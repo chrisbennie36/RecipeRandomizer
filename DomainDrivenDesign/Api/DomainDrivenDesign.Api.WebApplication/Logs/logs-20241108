@@ -1,0 +1,12 @@
+2024-11-08 14:10:28.195 +01:00 [ERR] Error when retrieving a RecipeProfile from the database: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+RecipeProfile -> RecipeProfileResult
+DomainDrivenDesign.Api.Data.Models.RecipeProfile -> DomainDrivenDesign.Api.Domain.Results.RecipeProfileResult
+2024-11-08 14:10:28.224 +01:00 [ERR] Could not retrieve a RecipeProfileResult when generating a recipe URL
+2024-11-08 14:19:03.576 +01:00 [ERR] Error when retrieving a RecipeProfile from the database: Missing type map configuration or unsupported mapping.
+
+Mapping types:
+RecipeProfile -> RecipeProfileResult
+DomainDrivenDesign.Api.Data.Models.RecipeProfile -> DomainDrivenDesign.Api.Domain.Results.RecipeProfileResult
+2024-11-08 14:19:03.604 +01:00 [ERR] Could not retrieve a RecipeProfileResult when generating a recipe URL

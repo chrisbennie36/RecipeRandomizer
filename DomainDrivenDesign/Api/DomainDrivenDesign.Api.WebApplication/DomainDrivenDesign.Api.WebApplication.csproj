@@ -26,5 +26,6 @@
     <ProjectReference Include="..\..\DomainDrivenDesign.Api.Domain\DomainDrivenDesign.Api.Domain.csproj" />
     <ProjectReference Include="..\..\DomainDrivenDesign.Api.Data\DomainDrivenDesign.Api.Data.csproj" />
     <ProjectReference Include="..\..\DomainDrivenDesign.Shared.Enums\DomainDrivenDesign.Shared.Enums.csproj" />
+    <ProjectReference Include="..\..\DomainDrivenDesign.Api.GoogleCustomSearchClient\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj" />
   </ItemGroup>
 </Project>

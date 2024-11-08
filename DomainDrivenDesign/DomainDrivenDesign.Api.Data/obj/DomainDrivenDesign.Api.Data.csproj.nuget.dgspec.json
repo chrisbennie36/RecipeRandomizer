@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {}
+    "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {}
   },
   "projects": {
-    "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
+    "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
+        "projectUniqueName": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
         "projectName": "DomainDrivenDesign.Api.Data",
-        "projectPath": "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
+        "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\obj\\",
+        "outputPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
-                "projectPath": "C:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
+              "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
+                "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
               }
             }
           }
@@ -82,14 +82,14 @@
         }
       }
     },
-    "C:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
+    "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj",
+        "projectUniqueName": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj",
         "projectName": "DomainDrivenDesign.Shared.Enums",
-        "projectPath": "C:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj",
+        "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\obj\\",
+        "outputPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config"

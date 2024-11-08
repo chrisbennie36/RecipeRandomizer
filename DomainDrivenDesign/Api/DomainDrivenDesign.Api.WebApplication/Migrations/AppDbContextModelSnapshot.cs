@@ -45,6 +45,40 @@ namespace DomainDrivenDesign.Api.WebApplication.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("DomainDrivenDesign.Api.Data.Models.RecipeProfile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Allergies")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("CreatedUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("DietType")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("MeatType")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime?>("UpdatedUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RecipeProfiles");
+                });
+
             modelBuilder.Entity("DomainDrivenDesign.Api.Data.User", b =>
                 {
                     b.Property<int>("Id")
@@ -55,6 +89,10 @@ namespace DomainDrivenDesign.Api.WebApplication.Migrations
 
                     b.Property<DateTime>("CreatedUtc")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("EmailAddress")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -73,6 +111,20 @@ namespace DomainDrivenDesign.Api.WebApplication.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("DomainDrivenDesign.Api.Data.Models.RecipeProfile", b =>
+                {
+                    b.HasOne("DomainDrivenDesign.Api.Data.User", null)
+                        .WithMany("RecipeProfiles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DomainDrivenDesign.Api.Data.User", b =>
+                {
+                    b.Navigation("RecipeProfiles");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,4 +1,6 @@
+using AutoMapper;
 using DomainDrivenDesign.Api.Domain.Commands;
+using DomainDrivenDesign.Api.Domain.Models;
 using DomainDrivenDesign.Api.Domain.Queries;
 using DomainDrivenDesign.Api.WebApplication.Dtos;
 using MediatR;
@@ -13,11 +15,13 @@ public class UserController : ControllerBase
 {
     private readonly ISender sender;
     private readonly ILogger<MessageController> logger;
+    private readonly IMapper mapper;
 
-    public UserController(ISender sender, ILogger<MessageController> logger)
+    public UserController(ISender sender, ILogger<MessageController> logger, IMapper mapper)
     {
         this.sender = sender;
         this.logger = logger;
+        this.mapper = mapper;
     }
 
     [HttpGet("{userId}")]
@@ -40,7 +44,7 @@ public class UserController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult> CreateUser(UserDto userDto)
     {        
-        var result = await sender.Send(new AddUserCommand(userDto.Username, userDto.Password, userDto.Role));
+        var result = await sender.Send(new AddUserCommand(userDto.Username, userDto.Password, userDto.EmailAddress, userDto.Role, userDto.RecipeProfile != null ? mapper.Map<RecipeProfileModel>(userDto.RecipeProfile) : null));
 
         if(result == false)
         {

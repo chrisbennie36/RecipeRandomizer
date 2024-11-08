@@ -1,12 +1,8 @@
-using System.ComponentModel.DataAnnotations;
+using DomainDrivenDesign.Api.Data.Models;
 
 namespace DomainDrivenDesign.Api.Data;
 
-public class Message
+public class Message : EntityBase
 {
-    [Key]
-    public int Id {get; set;}
     public string MessageText {get; set;} = string.Empty;
-    public DateTime CreatedUtc{ get; set; }
-    public DateTime? UpdatedUtc { get; set; }
 }

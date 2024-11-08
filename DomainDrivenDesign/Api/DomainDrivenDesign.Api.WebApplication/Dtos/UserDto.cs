@@ -9,6 +9,8 @@ namespace DomainDrivenDesign.Api.WebApplication.Dtos
         public string Username { get; set; } = string.Empty;
         [Required]
         public string Password { get; set; } = string.Empty;
+        public string EmailAddress { get; set; } = string.Empty;
         public UserRole Role { get; set; } = UserRole.Client;
+        public RecipeProfileDto? RecipeProfile { get; set; } 
     }
 }

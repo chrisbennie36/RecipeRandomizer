@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "BRCwVGuHXgc=",
+  "dgSpecHash": "6hmOm4YndRg=",
   "success": true,
-  "projectFilePath": "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj",
+  "projectFilePath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chris\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\mediatr\\12.4.1\\mediatr.12.4.1.nupkg.sha512",
@@ -20,8 +20,10 @@
     "C:\\Users\\chris\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\microsoft.extensions.options\\8.0.2\\microsoft.extensions.options.8.0.2.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\microsoft.extensions.primitives\\8.0.0\\microsoft.extensions.primitives.8.0.0.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\npgsql\\8.0.5\\npgsql.8.0.5.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\8.0.10\\npgsql.entityframeworkcore.postgresql.8.0.10.nupkg.sha512",
+    "C:\\Users\\chris\\.nuget\\packages\\restsharp\\112.1.0\\restsharp.112.1.0.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\serilog\\4.1.0\\serilog.4.1.0.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\serilog.sinks.file\\6.0.0\\serilog.sinks.file.6.0.0.nupkg.sha512"
   ],

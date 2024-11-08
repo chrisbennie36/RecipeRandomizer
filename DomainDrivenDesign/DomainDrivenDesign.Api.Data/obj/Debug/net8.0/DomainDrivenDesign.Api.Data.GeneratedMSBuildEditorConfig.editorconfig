@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = DomainDrivenDesign.Api.Data
-build_property.ProjectDir = c:\Projects\DomainDrivenDesign\DomainDrivenDesign\DomainDrivenDesign.Api.Data\
+build_property.ProjectDir = C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Data\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

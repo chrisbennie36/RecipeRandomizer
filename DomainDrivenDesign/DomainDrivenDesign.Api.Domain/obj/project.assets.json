@@ -281,6 +281,19 @@
           "buildTransitive/net6.0/_._": {}
         }
       },
+      "Newtonsoft.Json/13.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Npgsql/8.0.5": {
         "type": "package",
         "dependencies": {
@@ -312,6 +325,19 @@
         },
         "runtime": {
           "lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "RestSharp/112.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net8.0/RestSharp.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/RestSharp.dll": {
             "related": ".xml"
           }
         }
@@ -358,6 +384,21 @@
         },
         "runtime": {
           "bin/placeholder/DomainDrivenDesign.Api.Data.dll": {}
+        }
+      },
+      "DomainDrivenDesign.Api.GoogleCustomSearchClient/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.3",
+          "RestSharp": "112.1.0",
+          "Serilog": "4.1.0"
+        },
+        "compile": {
+          "bin/placeholder/DomainDrivenDesign.Api.GoogleCustomSearchClient.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DomainDrivenDesign.Api.GoogleCustomSearchClient.dll": {}
         }
       },
       "DomainDrivenDesign.Shared.Enums/1.0.0": {
@@ -816,6 +857,36 @@
         "useSharedDesignerContext.txt"
       ]
     },
+    "Newtonsoft.Json/13.0.3": {
+      "sha512": "HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "README.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/net6.0/Newtonsoft.Json.dll",
+        "lib/net6.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
     "Npgsql/8.0.5": {
       "sha512": "zRG5V8cyeZLpzJlKzFKjEwkRMYIYnHWJvEor2lWXeccS2E1G2nIWYYhnukB51iz5XsWSVEtqg3AxTWM0QJ6vfg==",
       "type": "package",
@@ -852,6 +923,31 @@
         "npgsql.entityframeworkcore.postgresql.8.0.10.nupkg.sha512",
         "npgsql.entityframeworkcore.postgresql.nuspec",
         "postgresql.png"
+      ]
+    },
+    "RestSharp/112.1.0": {
+      "sha512": "bOUGNZqhhv/QeCXHTKEUil846yBjwWXpzPKjO67kFvaAOoF361z7jLY5BMnuZ6WD2WQRA750sNMcK7MSPCQ5Mg==",
+      "type": "package",
+      "path": "restsharp/112.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net471/RestSharp.dll",
+        "lib/net471/RestSharp.xml",
+        "lib/net48/RestSharp.dll",
+        "lib/net48/RestSharp.xml",
+        "lib/net6.0/RestSharp.dll",
+        "lib/net6.0/RestSharp.xml",
+        "lib/net7.0/RestSharp.dll",
+        "lib/net7.0/RestSharp.xml",
+        "lib/net8.0/RestSharp.dll",
+        "lib/net8.0/RestSharp.xml",
+        "lib/netstandard2.0/RestSharp.dll",
+        "lib/netstandard2.0/RestSharp.xml",
+        "restsharp.112.1.0.nupkg.sha512",
+        "restsharp.nuspec",
+        "restsharp.png"
       ]
     },
     "Serilog/4.1.0": {
@@ -905,6 +1001,11 @@
       "path": "../DomainDrivenDesign.Api.Data/DomainDrivenDesign.Api.Data.csproj",
       "msbuildProject": "../DomainDrivenDesign.Api.Data/DomainDrivenDesign.Api.Data.csproj"
     },
+    "DomainDrivenDesign.Api.GoogleCustomSearchClient/1.0.0": {
+      "type": "project",
+      "path": "../DomainDrivenDesign.Api.GoogleCustomSearchClient/DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj",
+      "msbuildProject": "../DomainDrivenDesign.Api.GoogleCustomSearchClient/DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj"
+    },
     "DomainDrivenDesign.Shared.Enums/1.0.0": {
       "type": "project",
       "path": "../DomainDrivenDesign.Shared.Enums/DomainDrivenDesign.Shared.Enums.csproj",
@@ -915,6 +1016,7 @@
     "net8.0": [
       "AutoMapper >= 13.0.1",
       "DomainDrivenDesign.Api.Data >= 1.0.0",
+      "DomainDrivenDesign.Api.GoogleCustomSearchClient >= 1.0.0",
       "DomainDrivenDesign.Shared.Enums >= 1.0.0",
       "MediatR >= 12.4.1",
       "Serilog >= 4.1.0",
@@ -927,11 +1029,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj",
+      "projectUniqueName": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj",
       "projectName": "DomainDrivenDesign.Api.Domain",
-      "projectPath": "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj",
+      "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj",
       "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-      "outputPath": "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\obj\\",
+      "outputPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -946,11 +1048,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
-              "projectPath": "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj"
+            "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
+              "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj"
             },
-            "C:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
-              "projectPath": "C:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
+            "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj": {
+              "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj"
+            },
+            "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
+              "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
             }
           }
         }

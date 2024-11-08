@@ -1,0 +1,13 @@
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\bin\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.deps.json
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\bin\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.dll
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\bin\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.pdb
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj.AssemblyReference.cache
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.GeneratedMSBuildEditorConfig.editorconfig
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.AssemblyInfoInputs.cache
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.AssemblyInfo.cs
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj.CoreCompileInputs.cache
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.sourcelink.json
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.dll
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\refint\DomainDrivenDesign.Api.GoogleCustomSearchClient.dll
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.pdb
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.GoogleCustomSearchClient\obj\Debug\net8.0\ref\DomainDrivenDesign.Api.GoogleCustomSearchClient.dll

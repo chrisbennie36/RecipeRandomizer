@@ -1,3 +1,4 @@
+using DomainDrivenDesign.Api.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -19,4 +20,5 @@ public class AppDbContext : DbContext
 
     public DbSet<Message> Messages { get; set; }
     public DbSet<User> Users { get; set; }
+    public DbSet<RecipeProfile> RecipeProfiles { get; set; }
 }

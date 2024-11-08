@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "bENiiFn6ffk=",
+  "dgSpecHash": "sDkg+6i8Mu0=",
   "success": true,
-  "projectFilePath": "c:\\Projects\\DomainDrivenDesign\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
+  "projectFilePath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chris\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\chris\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
