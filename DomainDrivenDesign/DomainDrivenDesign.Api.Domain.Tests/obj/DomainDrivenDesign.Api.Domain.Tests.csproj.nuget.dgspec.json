@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\DomainDrivenDesign.Api.Domain.Tests.csproj": {}
+    "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\DomainDrivenDesign.Api.Domain.Tests.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
+    "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
+        "projectUniqueName": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
         "projectName": "DomainDrivenDesign.Api.Data",
-        "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
+        "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\obj\\",
+        "outputPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
-                "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
+              "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
+                "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
               }
             }
           }
@@ -82,14 +82,14 @@
         }
       }
     },
-    "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\DomainDrivenDesign.Api.Domain.Tests.csproj": {
+    "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\DomainDrivenDesign.Api.Domain.Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\DomainDrivenDesign.Api.Domain.Tests.csproj",
+        "projectUniqueName": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\DomainDrivenDesign.Api.Domain.Tests.csproj",
         "projectName": "DomainDrivenDesign.Api.Domain.Tests",
-        "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\DomainDrivenDesign.Api.Domain.Tests.csproj",
+        "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\DomainDrivenDesign.Api.Domain.Tests.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\obj\\",
+        "outputPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain.Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -172,14 +172,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
-                "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj"
+              "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
+                "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj"
               },
               "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj": {
                 "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj"
               },
-              "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
-                "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
+              "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
+                "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
               }
             }
           }
@@ -308,14 +308,14 @@
         }
       }
     },
-    "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
+    "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj",
+        "projectUniqueName": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj",
         "projectName": "DomainDrivenDesign.Shared.Enums",
-        "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj",
+        "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\obj\\",
+        "outputPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config"

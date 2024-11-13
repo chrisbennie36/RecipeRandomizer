@@ -12,7 +12,7 @@ using Serilog;
 
 namespace DomainDrivenDesign.Api.Domain.Handlers;
 
-public class GenerateRecipeBasedOnRecipeProfileCommandHandler : IRequestHandler<GenerateRecipeBasedOnRecipeProfileCommand, string>
+public class GenerateRecipeBasedOnRecipeProfileCommandHandler : IRequestHandler<GenerateRecipeBasedOnRecipeProfileCommand, RecipeResult>
 {
     private ISender sender;
     private IMapper mapper;
@@ -25,14 +25,16 @@ public class GenerateRecipeBasedOnRecipeProfileCommandHandler : IRequestHandler<
         this.googleCustomSearchClient = googleCustomSearchClient;
     }
 
-    public async Task<string> Handle(GenerateRecipeBasedOnRecipeProfileCommand request, CancellationToken cancellationToken)
+    public async Task<RecipeResult> Handle(GenerateRecipeBasedOnRecipeProfileCommand request, CancellationToken cancellationToken)
     {
+        RecipeResult result = new RecipeResult();
+
         RecipeProfileResult? recipeProfileResult = await sender.Send(new GetRecipeProfileByIdQuery(request.recipeProfileId));
 
         if(recipeProfileResult == null)
         {
             Log.Error($"Could not retrieve a {nameof(RecipeProfileResult)} when generating a recipe URL");
-            return string.Empty;
+            return result;
         }
 
         string recipeQueryParams = GenerateRecipeQuery(mapper.Map<RecipeProfileModel>(recipeProfileResult));
@@ -40,17 +42,28 @@ public class GenerateRecipeBasedOnRecipeProfileCommandHandler : IRequestHandler<
         if(string.IsNullOrEmpty(recipeQueryParams))
         {
             Log.Error($"Could not generate recipe query params for {typeof(MeatType)}: {recipeProfileResult.MeatType}");
-            return string.Empty;
+            return result;
         }
 
         GoogleCustomSearchResult? customSearchResult = await googleCustomSearchClient.GetResults(recipeQueryParams);
 
         if(customSearchResult == null)
         {
-            return string.Empty;
+            return result;
         }
 
-        return customSearchResult.Items.First().Link;
+        IEnumerable<string> urls = customSearchResult.Items.Select(i => i.Link);
+
+        result.RecipeUrl = ChooseRandomResultUrl(urls.ToArray());
+        return result;
+    }
+
+    private string ChooseRandomResultUrl(string[] urls)
+    {
+        Random rand = new Random();
+        int index = rand.Next(urls.Length);
+
+        return urls[index];
     }
 
     private string GenerateRecipeQuery(RecipeProfileModel recipeProfile)

@@ -17,7 +17,8 @@ public class GoogleCustomSearchClient : IGoogleCustomSearchClient
 
     public async Task<GoogleCustomSearchResult?> GetResults(string queryParams)
     {
-        RestRequest request = new RestRequest($"https://www.googleapis.com/customsearch/v1?key=<key>&cx=921e5e54836d64b7f&{queryParams}");
+        //ToDo: put key in secrets manager
+        RestRequest request = new RestRequest($"https://www.googleapis.com/customsearch/v1?key=AIzaSyBPg_RNOYaXH3Qwz1RAsWUlp-h4rAoY9pM&cx=921e5e54836d64b7f&{queryParams}");
 
         var response = await client.GetAsync(request);
 

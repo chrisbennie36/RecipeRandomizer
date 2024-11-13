@@ -1,5 +1,6 @@
 using AutoMapper;
 using DomainDrivenDesign.Api.Domain.Commands;
+using DomainDrivenDesign.Api.Domain.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,15 +26,13 @@ public class RecipeController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> GetRecipe([FromRoute] int recipeProfileId)
     {        
-        string recipeUrl = await sender.Send(new GenerateRecipeBasedOnRecipeProfileCommand(recipeProfileId));
+        RecipeResult recipeResult = await sender.Send(new GenerateRecipeBasedOnRecipeProfileCommand(recipeProfileId));
 
-        if(string.IsNullOrWhiteSpace(recipeUrl))
+        if(string.IsNullOrWhiteSpace(recipeResult.RecipeUrl))
         {
             return BadRequest();
         }
 
-        System.Diagnostics.Process.Start(@"C:\Program Files\Google\Chrome\Application\chrome.exe", recipeUrl);
-
-        return Ok();
+        return Ok(recipeResult);
     }
 }

@@ -107,8 +107,8 @@
               "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
                 "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj"
               },
-              "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj": {
-                "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj"
+              "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj": {
+                "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj"
               },
               "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
                 "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
@@ -168,14 +168,14 @@
         }
       }
     },
-    "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj": {
+    "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj",
+        "projectUniqueName": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj",
         "projectName": "DomainDrivenDesign.Api.GoogleCustomSearchClient",
-        "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj",
+        "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj",
         "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\obj\\",
+        "outputPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
