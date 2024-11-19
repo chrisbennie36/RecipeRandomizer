@@ -20,5 +20,4 @@ c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDes
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain.Tests\obj\Debug\net8.0\DomainDrivenDesign.Api.Domain.Tests.pdb
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain.Tests\obj\Debug\net8.0\DomainDrivenDesign.Api.Domain.Tests.genruntimeconfig.cache
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain.Tests\obj\Debug\net8.0\ref\DomainDrivenDesign.Api.Domain.Tests.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain.Tests\bin\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain.Tests\bin\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.pdb
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain.Tests\bin\Debug\net8.0\GoogleCustomSearchService.Api.Client.dll

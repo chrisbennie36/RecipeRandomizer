@@ -19,8 +19,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{C92AD0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainDrivenDesign.Shared.Enums", "DomainDrivenDesign.Shared.Enums\DomainDrivenDesign.Shared.Enums.csproj", "{29E1BCB3-7585-41F7-9B02-50FD2720CA17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainDrivenDesign.Api.GoogleCustomSearchClient", "DomainDrivenDesign.Api.GoogleCustomSearchClient\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj", "{33B8C010-07AF-4A9A-BFBE-CF5EB4BE2291}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,13 +48,8 @@ Global
 		{29E1BCB3-7585-41F7-9B02-50FD2720CA17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29E1BCB3-7585-41F7-9B02-50FD2720CA17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29E1BCB3-7585-41F7-9B02-50FD2720CA17}.Release|Any CPU.Build.0 = Release|Any CPU
-		{33B8C010-07AF-4A9A-BFBE-CF5EB4BE2291}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{33B8C010-07AF-4A9A-BFBE-CF5EB4BE2291}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{33B8C010-07AF-4A9A-BFBE-CF5EB4BE2291}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{33B8C010-07AF-4A9A-BFBE-CF5EB4BE2291}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{33B8C010-07AF-4A9A-BFBE-CF5EB4BE2291} = {E1D750DB-F499-4519-8132-C12A70E9B8A8}
 		{29E1BCB3-7585-41F7-9B02-50FD2720CA17} = {C92AD0E0-DC9E-48A6-8FFA-281C1AA72A66}
 		{2AEEAD48-70BA-4154-A969-F4643578B133} = {E1D750DB-F499-4519-8132-C12A70E9B8A8}
 		{7BAAA20C-AB3F-486E-AEE6-9CAC4D7D6AF4} = {C6BC9A3E-146D-4066-BC7D-EDF773C55A08}

@@ -2,11 +2,11 @@ using System.Text;
 using AutoMapper;
 using DomainDrivenDesign.Api.Domain.Commands;
 using DomainDrivenDesign.Api.Domain.Models;
+using DomainDrivenDesign.Api.Domain.Proxies;
 using DomainDrivenDesign.Api.Domain.Queries;
 using DomainDrivenDesign.Api.Domain.Results;
-using DomainDrivenDesign.Api.GoogleCustomSearchClient.Interfaces;
-using DomainDrivenDesign.Api.GoogleCustomSearchClient.Results;
 using DomainDrivenDesign.Shared.Enums;
+using GoogleCustomSearchService.Api.Client;
 using MediatR;
 using Serilog;
 
@@ -16,13 +16,13 @@ public class GenerateRecipeBasedOnRecipeProfileCommandHandler : IRequestHandler<
 {
     private ISender sender;
     private IMapper mapper;
-    private IGoogleCustomSearchClient googleCustomSearchClient;
+    private IGoogleCustomSearchServiceProxy googleCustomSearchProxy;
 
-    public GenerateRecipeBasedOnRecipeProfileCommandHandler(ISender sender, IMapper mapper, IGoogleCustomSearchClient googleCustomSearchClient)
+    public GenerateRecipeBasedOnRecipeProfileCommandHandler(ISender sender, IMapper mapper, IGoogleCustomSearchServiceProxy googleCustomSearchProxy)
     {
         this.sender = sender;
         this.mapper = mapper;
-        this.googleCustomSearchClient = googleCustomSearchClient;
+        this.googleCustomSearchProxy = googleCustomSearchProxy;
     }
 
     public async Task<RecipeResult> Handle(GenerateRecipeBasedOnRecipeProfileCommand request, CancellationToken cancellationToken)
@@ -45,7 +45,7 @@ public class GenerateRecipeBasedOnRecipeProfileCommandHandler : IRequestHandler<
             return result;
         }
 
-        GoogleCustomSearchResult? customSearchResult = await googleCustomSearchClient.GetResults(recipeQueryParams);
+        GoogleCustomSearchResponse? customSearchResult = await googleCustomSearchProxy.SearchAsync(new GoogleCustomSearchService.Api.Client.GoogleCustomSearchDto { QueryString = recipeQueryParams });
 
         if(customSearchResult == null)
         {

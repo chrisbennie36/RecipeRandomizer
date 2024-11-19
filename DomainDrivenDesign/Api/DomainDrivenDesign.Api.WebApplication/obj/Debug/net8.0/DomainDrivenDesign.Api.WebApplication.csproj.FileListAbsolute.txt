@@ -285,6 +285,4 @@ c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrive
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\obj\Debug\net8.0\DomainDrivenDesign.Api.WebApplication.pdb
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\obj\Debug\net8.0\DomainDrivenDesign.Api.WebApplication.genruntimeconfig.cache
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\obj\Debug\net8.0\ref\DomainDrivenDesign.Api.WebApplication.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\RestSharp.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.pdb
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\GoogleCustomSearchService.Api.Client.dll

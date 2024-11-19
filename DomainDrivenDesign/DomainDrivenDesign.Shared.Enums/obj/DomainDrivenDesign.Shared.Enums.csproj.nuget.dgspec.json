@@ -20,6 +20,7 @@
           "net8.0"
         ],
         "sources": {
+          "D:\\MugetSources": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

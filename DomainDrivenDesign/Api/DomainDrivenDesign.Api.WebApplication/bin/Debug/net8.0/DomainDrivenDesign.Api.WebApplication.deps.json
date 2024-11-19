@@ -11,7 +11,6 @@
           "AutoMapper": "13.0.1",
           "DomainDrivenDesign.Api.Data": "1.0.0",
           "DomainDrivenDesign.Api.Domain": "1.0.0",
-          "DomainDrivenDesign.Api.GoogleCustomSearchClient": "1.0.0",
           "DomainDrivenDesign.Shared.Enums": "1.0.0",
           "FluentValidation.AspNetCore": "11.3.0",
           "FluentValidation.DependencyInjectionExtensions": "11.10.0",
@@ -24,7 +23,8 @@
           "Npgsql.DependencyInjection": "8.0.5",
           "Serilog": "4.1.0",
           "Serilog.Sinks.File": "6.0.0",
-          "System.IdentityModel.Tokens.Jwt": "8.2.0"
+          "System.IdentityModel.Tokens.Jwt": "8.2.0",
+          "GoogleCustomSearchService.Api.Client": "1.0.0.0"
         },
         "runtime": {
           "DomainDrivenDesign.Api.WebApplication.dll": {}
@@ -1173,14 +1173,6 @@
           }
         }
       },
-      "RestSharp/112.1.0": {
-        "runtime": {
-          "lib/net8.0/RestSharp.dll": {
-            "assemblyVersion": "112.1.0.0",
-            "fileVersion": "112.1.0.0"
-          }
-        }
-      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
@@ -1931,7 +1923,6 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "DomainDrivenDesign.Api.Data": "1.0.0",
-          "DomainDrivenDesign.Api.GoogleCustomSearchClient": "1.0.0",
           "DomainDrivenDesign.Shared.Enums": "1.0.0",
           "MediatR": "12.4.1",
           "Serilog": "4.1.0",
@@ -1944,23 +1935,18 @@
           }
         }
       },
-      "DomainDrivenDesign.Api.GoogleCustomSearchClient/1.0.0": {
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3",
-          "RestSharp": "112.1.0",
-          "Serilog": "4.1.0"
-        },
+      "DomainDrivenDesign.Shared.Enums/1.0.0": {
         "runtime": {
-          "DomainDrivenDesign.Api.GoogleCustomSearchClient.dll": {
+          "DomainDrivenDesign.Shared.Enums.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
       },
-      "DomainDrivenDesign.Shared.Enums/1.0.0": {
+      "GoogleCustomSearchService.Api.Client/1.0.0.0": {
         "runtime": {
-          "DomainDrivenDesign.Shared.Enums.dll": {
-            "assemblyVersion": "1.0.0",
+          "GoogleCustomSearchService.Api.Client.dll": {
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -2757,13 +2743,6 @@
       "path": "nswag.generation.aspnetcore/14.1.0",
       "hashPath": "nswag.generation.aspnetcore.14.1.0.nupkg.sha512"
     },
-    "RestSharp/112.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-bOUGNZqhhv/QeCXHTKEUil846yBjwWXpzPKjO67kFvaAOoF361z7jLY5BMnuZ6WD2WQRA750sNMcK7MSPCQ5Mg==",
-      "path": "restsharp/112.1.0",
-      "hashPath": "restsharp.112.1.0.nupkg.sha512"
-    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -3425,13 +3404,13 @@
       "serviceable": false,
       "sha512": ""
     },
-    "DomainDrivenDesign.Api.GoogleCustomSearchClient/1.0.0": {
+    "DomainDrivenDesign.Shared.Enums/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "DomainDrivenDesign.Shared.Enums/1.0.0": {
-      "type": "project",
+    "GoogleCustomSearchService.Api.Client/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

@@ -18,8 +18,6 @@ public class DefaultProfile : Profile
 
     private void MapEntitiesToQueryResults()
     {
-        CreateMap<Message, MessageResult>();
-        CreateMap<User, UserResult>();
         CreateMap<RecipeProfile, RecipeProfileResult>();
     }
 

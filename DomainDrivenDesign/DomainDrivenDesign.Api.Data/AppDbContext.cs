@@ -18,7 +18,5 @@ public class AppDbContext : DbContext
         options.UseNpgsql(configuration.GetConnectionString("ApiConnectionString"), b => b.MigrationsAssembly("DomainDrivenDesign.Api.WebApplication"));
     }
 
-    public DbSet<Message> Messages { get; set; }
-    public DbSet<User> Users { get; set; }
     public DbSet<RecipeProfile> RecipeProfiles { get; set; }
 }

@@ -33,5 +33,5 @@ c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDes
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain\obj\Debug\net8.0\refint\DomainDrivenDesign.Api.Domain.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain\obj\Debug\net8.0\DomainDrivenDesign.Api.Domain.pdb
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain\obj\Debug\net8.0\ref\DomainDrivenDesign.Api.Domain.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain\bin\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain\bin\Debug\net8.0\DomainDrivenDesign.Api.GoogleCustomSearchClient.pdb
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain\bin\Debug\net8.0\GoogleCustomSearchService.Api.Client.dll
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\DomainDrivenDesign.Api.Domain\bin\Debug\net8.0\UserManagementService.Api.Client.dll

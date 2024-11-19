@@ -1,18 +1,15 @@
 using System.Text;
 using DomainDrivenDesign.Api.Data;
 using DomainDrivenDesign.Api.Domain.Commands;
-using DomainDrivenDesign.Api.WebApplication.Validation;
-using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using NSwag.Generation.Processors.Security;
-using DomainDrivenDesign.Api.GoogleCustomSearchClient.Interfaces;
-using DomainDrivenDesign.Api.GoogleCustomSearchClient;
+using DomainDrivenDesign.Api.Domain.Proxies;
+using GoogleClient = GoogleCustomSearchService.Api.Client.GoogleCustomSearchClient;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddTransient<IGoogleCustomSearchClient, GoogleCustomSearchClient>();
 builder.Services.AddControllers();
 builder.Services.AddMvcCore().AddApiExplorer();
 //Nswag: Useful setup link for both NSwag and Swashbuckle here: https://code-maze.com/aspnetcore-swashbuckle-vs-nswag/
@@ -29,13 +26,27 @@ builder.Services.AddOpenApiDocument(config =>
     config.OperationProcessors.Add(new OperationSecurityScopeProcessor("Bearer"));
 });
 
-builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddMessageCommand).Assembly));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddRecipeProfileCommand).Assembly));
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.AddValidatorsFromAssemblyContaining<MessageDtoValidator>();
 
 builder.Services.AddDbContext<AppDbContext>();
 /*builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("ApiConnectionString")));*/
+
+builder.Services.AddHttpClient("GoogleCustomSearchClient", config => 
+{
+    config.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"] ?? string.Empty);
+});
+
+builder.Services.AddSingleton<GoogleClient>(c => 
+{
+    var factory = c.GetService<IHttpClientFactory>();
+    var httpClient = factory?.CreateClient("GoogleCustomSearchClient");
+    
+    return new GoogleClient(httpClient);
+});
+
+builder.Services.AddTransient<IGoogleCustomSearchServiceProxy, GoogleCustomSearchServiceProxy>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => 
 {

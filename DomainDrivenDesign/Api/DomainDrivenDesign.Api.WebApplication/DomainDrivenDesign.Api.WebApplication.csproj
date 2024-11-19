@@ -28,4 +28,9 @@
     <ProjectReference Include="..\..\DomainDrivenDesign.Shared.Enums\DomainDrivenDesign.Shared.Enums.csproj" />
     <ProjectReference Include="..\..\DomainDrivenDesign.Api.GoogleCustomSearchClient\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GoogleCustomSearchService.Api.Client.dll">
+      <HintPath>..\..\Refs\GoogleCustomSearchService.Api.Client.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

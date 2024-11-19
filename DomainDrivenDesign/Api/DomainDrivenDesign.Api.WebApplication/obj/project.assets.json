@@ -2087,19 +2087,6 @@
           "Microsoft.AspNetCore.App"
         ]
       },
-      "RestSharp/112.1.0": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/RestSharp.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/RestSharp.dll": {
-            "related": ".xml"
-          }
-        }
-      },
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
         "type": "package",
         "runtimeTargets": {
@@ -3689,7 +3676,6 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "DomainDrivenDesign.Api.Data": "1.0.0",
-          "DomainDrivenDesign.Api.GoogleCustomSearchClient": "1.0.0",
           "DomainDrivenDesign.Shared.Enums": "1.0.0",
           "MediatR": "12.4.1",
           "Serilog": "4.1.0",
@@ -3700,21 +3686,6 @@
         },
         "runtime": {
           "bin/placeholder/DomainDrivenDesign.Api.Domain.dll": {}
-        }
-      },
-      "DomainDrivenDesign.Api.GoogleCustomSearchClient/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v8.0",
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3",
-          "RestSharp": "112.1.0",
-          "Serilog": "4.1.0"
-        },
-        "compile": {
-          "bin/placeholder/DomainDrivenDesign.Api.GoogleCustomSearchClient.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/DomainDrivenDesign.Api.GoogleCustomSearchClient.dll": {}
         }
       },
       "DomainDrivenDesign.Shared.Enums/1.0.0": {
@@ -6371,31 +6342,6 @@
         "lib/netstandard2.0/NSwag.Generation.AspNetCore.xml",
         "nswag.generation.aspnetcore.14.1.0.nupkg.sha512",
         "nswag.generation.aspnetcore.nuspec"
-      ]
-    },
-    "RestSharp/112.1.0": {
-      "sha512": "bOUGNZqhhv/QeCXHTKEUil846yBjwWXpzPKjO67kFvaAOoF361z7jLY5BMnuZ6WD2WQRA750sNMcK7MSPCQ5Mg==",
-      "type": "package",
-      "path": "restsharp/112.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "README.md",
-        "lib/net471/RestSharp.dll",
-        "lib/net471/RestSharp.xml",
-        "lib/net48/RestSharp.dll",
-        "lib/net48/RestSharp.xml",
-        "lib/net6.0/RestSharp.dll",
-        "lib/net6.0/RestSharp.xml",
-        "lib/net7.0/RestSharp.dll",
-        "lib/net7.0/RestSharp.xml",
-        "lib/net8.0/RestSharp.dll",
-        "lib/net8.0/RestSharp.xml",
-        "lib/netstandard2.0/RestSharp.dll",
-        "lib/netstandard2.0/RestSharp.xml",
-        "restsharp.112.1.0.nupkg.sha512",
-        "restsharp.nuspec",
-        "restsharp.png"
       ]
     },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
@@ -10349,11 +10295,6 @@
       "path": "../../DomainDrivenDesign.Api.Domain/DomainDrivenDesign.Api.Domain.csproj",
       "msbuildProject": "../../DomainDrivenDesign.Api.Domain/DomainDrivenDesign.Api.Domain.csproj"
     },
-    "DomainDrivenDesign.Api.GoogleCustomSearchClient/1.0.0": {
-      "type": "project",
-      "path": "../../DomainDrivenDesign.Api.GoogleCustomSearchClient/DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj",
-      "msbuildProject": "../../DomainDrivenDesign.Api.GoogleCustomSearchClient/DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj"
-    },
     "DomainDrivenDesign.Shared.Enums/1.0.0": {
       "type": "project",
       "path": "../../DomainDrivenDesign.Shared.Enums/DomainDrivenDesign.Shared.Enums.csproj",
@@ -10365,7 +10306,6 @@
       "AutoMapper >= 13.0.1",
       "DomainDrivenDesign.Api.Data >= 1.0.0",
       "DomainDrivenDesign.Api.Domain >= 1.0.0",
-      "DomainDrivenDesign.Api.GoogleCustomSearchClient >= 1.0.0",
       "DomainDrivenDesign.Shared.Enums >= 1.0.0",
       "FluentValidation.AspNetCore >= 11.3.0",
       "FluentValidation.DependencyInjectionExtensions >= 11.10.0",
@@ -10400,20 +10340,18 @@
         "net8.0"
       ],
       "sources": {
+        "D:\\MugetSources": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
-              "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj"
+            "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
+              "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj"
             },
-            "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj": {
-              "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj"
-            },
-            "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj": {
-              "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.GoogleCustomSearchClient\\DomainDrivenDesign.Api.GoogleCustomSearchClient.csproj"
+            "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj": {
+              "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj"
             },
             "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
               "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"

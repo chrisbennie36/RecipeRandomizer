@@ -11,13 +11,11 @@ namespace DomainDrivenDesign.Api.WebApplication.Controllers;
 public class RecipeController : ControllerBase
 {
     private readonly ISender sender;
-    private readonly ILogger<MessageController> logger;
     private readonly IMapper mapper;
 
-    public RecipeController(ISender sender, ILogger<MessageController> logger, IMapper mapper)
+    public RecipeController(ISender sender, IMapper mapper)
     {
         this.sender = sender;
-        this.logger = logger;
         this.mapper = mapper;
     }
 

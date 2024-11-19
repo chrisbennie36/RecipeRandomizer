@@ -10,11 +10,12 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "DomainDrivenDesign.Api.Data": "1.0.0",
-          "DomainDrivenDesign.Api.GoogleCustomSearchClient": "1.0.0",
           "DomainDrivenDesign.Shared.Enums": "1.0.0",
           "MediatR": "12.4.1",
           "Serilog": "4.1.0",
-          "Serilog.Sinks.File": "6.0.0"
+          "Serilog.Sinks.File": "6.0.0",
+          "GoogleCustomSearchService.Api.Client": "1.0.0.0",
+          "UserManagementService.Api.Client": "1.0.0.0"
         },
         "runtime": {
           "DomainDrivenDesign.Api.Domain.dll": {}
@@ -186,14 +187,6 @@
           }
         }
       },
-      "Newtonsoft.Json/13.0.3": {
-        "runtime": {
-          "lib/net6.0/Newtonsoft.Json.dll": {
-            "assemblyVersion": "13.0.0.0",
-            "fileVersion": "13.0.3.27908"
-          }
-        }
-      },
       "Npgsql/8.0.5": {
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": "8.0.2"
@@ -216,14 +209,6 @@
           "lib/net8.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {
             "assemblyVersion": "8.0.10.0",
             "fileVersion": "8.0.10.0"
-          }
-        }
-      },
-      "RestSharp/112.1.0": {
-        "runtime": {
-          "lib/net8.0/RestSharp.dll": {
-            "assemblyVersion": "112.1.0.0",
-            "fileVersion": "112.1.0.0"
           }
         }
       },
@@ -259,23 +244,26 @@
           }
         }
       },
-      "DomainDrivenDesign.Api.GoogleCustomSearchClient/1.0.0": {
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.3",
-          "RestSharp": "112.1.0",
-          "Serilog": "4.1.0"
-        },
+      "DomainDrivenDesign.Shared.Enums/1.0.0": {
         "runtime": {
-          "DomainDrivenDesign.Api.GoogleCustomSearchClient.dll": {
+          "DomainDrivenDesign.Shared.Enums.dll": {
             "assemblyVersion": "1.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
       },
-      "DomainDrivenDesign.Shared.Enums/1.0.0": {
+      "GoogleCustomSearchService.Api.Client/1.0.0.0": {
         "runtime": {
-          "DomainDrivenDesign.Shared.Enums.dll": {
-            "assemblyVersion": "1.0.0",
+          "GoogleCustomSearchService.Api.Client.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "UserManagementService.Api.Client/1.0.0.0": {
+        "runtime": {
+          "UserManagementService.Api.Client.dll": {
+            "assemblyVersion": "1.0.0.0",
             "fileVersion": "1.0.0.0"
           }
         }
@@ -400,13 +388,6 @@
       "path": "microsoft.extensions.primitives/8.0.0",
       "hashPath": "microsoft.extensions.primitives.8.0.0.nupkg.sha512"
     },
-    "Newtonsoft.Json/13.0.3": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
-      "path": "newtonsoft.json/13.0.3",
-      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
-    },
     "Npgsql/8.0.5": {
       "type": "package",
       "serviceable": true,
@@ -420,13 +401,6 @@
       "sha512": "sha512-gFPl9Dmxih7Yi4tZ3bITzZFzbxFMBx04gqTqcjoL2r5VEW+O2TA5UVw/wm/XW26NAJ7sg59Je0+9QrwiZt6MPQ==",
       "path": "npgsql.entityframeworkcore.postgresql/8.0.10",
       "hashPath": "npgsql.entityframeworkcore.postgresql.8.0.10.nupkg.sha512"
-    },
-    "RestSharp/112.1.0": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-bOUGNZqhhv/QeCXHTKEUil846yBjwWXpzPKjO67kFvaAOoF361z7jLY5BMnuZ6WD2WQRA750sNMcK7MSPCQ5Mg==",
-      "path": "restsharp/112.1.0",
-      "hashPath": "restsharp.112.1.0.nupkg.sha512"
     },
     "Serilog/4.1.0": {
       "type": "package",
@@ -447,13 +421,18 @@
       "serviceable": false,
       "sha512": ""
     },
-    "DomainDrivenDesign.Api.GoogleCustomSearchClient/1.0.0": {
+    "DomainDrivenDesign.Shared.Enums/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "DomainDrivenDesign.Shared.Enums/1.0.0": {
-      "type": "project",
+    "GoogleCustomSearchService.Api.Client/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UserManagementService.Api.Client/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }
