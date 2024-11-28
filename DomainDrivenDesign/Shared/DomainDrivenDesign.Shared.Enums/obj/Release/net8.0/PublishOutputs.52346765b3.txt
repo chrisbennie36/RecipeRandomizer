@@ -1,0 +1,3 @@
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\bin\Release\net8.0\publish\DomainDrivenDesign.Shared.Enums.dll
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\bin\Release\net8.0\publish\DomainDrivenDesign.Shared.Enums.deps.json
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\bin\Release\net8.0\publish\DomainDrivenDesign.Shared.Enums.pdb

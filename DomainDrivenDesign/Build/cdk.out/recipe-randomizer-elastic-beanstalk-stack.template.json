@@ -1,0 +1,417 @@
+{
+ "Resources": {
+  "reciperandomizerebinstanceprofileA1A59F8D": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "InstanceProfileName": "RecipeRandomizerEBInstanceProfile",
+    "Roles": [
+     "Elasticbeanstalk-EC2-Role"
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "recipe-randomizer-elastic-beanstalk-stack/recipe-randomizer-eb-instance-profile/Resource"
+   }
+  },
+  "reciperandomizerelbapp": {
+   "Type": "AWS::ElasticBeanstalk::Application",
+   "Properties": {
+    "ApplicationName": "RecipeRandomizer"
+   },
+   "Metadata": {
+    "aws:cdk:path": "recipe-randomizer-elastic-beanstalk-stack/recipe-randomizer-elb-app"
+   }
+  },
+  "reciperandomizerelbappversion": {
+   "Type": "AWS::ElasticBeanstalk::ApplicationVersion",
+   "Properties": {
+    "ApplicationName": "RecipeRandomizer",
+    "SourceBundle": {
+     "S3Bucket": {
+      "Fn::Sub": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}"
+     },
+     "S3Key": "595674d418357e7f6b3c677443e4d17a2e12a56ae5790b5535ee9cdd685f8502.zip"
+    }
+   },
+   "DependsOn": [
+    "reciperandomizerelbapp"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "recipe-randomizer-elastic-beanstalk-stack/recipe-randomizer-elb-app-version"
+   }
+  },
+  "reciperandomizerelbenvironment": {
+   "Type": "AWS::ElasticBeanstalk::Environment",
+   "Properties": {
+    "ApplicationName": "RecipeRandomizer",
+    "EnvironmentName": "RecipeRandomizer",
+    "OptionSettings": [
+     {
+      "Namespace": "aws:autoscaling:launchconfiguration",
+      "OptionName": "IamInstanceProfile",
+      "Value": {
+       "Fn::GetAtt": [
+        "reciperandomizerebinstanceprofileA1A59F8D",
+        "Arn"
+       ]
+      }
+     },
+     {
+      "Namespace": "aws:autoscaling:launchconfiguration",
+      "OptionName": "RootVolumeType",
+      "Value": "gp3"
+     },
+     {
+      "Namespace": "aws:autoscaling:asg",
+      "OptionName": "MaxSize",
+      "Value": "1"
+     },
+     {
+      "Namespace": "aws:autoscaling:asg",
+      "OptionName": "MinSize",
+      "Value": "1"
+     }
+    ],
+    "SolutionStackName": "64bit Amazon Linux 2023 v3.2.1 running .NET 8",
+    "VersionLabel": {
+     "Ref": "reciperandomizerelbappversion"
+    }
+   },
+   "DependsOn": [
+    "reciperandomizerelbapp"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "recipe-randomizer-elastic-beanstalk-stack/recipe-randomizer-elb-environment"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/12OMU/DQAyFf0v3i5OQARaGNO3AUlCLWCv36lQmiS86O+0Q5b+jgwoJ9Ian90n2ew9QPpZQrPCmmT93Wc8nmA+GvnN70jBFTw5vepwZB5hfRA3F01sMLffkmlb+ocVpdURVMoU6mdMK1pPvyNao5KhHNfYnwnTXdzA3rdTj2LNH4yDub/ygqHe6lSvHIAOJLUsCr5ONk7nvloPhheWS8O/sppUmyJnTn8Vtgu3I8icooCxy2G3fmxCpHsfs3vF8raDMSyiSVp/KnMVJjAeC/Y9/AYTvMOssAQAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "recipe-randomizer-elastic-beanstalk-stack/CDKMetadata/Default"
+   },
+   "Condition": "CDKMetadataAvailable"
+  }
+ },
+ "Outputs": {
+  "reciperandomizerebiamrole": {
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "arn:",
+      {
+       "Ref": "AWS::Partition"
+      },
+      ":iam::",
+      {
+       "Ref": "AWS::AccountId"
+      },
+      ":role/Elasticbeanstalk-EC2-Role"
+     ]
+    ]
+   }
+  }
+ },
+ "Conditions": {
+  "CDKMetadataAvailable": {
+   "Fn::Or": [
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "af-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-northeast-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-south-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-3"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ap-southeast-4"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "ca-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "cn-northwest-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-central-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-north-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-south-2"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Or": [
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "eu-west-3"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "il-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-central-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "me-south-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "sa-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-1"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-east-2"
+       ]
+      },
+      {
+       "Fn::Equals": [
+        {
+         "Ref": "AWS::Region"
+        },
+        "us-west-1"
+       ]
+      }
+     ]
+    },
+    {
+     "Fn::Equals": [
+      {
+       "Ref": "AWS::Region"
+      },
+      "us-west-2"
+     ]
+    }
+   ]
+  }
+ },
+ "Parameters": {
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

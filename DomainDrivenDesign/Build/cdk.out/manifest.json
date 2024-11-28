@@ -1,0 +1,101 @@
+{
+  "version": "38.0.1",
+  "artifacts": {
+    "recipe-randomizer-elastic-beanstalk-stack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "recipe-randomizer-elastic-beanstalk-stack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "recipe-randomizer-elastic-beanstalk-stack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://unknown-account/unknown-region",
+      "properties": {
+        "templateFile": "recipe-randomizer-elastic-beanstalk-stack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-deploy-role-${AWS::AccountId}-${AWS::Region}",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-cfn-exec-role-${AWS::AccountId}-${AWS::Region}",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}/6de72d48e06a15eaebf3357e5dbb6f42e7cb7dc4a7353f70c9f593697b133b04.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "recipe-randomizer-elastic-beanstalk-stack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-lookup-role-${AWS::AccountId}-${AWS::Region}",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "recipe-randomizer-elastic-beanstalk-stack.assets"
+      ],
+      "metadata": {
+        "/recipe-randomizer-elastic-beanstalk-stack/recipe-randomizer-eb-instance-profile/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "reciperandomizerebinstanceprofileA1A59F8D"
+          }
+        ],
+        "/recipe-randomizer-elastic-beanstalk-stack/recipe-randomizer-eb-iam-role": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "reciperandomizerebiamrole"
+          }
+        ],
+        "/recipe-randomizer-elastic-beanstalk-stack/recipe-randomizer-elb-app": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "reciperandomizerelbapp"
+          }
+        ],
+        "/recipe-randomizer-elastic-beanstalk-stack/recipe-randomizer-elb-app-version": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "reciperandomizerelbappversion"
+          }
+        ],
+        "/recipe-randomizer-elastic-beanstalk-stack/recipe-randomizer-elb-environment": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "reciperandomizerelbenvironment"
+          }
+        ],
+        "/recipe-randomizer-elastic-beanstalk-stack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/recipe-randomizer-elastic-beanstalk-stack/CDKMetadata/Condition": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadataAvailable"
+          }
+        ],
+        "/recipe-randomizer-elastic-beanstalk-stack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/recipe-randomizer-elastic-beanstalk-stack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "recipe-randomizer-elastic-beanstalk-stack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}
