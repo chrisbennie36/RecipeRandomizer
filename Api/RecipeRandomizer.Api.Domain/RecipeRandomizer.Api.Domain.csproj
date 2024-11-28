@@ -11,10 +11,6 @@
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DomainDrivenDesign.Api.Data\DomainDrivenDesign.Api.Data.csproj" />
-    <ProjectReference Include="..\..\Shared\DomainDrivenDesign.Shared.Enums\DomainDrivenDesign.Shared.Enums.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="UserManagementService.Api.Client.dll">
       <HintPath>..\..\Refs\UserManagementService.Api.Client.dll</HintPath>
     </Reference>
@@ -23,5 +19,9 @@
     <Reference Include="GoogleCustomSearchService.Api.Client.dll">
       <HintPath>..\..\Refs\GoogleCustomSearchService.Api.Client.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RecipeRandomizer.Api.Data\RecipeRandomizer.Api.Data.csproj" />
+    <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Enums\RecipeRandomizer.Shared.Enums.csproj" />
   </ItemGroup>
 </Project>

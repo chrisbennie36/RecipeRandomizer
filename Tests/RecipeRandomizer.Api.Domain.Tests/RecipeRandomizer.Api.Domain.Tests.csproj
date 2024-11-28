@@ -8,6 +8,6 @@
     <PackageReference Include="xunit" Version="2.9.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Api\DomainDrivenDesign.Api.Domain\DomainDrivenDesign.Api.Domain.csproj" />
+    <ProjectReference Include="..\..\Api\RecipeRandomizer.Api.Domain\RecipeRandomizer.Api.Domain.csproj" />
   </ItemGroup>
 </Project>

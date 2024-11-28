@@ -13,6 +13,6 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.10" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Shared\DomainDrivenDesign.Shared.Enums\DomainDrivenDesign.Shared.Enums.csproj" />
+    <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Enums\RecipeRandomizer.Shared.Enums.csproj" />
   </ItemGroup>
 </Project>
