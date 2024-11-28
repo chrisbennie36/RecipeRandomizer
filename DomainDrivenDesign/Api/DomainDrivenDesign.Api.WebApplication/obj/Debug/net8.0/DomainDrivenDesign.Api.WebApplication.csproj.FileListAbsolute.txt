@@ -149,8 +149,6 @@ c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrive
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Api.WebApplication.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Api.WebApplication.pdb
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\AutoMapper.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\AWSSDK.CloudWatchLogs.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\AWSSDK.Core.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\FluentValidation.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\FluentValidation.AspNetCore.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\FluentValidation.DependencyInjectionExtensions.dll
@@ -203,9 +201,7 @@ c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrive
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\NSwag.Generation.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\NSwag.Generation.AspNetCore.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\Serilog.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\Serilog.Sinks.AwsCloudWatch.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\Serilog.Sinks.File.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\Serilog.Sinks.PeriodicBatching.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\System.CodeDom.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\System.Composition.AttributedModel.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\System.Composition.Convention.dll
@@ -270,10 +266,9 @@ c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrive
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Api.Data.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Api.Domain.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Shared.Enums.dll
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\GoogleCustomSearchService.Api.Client.dll
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Api.Domain.pdb
-c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Shared.Enums.pdb
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Api.Data.pdb
+c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\DomainDrivenDesign.Shared.Enums.pdb
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\obj\Debug\net8.0\DomainDrivenDesign.Api.WebApplication.csproj.AssemblyReference.cache
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\obj\Debug\net8.0\DomainDrivenDesign.Api.WebApplication.GeneratedMSBuildEditorConfig.editorconfig
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\obj\Debug\net8.0\DomainDrivenDesign.Api.WebApplication.AssemblyInfoInputs.cache
@@ -290,3 +285,4 @@ c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrive
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\obj\Debug\net8.0\DomainDrivenDesign.Api.WebApplication.pdb
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\obj\Debug\net8.0\DomainDrivenDesign.Api.WebApplication.genruntimeconfig.cache
 c:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\obj\Debug\net8.0\ref\DomainDrivenDesign.Api.WebApplication.dll
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Api\DomainDrivenDesign.Api.WebApplication\bin\Debug\net8.0\GoogleCustomSearchService.Api.Client.dll

@@ -7,10 +7,6 @@ using Serilog;
 using NSwag.Generation.Processors.Security;
 using DomainDrivenDesign.Api.Domain.Proxies;
 using GoogleClient = GoogleCustomSearchService.Api.Client.GoogleCustomSearchClient;
-using Serilog.Sinks.AwsCloudWatch;
-using Amazon.CloudWatchLogs;
-using Amazon.Runtime;
-using Amazon;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,8 +35,6 @@ builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddHttpClient("GoogleCustomSearchClient", config => 
 {
-    var me = builder.Configuration["GoogleCustomSearchClient:Url"];
-
     config.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"] ?? string.Empty);
 });
 
@@ -48,7 +42,6 @@ builder.Services.AddSingleton<GoogleClient>(c =>
 {
     var factory = c.GetService<IHttpClientFactory>();
     var httpClient = factory?.CreateClient("GoogleCustomSearchClient");
-    httpClient.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"]);
     
     return new GoogleClient(httpClient);
 });
@@ -71,19 +64,7 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-//Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/logs-", rollingInterval: RollingInterval.Day).MinimumLevel.Debug().CreateLogger();
-
-var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(builder.Configuration["AwsCloudwatchLogging:AccessKey"], builder.Configuration["AwsCloudwatchLogging:SecretKey"]), RegionEndpoint.USEast1);
-
-Log.Logger = new LoggerConfiguration().WriteTo.AmazonCloudWatch(
-    logGroup: builder.Configuration["AwsCloudwatchLogging:LogGroup"],
-    logStreamPrefix: builder.Configuration["AwsCloudwatchLogging:LogStreamPrefix"],
-    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose,
-    createLogGroup: true,
-    appendUniqueInstanceGuid: true,
-    appendHostName: false,
-    logGroupRetentionPolicy: LogGroupRetentionPolicy.ThreeDays,
-    cloudWatchClient: client).CreateLogger();
+Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/logs-", rollingInterval: RollingInterval.Day).MinimumLevel.Debug().CreateLogger();
 
 if(app.Environment.IsDevelopment())
 {
