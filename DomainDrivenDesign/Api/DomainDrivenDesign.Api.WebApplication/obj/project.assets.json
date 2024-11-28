@@ -18,6 +18,35 @@
           }
         }
       },
+      "AWSSDK.CloudWatchLogs/3.7.102.27": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.Core": "[3.7.103.10, 4.0.0)"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.CloudWatchLogs.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.CloudWatchLogs.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
+      "AWSSDK.Core/3.7.103.10": {
+        "type": "package",
+        "compile": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/AWSSDK.Core.dll": {
+            "related": ".pdb;.xml"
+          }
+        }
+      },
       "FluentValidation/11.10.0": {
         "type": "package",
         "compile": {
@@ -2271,6 +2300,24 @@
           }
         }
       },
+      "Serilog.Sinks.AwsCloudWatch/4.3.37": {
+        "type": "package",
+        "dependencies": {
+          "AWSSDK.CloudWatchLogs": "3.7.102.27",
+          "Serilog": "3.0.0",
+          "Serilog.Sinks.PeriodicBatching": "3.1.0"
+        },
+        "compile": {
+          "lib/net6.0/Serilog.Sinks.AwsCloudWatch.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Serilog.Sinks.AwsCloudWatch.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Serilog.Sinks.File/6.0.0": {
         "type": "package",
         "dependencies": {
@@ -2283,6 +2330,22 @@
         },
         "runtime": {
           "lib/net8.0/Serilog.Sinks.File.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Serilog.Sinks.PeriodicBatching/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Serilog": "2.0.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/Serilog.Sinks.PeriodicBatching.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.1/Serilog.Sinks.PeriodicBatching.dll": {
             "related": ".xml"
           }
         }
@@ -3714,6 +3777,58 @@
         "icon.png",
         "lib/net6.0/AutoMapper.dll",
         "lib/net6.0/AutoMapper.xml"
+      ]
+    },
+    "AWSSDK.CloudWatchLogs/3.7.102.27": {
+      "sha512": "A2GBbtLyFR4wLkbUL1/M48ylI17b9JnEuY+dBkwF9dmNqFHox+whjszrSdUnrsgr5lD8kT7TwFseFuEplb7aYQ==",
+      "type": "package",
+      "path": "awssdk.cloudwatchlogs/3.7.102.27",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "analyzers/dotnet/cs/AWSSDK.CloudWatchLogs.CodeAnalysis.dll",
+        "awssdk.cloudwatchlogs.3.7.102.27.nupkg.sha512",
+        "awssdk.cloudwatchlogs.nuspec",
+        "lib/net35/AWSSDK.CloudWatchLogs.dll",
+        "lib/net35/AWSSDK.CloudWatchLogs.pdb",
+        "lib/net35/AWSSDK.CloudWatchLogs.xml",
+        "lib/net45/AWSSDK.CloudWatchLogs.dll",
+        "lib/net45/AWSSDK.CloudWatchLogs.pdb",
+        "lib/net45/AWSSDK.CloudWatchLogs.xml",
+        "lib/netcoreapp3.1/AWSSDK.CloudWatchLogs.dll",
+        "lib/netcoreapp3.1/AWSSDK.CloudWatchLogs.pdb",
+        "lib/netcoreapp3.1/AWSSDK.CloudWatchLogs.xml",
+        "lib/netstandard2.0/AWSSDK.CloudWatchLogs.dll",
+        "lib/netstandard2.0/AWSSDK.CloudWatchLogs.pdb",
+        "lib/netstandard2.0/AWSSDK.CloudWatchLogs.xml",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "AWSSDK.Core/3.7.103.10": {
+      "sha512": "T+whMY7eMb7hy6COuI47iOM+7aqrNw3AWymgje2RYTNoKnnlQIdpYf0arIft874NDN5IYW3f0wuAcwYeowN46g==",
+      "type": "package",
+      "path": "awssdk.core/3.7.103.10",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "awssdk.core.3.7.103.10.nupkg.sha512",
+        "awssdk.core.nuspec",
+        "lib/net35/AWSSDK.Core.dll",
+        "lib/net35/AWSSDK.Core.pdb",
+        "lib/net35/AWSSDK.Core.xml",
+        "lib/net45/AWSSDK.Core.dll",
+        "lib/net45/AWSSDK.Core.pdb",
+        "lib/net45/AWSSDK.Core.xml",
+        "lib/netcoreapp3.1/AWSSDK.Core.dll",
+        "lib/netcoreapp3.1/AWSSDK.Core.pdb",
+        "lib/netcoreapp3.1/AWSSDK.Core.xml",
+        "lib/netstandard2.0/AWSSDK.Core.dll",
+        "lib/netstandard2.0/AWSSDK.Core.pdb",
+        "lib/netstandard2.0/AWSSDK.Core.xml",
+        "tools/account-management.ps1"
       ]
     },
     "FluentValidation/11.10.0": {
@@ -6591,6 +6706,23 @@
         "serilog.nuspec"
       ]
     },
+    "Serilog.Sinks.AwsCloudWatch/4.3.37": {
+      "sha512": "MolT7TiIYZzueEgyHknlKtnkTl9vAQKr6xap6ZJxARk7x55S2Cze1LYr/2Iyhm32527HkwQncujS5Fa8rqD9IA==",
+      "type": "package",
+      "path": "serilog.sinks.awscloudwatch/4.3.37",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net6.0/Serilog.Sinks.AwsCloudWatch.dll",
+        "lib/net6.0/Serilog.Sinks.AwsCloudWatch.xml",
+        "lib/netstandard2.0/Serilog.Sinks.AwsCloudWatch.dll",
+        "lib/netstandard2.0/Serilog.Sinks.AwsCloudWatch.xml",
+        "logo.png",
+        "readme.md",
+        "serilog.sinks.awscloudwatch.4.3.37.nupkg.sha512",
+        "serilog.sinks.awscloudwatch.nuspec"
+      ]
+    },
     "Serilog.Sinks.File/6.0.0": {
       "sha512": "lxjg89Y8gJMmFxVkbZ+qDgjl+T4yC5F7WSLTvA+5q0R04tfKVLRL/EHpYoJ/MEQd2EeCKDuylBIVnAYMotmh2A==",
       "type": "package",
@@ -6612,6 +6744,28 @@
         "serilog-sink-nuget.png",
         "serilog.sinks.file.6.0.0.nupkg.sha512",
         "serilog.sinks.file.nuspec"
+      ]
+    },
+    "Serilog.Sinks.PeriodicBatching/3.1.0": {
+      "sha512": "NDWR7m3PalVlGEq3rzoktrXikjFMLmpwF0HI4sowo8YDdU+gqPlTHlDQiOGxHfB0sTfjPA9JjA7ctKG9zqjGkw==",
+      "type": "package",
+      "path": "serilog.sinks.periodicbatching/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.png",
+        "lib/net45/Serilog.Sinks.PeriodicBatching.dll",
+        "lib/net45/Serilog.Sinks.PeriodicBatching.xml",
+        "lib/netstandard1.1/Serilog.Sinks.PeriodicBatching.dll",
+        "lib/netstandard1.1/Serilog.Sinks.PeriodicBatching.xml",
+        "lib/netstandard1.2/Serilog.Sinks.PeriodicBatching.dll",
+        "lib/netstandard1.2/Serilog.Sinks.PeriodicBatching.xml",
+        "lib/netstandard2.0/Serilog.Sinks.PeriodicBatching.dll",
+        "lib/netstandard2.0/Serilog.Sinks.PeriodicBatching.xml",
+        "lib/netstandard2.1/Serilog.Sinks.PeriodicBatching.dll",
+        "lib/netstandard2.1/Serilog.Sinks.PeriodicBatching.xml",
+        "serilog.sinks.periodicbatching.3.1.0.nupkg.sha512",
+        "serilog.sinks.periodicbatching.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -10287,24 +10441,23 @@
     },
     "DomainDrivenDesign.Api.Data/1.0.0": {
       "type": "project",
-      "path": "../../DomainDrivenDesign.Api.Data/DomainDrivenDesign.Api.Data.csproj",
-      "msbuildProject": "../../DomainDrivenDesign.Api.Data/DomainDrivenDesign.Api.Data.csproj"
+      "path": "../DomainDrivenDesign.Api.Data/DomainDrivenDesign.Api.Data.csproj",
+      "msbuildProject": "../DomainDrivenDesign.Api.Data/DomainDrivenDesign.Api.Data.csproj"
     },
     "DomainDrivenDesign.Api.Domain/1.0.0": {
       "type": "project",
-      "path": "../../DomainDrivenDesign.Api.Domain/DomainDrivenDesign.Api.Domain.csproj",
-      "msbuildProject": "../../DomainDrivenDesign.Api.Domain/DomainDrivenDesign.Api.Domain.csproj"
+      "path": "../DomainDrivenDesign.Api.Domain/DomainDrivenDesign.Api.Domain.csproj",
+      "msbuildProject": "../DomainDrivenDesign.Api.Domain/DomainDrivenDesign.Api.Domain.csproj"
     },
     "DomainDrivenDesign.Shared.Enums/1.0.0": {
       "type": "project",
-      "path": "../../DomainDrivenDesign.Shared.Enums/DomainDrivenDesign.Shared.Enums.csproj",
-      "msbuildProject": "../../DomainDrivenDesign.Shared.Enums/DomainDrivenDesign.Shared.Enums.csproj"
+      "path": "../../Shared/DomainDrivenDesign.Shared.Enums/DomainDrivenDesign.Shared.Enums.csproj",
+      "msbuildProject": "../../Shared/DomainDrivenDesign.Shared.Enums/DomainDrivenDesign.Shared.Enums.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "AutoMapper >= 13.0.1",
-      "DomainDrivenDesign.Api.Data >= 1.0.0",
       "DomainDrivenDesign.Api.Domain >= 1.0.0",
       "DomainDrivenDesign.Shared.Enums >= 1.0.0",
       "FluentValidation.AspNetCore >= 11.3.0",
@@ -10317,6 +10470,7 @@
       "NSwag.AspNetCore >= 14.1.0",
       "Npgsql.DependencyInjection >= 8.0.5",
       "Serilog >= 4.1.0",
+      "Serilog.Sinks.AwsCloudWatch >= 4.3.37",
       "Serilog.Sinks.File >= 6.0.0",
       "System.IdentityModel.Tokens.Jwt >= 8.2.0"
     ]
@@ -10327,11 +10481,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Api\\DomainDrivenDesign.Api.WebApplication\\DomainDrivenDesign.Api.WebApplication.csproj",
+      "projectUniqueName": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Api\\DomainDrivenDesign.Api.WebApplication\\DomainDrivenDesign.Api.WebApplication.csproj",
       "projectName": "DomainDrivenDesign.Api.WebApplication",
-      "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Api\\DomainDrivenDesign.Api.WebApplication\\DomainDrivenDesign.Api.WebApplication.csproj",
+      "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Api\\DomainDrivenDesign.Api.WebApplication\\DomainDrivenDesign.Api.WebApplication.csproj",
       "packagesPath": "C:\\Users\\chris\\.nuget\\packages\\",
-      "outputPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Api\\DomainDrivenDesign.Api.WebApplication\\obj\\",
+      "outputPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Api\\DomainDrivenDesign.Api.WebApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chris\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -10347,14 +10501,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj": {
-              "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Data\\DomainDrivenDesign.Api.Data.csproj"
+            "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Api\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj": {
+              "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Api\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj"
             },
-            "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj": {
-              "projectPath": "C:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Api.Domain\\DomainDrivenDesign.Api.Domain.csproj"
-            },
-            "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
-              "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
+            "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Shared\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj": {
+              "projectPath": "c:\\Projects\\RecipeRandomizer\\RecipeRandomizer\\DomainDrivenDesign\\Shared\\DomainDrivenDesign.Shared.Enums\\DomainDrivenDesign.Shared.Enums.csproj"
             }
           }
         }
@@ -10419,6 +10570,10 @@
           "Serilog": {
             "target": "Package",
             "version": "[4.1.0, )"
+          },
+          "Serilog.Sinks.AwsCloudWatch": {
+            "target": "Package",
+            "version": "[4.3.37, )"
           },
           "Serilog.Sinks.File": {
             "target": "Package",

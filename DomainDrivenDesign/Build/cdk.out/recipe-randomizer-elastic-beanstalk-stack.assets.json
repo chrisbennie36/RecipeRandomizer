@@ -1,0 +1,32 @@
+{
+  "version": "38.0.1",
+  "files": {
+    "595674d418357e7f6b3c677443e4d17a2e12a56ae5790b5535ee9cdd685f8502": {
+      "source": {
+        "path": "asset.595674d418357e7f6b3c677443e4d17a2e12a56ae5790b5535ee9cdd685f8502.zip",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "595674d418357e7f6b3c677443e4d17a2e12a56ae5790b5535ee9cdd685f8502.zip",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    },
+    "6de72d48e06a15eaebf3357e5dbb6f42e7cb7dc4a7353f70c9f593697b133b04": {
+      "source": {
+        "path": "recipe-randomizer-elastic-beanstalk-stack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "current_account-current_region": {
+          "bucketName": "cdk-hnb659fds-assets-${AWS::AccountId}-${AWS::Region}",
+          "objectKey": "6de72d48e06a15eaebf3357e5dbb6f42e7cb7dc4a7353f70c9f593697b133b04.json",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::${AWS::AccountId}:role/cdk-hnb659fds-file-publishing-role-${AWS::AccountId}-${AWS::Region}"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

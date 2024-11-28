@@ -1,0 +1,12 @@
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\bin\Release\net8.0\DomainDrivenDesign.Shared.Enums.deps.json
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\bin\Release\net8.0\DomainDrivenDesign.Shared.Enums.dll
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\bin\Release\net8.0\DomainDrivenDesign.Shared.Enums.pdb
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\obj\Release\net8.0\DomainDrivenDesign.Shared.Enums.GeneratedMSBuildEditorConfig.editorconfig
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\obj\Release\net8.0\DomainDrivenDesign.Shared.Enums.AssemblyInfoInputs.cache
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\obj\Release\net8.0\DomainDrivenDesign.Shared.Enums.AssemblyInfo.cs
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\obj\Release\net8.0\DomainDrivenDesign.Shared.Enums.csproj.CoreCompileInputs.cache
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\obj\Release\net8.0\DomainDrivenDesign.Shared.Enums.sourcelink.json
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\obj\Release\net8.0\DomainDrivenDesign.Shared.Enums.dll
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\obj\Release\net8.0\refint\DomainDrivenDesign.Shared.Enums.dll
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\obj\Release\net8.0\DomainDrivenDesign.Shared.Enums.pdb
+C:\Projects\RecipeRandomizer\RecipeRandomizer\DomainDrivenDesign\Shared\DomainDrivenDesign.Shared.Enums\obj\Release\net8.0\ref\DomainDrivenDesign.Shared.Enums.dll
