@@ -1,4 +1,4 @@
-namespace DomainDrivenDesign.Api.Domain.Proxies;
+namespace RecipeRandomizer.Api.Domain.Proxies;
 
 using GoogleCustomSearchService.Api.Client;
 

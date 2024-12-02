@@ -1,8 +1,8 @@
-using DomainDrivenDesign.Api.Data.Models;
+using RecipeRandomizer.Api.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace DomainDrivenDesign.Api.Data;
+namespace RecipeRandomizer.Api.Data;
 
 public class AppDbContext : DbContext
 {
@@ -17,8 +17,11 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseNpgsql(configuration.GetConnectionString("ApiAwsConnectionString"), b => b.MigrationsAssembly("DomainDrivenDesign.Api.WebApplication"));
+        options.UseNpgsql(configuration.GetConnectionString("ApiAwsConnectionString"), b => b.MigrationsAssembly("RecipeRandomizer.Api.WebApplication"));
     }
 
-    public DbSet<RecipeProfile> RecipeProfiles { get; set; }
+    public DbSet<RecipePreference> RecipePreferences { get; set; }
+    public DbSet<SeafoodPreference> SeafoodPreferences { get; set; }
+    public DbSet<MeatPreference> MeatPreferences { get; set; }
+    public DbSet<VegetarianPreference> VegetarianPreferences { get; set; }
 }

@@ -1,44 +1,55 @@
-using AutoMapper;
-using DomainDrivenDesign.Api.Data;
-using DomainDrivenDesign.Api.Data.Models;
-using DomainDrivenDesign.Api.Domain.Commands;
-using DomainDrivenDesign.Api.Domain.Results;
+using RecipeRandomizer.Api.Domain.Commands;
 using MediatR;
 using Serilog;
+using RecipeRandomizer.Api.Domain.Models;
 
-namespace DomainDrivenDesign.Api.Domain.Handlers;
+namespace RecipeRandomizer.Api.Domain.Handlers;
 
-public class AddRecipeProfileCommandHandler: IRequestHandler<AddRecipeProfileCommand, RecipeProfileResult?>
+public class AddRecipeProfileCommandHandler: IRequestHandler<AddRecipeProfileCommand, bool>
 {
-    private readonly AppDbContext appDbContext;
-    private readonly IMapper mapper;
+    private readonly ISender sender;
 
-    public AddRecipeProfileCommandHandler(AppDbContext appDbContext, IMapper mapper)
+    public AddRecipeProfileCommandHandler(ISender sender)
     {
-        this.appDbContext = appDbContext;
-        this.mapper = mapper;
+        this.sender = sender;
     }
 
-    public async Task<RecipeProfileResult?> Handle(AddRecipeProfileCommand request, CancellationToken cancellationToken)
+    public async Task<bool> Handle(AddRecipeProfileCommand request, CancellationToken cancellationToken)
     {
         try
         {
-            var recipeProfile = appDbContext.RecipeProfiles.Add(new RecipeProfile 
+            RecipeProfileModel recipeProfile = request.recipeProfile;
+
+            if(recipeProfile.RecipePreferences.Any())
             {
-                UserId = request.userId,
-                MeatType = request.recipeProfile.MeatType,
-                DietType = request.recipeProfile.DietType,
-                CreatedUtc = DateTime.UtcNow
-            });
+                AddRecipePreferencesForUserCommand command = new AddRecipePreferencesForUserCommand(recipeProfile.RecipePreferences, request.userId);
+                await sender.Send(command);
+            }
 
-            await appDbContext.SaveChangesAsync();
+            if(request.recipeProfile.SeafoodPreferences.Any())
+            {
+                AddSeafoodPreferencesForUserCommand command = new AddSeafoodPreferencesForUserCommand(recipeProfile.SeafoodPreferences, request.userId);
+                await sender.Send(command);
+            }
 
-            return mapper.Map<RecipeProfileResult>(recipeProfile.Entity);
+            if(request.recipeProfile.MeatPreferences.Any())
+            {
+                AddMeatPreferencesForUserCommand command = new AddMeatPreferencesForUserCommand(recipeProfile.MeatPreferences, request.userId);
+                await sender.Send(command);
+            }
+
+            if(request.recipeProfile.VegetarianPreferences.Any()) 
+            {
+                AddVegetarianPreferencesForUserCommand command = new AddVegetarianPreferencesForUserCommand(recipeProfile.VegetarianPreferences, request.userId);
+                await sender.Send(command);
+            }
+
+            return true;
         }
         catch(Exception e)
         {
-            Log.Error($"Error when writing a {nameof(RecipeProfile)} to the database: {e.Message}");
-            return null;
+            Log.Error($"Error when writing recipe preferences to the database: {e.Message}");
+            return false;
         }
     }
 }

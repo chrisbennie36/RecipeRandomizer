@@ -1,4 +1,4 @@
-namespace DomainDrivenDesign.Api.Domain.Results;
+namespace RecipeRandomizer.Api.Domain.Results;
 
 public class RecipeResult
 {

@@ -1,6 +1,6 @@
-using DomainDrivenDesign.Api.Domain.Results;
+using RecipeRandomizer.Api.Domain.Results;
 using MediatR;
 
-namespace DomainDrivenDesign.Api.Domain.Queries;
+namespace RecipeRandomizer.Api.Domain.Queries;
 
 public record GetRecipeProfileForUserQuery(int userId) : IRequest<RecipeProfileResult?>;

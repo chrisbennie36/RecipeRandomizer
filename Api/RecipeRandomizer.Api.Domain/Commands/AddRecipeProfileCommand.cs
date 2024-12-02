@@ -1,7 +1,6 @@
-using DomainDrivenDesign.Api.Domain.Models;
-using DomainDrivenDesign.Api.Domain.Results;
+using RecipeRandomizer.Api.Domain.Models;
 using MediatR;
 
-namespace DomainDrivenDesign.Api.Domain.Commands;
+namespace RecipeRandomizer.Api.Domain.Commands;
 
-public record AddRecipeProfileCommand(RecipeProfileModel recipeProfile, int userId) : IRequest<RecipeProfileResult?>;
+public record AddRecipeProfileCommand(RecipeProfileModel recipeProfile, int userId) : IRequest<bool>;

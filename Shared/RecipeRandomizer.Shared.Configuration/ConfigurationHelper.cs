@@ -3,7 +3,7 @@ using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DomainDrivenDesign.Shared.Configuration;
+namespace RecipeRandomizer.Shared.Configuration;
 
 public class ConfigurationHelper<T>
 {

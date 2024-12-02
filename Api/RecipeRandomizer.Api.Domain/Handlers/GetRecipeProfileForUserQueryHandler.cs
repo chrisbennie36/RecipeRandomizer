@@ -1,43 +1,40 @@
-using AutoMapper;
-using DomainDrivenDesign.Api.Data;
-using DomainDrivenDesign.Api.Data.Models;
-using DomainDrivenDesign.Api.Domain.Queries;
-using DomainDrivenDesign.Api.Domain.Results;
+using RecipeRandomizer.Api.Domain.Queries;
+using RecipeRandomizer.Api.Domain.Results;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using RecipeRandomizer.Shared.Enums;
+using Serilog;
 
-namespace DomainDrivenDesign.Api.Domain.Handlers;
+namespace RecipeRandomizer.Api.Domain.Handlers;
 
 public class GetRecipeProfileForUserQueryHandler : IRequestHandler<GetRecipeProfileForUserQuery, RecipeProfileResult?>
 {
-    private readonly AppDbContext appDbContext;
-    private readonly IMapper mapper;
-    private readonly ILogger<GetRecipeProfileForUserQueryHandler> logger;
+    private readonly ISender sender;
 
-    public GetRecipeProfileForUserQueryHandler(AppDbContext appDbContext, IMapper mapper, ILogger<GetRecipeProfileForUserQueryHandler> logger)
+    public GetRecipeProfileForUserQueryHandler(ISender sender)
     {
-        this.appDbContext = appDbContext;
-        this.mapper = mapper;
-        this.logger = logger;
+        this.sender = sender;
     }
 
     public async Task<RecipeProfileResult?> Handle(GetRecipeProfileForUserQuery request, CancellationToken cancellationToken)
     {
         try
         {
-            RecipeProfile? recipeProfileForUser = await appDbContext.RecipeProfiles.FirstOrDefaultAsync(r => r.UserId == request.userId);
-            
-            if(recipeProfileForUser == null)
-            {
-                return null;
-            }
+            IEnumerable<RecipePreferenceType> recipePreferences = await sender.Send(new GetRecipePreferencesForUserQuery(request.userId));
+            IEnumerable<SeafoodPreferenceType> seafoodPreferences = await sender.Send(new GetSeafoodPreferencesForUserQuery(request.userId));
+            IEnumerable<MeatPreferenceType> meatPreferences = await sender.Send(new GetMeatPreferencesForUserQuery(request.userId));
+            IEnumerable<VegetarianPreferenceType> vegetarianPreferences = await sender.Send(new GetVegetarianPreferencesForUserQuery(request.userId));
 
-            return mapper.Map<RecipeProfileResult>(recipeProfileForUser);
+            return new RecipeProfileResult
+            {
+                RecipePreferences = recipePreferences,
+                SeafoodPreferences = seafoodPreferences,
+                MeatPreferences = meatPreferences,
+                VegetarianPreferences = vegetarianPreferences
+            };
         }
         catch(Exception e)
         {
-            logger.LogError($"Error when retrieving a {nameof(RecipeProfile)} from the database: {e.Message}");
+            Log.Error($"Error when retrieving recipe preferences from the database: {e.Message}");
             return null;
         }
     }

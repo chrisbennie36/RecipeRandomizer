@@ -1,6 +1,6 @@
-namespace DomainDrivenDesign.Shared.Enums;
+namespace RecipeRandomizer.Shared.Enums;
 
-public enum DietType
+public enum RecipePreferenceType
 {
     Meat = 1,
     Vegetarian = 2,

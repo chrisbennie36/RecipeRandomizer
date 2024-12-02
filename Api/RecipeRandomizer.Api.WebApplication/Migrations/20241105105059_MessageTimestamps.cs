@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace DomainDrivenDesign.Api.WebApplication.Migrations
+namespace RecipeRandomizer.Api.WebApplication.Migrations
 {
     /// <inheritdoc />
     public partial class MessageTimestamps : Migration

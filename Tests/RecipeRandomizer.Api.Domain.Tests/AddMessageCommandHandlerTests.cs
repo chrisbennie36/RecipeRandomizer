@@ -1,6 +1,6 @@
 ﻿using Xunit;
 
-namespace DomainDrivenDesign.Api.Domain.Tests;
+namespace RecipeRandomizer.Api.Domain.Tests;
 
 public class AddMessageCommandHandlerTests
 {

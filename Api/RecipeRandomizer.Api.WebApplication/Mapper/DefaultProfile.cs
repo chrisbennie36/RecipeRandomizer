@@ -1,32 +1,22 @@
 using AutoMapper;
-using DomainDrivenDesign.Api.Data.Models;
-using DomainDrivenDesign.Api.Domain.Commands;
-using DomainDrivenDesign.Api.Domain.Models;
-using DomainDrivenDesign.Api.Domain.Results;
-using DomainDrivenDesign.Api.WebApplication.Dtos;
-using DomainDrivenDesign.Api.WebApplication.Responses;
-
-namespace DomainDrivenDesign.Api.WebApplication.Mapper;
+using RecipeRandomizer.Api.Domain.Commands;
+using RecipeRandomizer.Api.Domain.Models;
+using RecipeRandomizer.Api.Domain.Results;
+using RecipeRandomizer.Api.WebApplication.Dtos;
+namespace RecipeRandomizer.Api.WebApplication.Mapper;
 
 public class DefaultProfile : Profile
 {
     public DefaultProfile()
     {
         MapDtosToCommands();
-        MapEntitiesToQueryResults();
         MapDtosToModels();
         MapResultsToModels();
-        MapResultsToResponses();
     }
 
     private void MapDtosToCommands()
     {
         CreateMap<RecipeProfileDto, AddRecipeProfileCommand>();
-    }
-
-    private void MapEntitiesToQueryResults()
-    {
-        CreateMap<RecipeProfile, RecipeProfileResult>();
     }
 
     private void MapDtosToModels()
@@ -37,10 +27,5 @@ public class DefaultProfile : Profile
     private void MapResultsToModels()
     {
         CreateMap<RecipeProfileResult, RecipeProfileModel>();
-    }
-
-    private void MapResultsToResponses() 
-    {
-        CreateMap<RecipeProfileResult, RecipeProfileResponse>();
     }
 }

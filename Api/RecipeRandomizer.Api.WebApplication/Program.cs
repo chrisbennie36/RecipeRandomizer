@@ -1,16 +1,17 @@
 using System.Text;
-using DomainDrivenDesign.Api.Data;
-using DomainDrivenDesign.Api.Domain.Commands;
+using RecipeRandomizer.Api.Data;
+using RecipeRandomizer.Api.Domain.Commands;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using NSwag.Generation.Processors.Security;
-using DomainDrivenDesign.Api.Domain.Proxies;
+using RecipeRandomizer.Api.Domain.Proxies;
 using GoogleClient = GoogleCustomSearchService.Api.Client.GoogleCustomSearchClient;
 using Serilog.Sinks.AwsCloudWatch;
 using Amazon.CloudWatchLogs;
 using Amazon.Runtime;
 using Amazon;
+using RecipeRandomizer.Api.WebApplication.ExceptionHandler;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,8 @@ builder.Services.AddOpenApiDocument(config =>
 
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(AddRecipeProfileCommand).Assembly));
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddProblemDetails().AddExceptionHandler<GlobalExceptionHandler>();
 
 builder.Services.AddDbContext<AppDbContext>();
 /*builder.Services.AddDbContext<AppDbContext>(options =>
@@ -90,6 +93,9 @@ if(app.Environment.IsDevelopment())
     app.UseOpenApi();
     app.UseSwaggerUi();
 }
+
+app.UseStatusCodePages();
+app.UseExceptionHandler();
 
 //The following three should be in this exact order - see here: https://stackoverflow.com/questions/43574552/authorization-in-asp-net-core-always-401-unauthorized-for-authorize-attribute
 app.UseAuthentication();
