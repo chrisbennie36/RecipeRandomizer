@@ -1,0 +1,6 @@
+bin/
+obj/
+Logs/
+appsettings.Development.json
+appsettings.json
+*.zip
