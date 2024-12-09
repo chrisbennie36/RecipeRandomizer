@@ -1,6 +1,6 @@
 using MediatR;
 using RecipeRandomizer.Api.Data;
-using RecipeRandomizer.Api.Data.Models;
+using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Extensions;
 using RecipeRandomizer.Api.Domain.Models;

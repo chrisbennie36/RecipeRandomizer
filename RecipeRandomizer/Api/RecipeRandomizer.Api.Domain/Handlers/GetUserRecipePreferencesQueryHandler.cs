@@ -2,7 +2,7 @@ using RecipeRandomizer.Api.Domain.Queries;
 using MediatR;
 using Serilog;
 using RecipeRandomizer.Api.Data;
-using RecipeRandomizer.Api.Data.Models;
+using RecipeRandomizer.Api.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using RecipeRandomizer.Api.Domain.Models;
 using AutoMapper;

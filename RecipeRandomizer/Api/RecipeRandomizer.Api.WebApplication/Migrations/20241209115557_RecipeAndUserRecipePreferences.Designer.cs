@@ -25,7 +25,7 @@ namespace RecipeRandomizer.Api.WebApplication.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("RecipeRandomizer.Api.Data.Models.RecipePreference", b =>
+            modelBuilder.Entity("RecipeRandomizer.Api.Data.Entities.RecipePreference", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace RecipeRandomizer.Api.WebApplication.Migrations
                     b.ToTable("RecipePreferences");
                 });
 
-            modelBuilder.Entity("RecipeRandomizer.Api.Data.Models.UserRecipePreference", b =>
+            modelBuilder.Entity("RecipeRandomizer.Api.Data.Entities.UserRecipePreference", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -78,9 +78,9 @@ namespace RecipeRandomizer.Api.WebApplication.Migrations
                     b.ToTable("UserRecipePreferences");
                 });
 
-            modelBuilder.Entity("RecipeRandomizer.Api.Data.Models.UserRecipePreference", b =>
+            modelBuilder.Entity("RecipeRandomizer.Api.Data.Entities.UserRecipePreference", b =>
                 {
-                    b.HasOne("RecipeRandomizer.Api.Data.Models.RecipePreference", "RecipePreferece")
+                    b.HasOne("RecipeRandomizer.Api.Data.Entities.RecipePreference", "RecipePreferece")
                         .WithMany()
                         .HasForeignKey("RecipePreferenceId")
                         .OnDelete(DeleteBehavior.Cascade)

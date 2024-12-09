@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace RecipeRandomizer.Api.Data.Models;
+namespace RecipeRandomizer.Api.Data.Entities;
 
 public class EntityBase
 {

@@ -1,5 +1,5 @@
 using AutoMapper;
-using RecipeRandomizer.Api.Data.Models;
+using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Models;
 namespace RecipeRandomizer.Api.WebApplication.Mapper;
 

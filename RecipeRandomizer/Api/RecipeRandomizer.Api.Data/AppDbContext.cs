@@ -1,4 +1,4 @@
-using RecipeRandomizer.Api.Data.Models;
+using RecipeRandomizer.Api.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
