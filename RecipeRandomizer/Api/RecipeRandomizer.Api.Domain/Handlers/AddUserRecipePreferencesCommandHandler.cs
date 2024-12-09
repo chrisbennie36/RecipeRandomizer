@@ -41,7 +41,7 @@ public class AddUserRecipePreferencesCommandHandler : IRequestHandler<AddUserRec
         }
         catch(Exception e)
         {
-            Log.Error($"Error occurred when trying to save a {nameof(UserRecipePreference)} to the database: {e.Message}");
+            Log.Error($"Error occurred when trying to save a {nameof(UserRecipePreference)} to the database: {e.Message} {e.InnerException?.Message}");
             return false;
         }
     }

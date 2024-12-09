@@ -31,7 +31,7 @@ public class GetUserRecipePreferencesQueryHandler : IRequestHandler<GetUserRecip
         }
         catch(Exception e)
         {
-            Log.Error($"Error when retrieving recipe preferences from the database: {e.Message}");
+            Log.Error($"Error when retrieving recipe preferences from the database: {e.Message} {e.InnerException?.Message}");
             return Enumerable.Empty<RecipePreferenceModel>();
         }
     }

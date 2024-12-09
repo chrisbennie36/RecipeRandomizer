@@ -41,7 +41,7 @@ public class DeleteUserRecipePreferencesCommandHandler : IRequestHandler<DeleteU
         }
         catch(Exception e)
         {
-            Log.Error($"Error occurred when trying to delete a {nameof(UserRecipePreference)} from the database: {e.Message}");
+            Log.Error($"Error occurred when trying to delete a {nameof(UserRecipePreference)} from the database: {e.Message} {e.InnerException?.Message}");
             return false;
         }
     }
