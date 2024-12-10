@@ -119,19 +119,19 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
         Random rand = new Random();
 
-        RecipePreferenceType recipeTypeToSearchFor = recipePreferencesArray[rand.Next(recipePreferences.Count() - 1)].RecipePreferenceType;
+        RecipePreferenceType recipeTypeToSearchFor = recipePreferencesArray[rand.Next(recipePreferences.Count() - 1)].Type;
 
         if(recipeTypeToSearchFor == RecipePreferenceType.Pescatarian)
         {
-            return GenerateSeafoodQuery(sb, recipePreferences.GetSeafoodPreferences().ToArray());
+            return GenerateSeafoodQuery(sb, recipePreferences.GetSelectedUserPreferencesForType(RecipePreferenceType.Pescatarian).ToArray());
         }
         else if(recipeTypeToSearchFor == RecipePreferenceType.Meat)
         {
-            return GenerateMeatQuery(sb, recipePreferences.GetMeatPreferences().ToArray());
+            return GenerateMeatQuery(sb, recipePreferences.GetSelectedUserPreferencesForType(RecipePreferenceType.Meat).ToArray());
         }
         else
         {
-            return GenerateVegetarianQuery(sb, recipePreferences.GetVegetarianPreferences().ToArray());
+            return GenerateVegetarianQuery(sb, recipePreferences.GetSelectedUserPreferencesForType(RecipePreferenceType.Vegetarian).ToArray());
         }
     }
 

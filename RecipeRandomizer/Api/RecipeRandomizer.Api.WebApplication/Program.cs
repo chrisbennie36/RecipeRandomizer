@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Text;
 using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Domain.Commands;
@@ -76,17 +77,24 @@ var app = builder.Build();
 
 //Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/logs-", rollingInterval: RollingInterval.Day).MinimumLevel.Debug().CreateLogger();
 
-var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(builder.Configuration["AwsCloudwatchLogging:AccessKey"], builder.Configuration["AwsCloudwatchLogging:SecretKey"]), RegionEndpoint.USEast1);
+if(Boolean.Parse(builder.Configuration["AwsCloudwatchLogging:Enabled"]) == true)
+{
+    var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(builder.Configuration["AwsCloudwatchLogging:AccessKey"], builder.Configuration["AwsCloudwatchLogging:SecretKey"]), RegionEndpoint.USEast1);
 
-Log.Logger = new LoggerConfiguration().WriteTo.AmazonCloudWatch(
-    logGroup: builder.Configuration["AwsCloudwatchLogging:LogGroup"],
-    logStreamPrefix: builder.Configuration["AwsCloudwatchLogging:LogStreamPrefix"],
-    restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose,
-    createLogGroup: true,
-    appendUniqueInstanceGuid: true,
-    appendHostName: false,
-    logGroupRetentionPolicy: LogGroupRetentionPolicy.ThreeDays,
-    cloudWatchClient: client).CreateLogger();
+    Log.Logger = new LoggerConfiguration().WriteTo.AmazonCloudWatch(
+        logGroup: builder.Configuration["AwsCloudwatchLogging:LogGroup"],
+        logStreamPrefix: builder.Configuration["AwsCloudwatchLogging:LogStreamPrefix"],
+        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose,
+        createLogGroup: true,
+        appendUniqueInstanceGuid: true,
+        appendHostName: false,
+        logGroupRetentionPolicy: LogGroupRetentionPolicy.ThreeDays,
+        cloudWatchClient: client).CreateLogger();
+}
+else
+{
+    Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/logs-", rollingInterval: RollingInterval.Day).MinimumLevel.Debug().CreateLogger();
+}
 
 if(app.Environment.IsDevelopment())
 {

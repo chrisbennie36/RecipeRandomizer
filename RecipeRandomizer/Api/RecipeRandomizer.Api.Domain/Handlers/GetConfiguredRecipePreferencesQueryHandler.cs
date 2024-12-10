@@ -24,14 +24,14 @@ public class GetConfiguredRecipePreferencesQueryHandler : IRequestHandler<GetCon
     {
         try
         {
-            IEnumerable<RecipePreference> configuredRecipePreferences = await appDbContext.RecipePreferences.ToListAsync();
+            List<RecipePreference> configuredRecipePreferences = await appDbContext.RecipePreferences.ToListAsync();
 
             if(!configuredRecipePreferences.Any())
             {
                 return Enumerable.Empty<RecipePreferenceModel>();
             }
 
-            return mapper.Map<IEnumerable<RecipePreferenceModel>>(configuredRecipePreferences);
+            return mapper.Map<List<RecipePreferenceModel>>(configuredRecipePreferences);
         }
         catch(Exception e)
         {
