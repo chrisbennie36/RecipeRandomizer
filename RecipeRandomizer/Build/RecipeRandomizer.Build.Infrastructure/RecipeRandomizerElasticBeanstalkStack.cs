@@ -18,7 +18,7 @@ public class RecipeRandomizerElasticBeanstalkStack : Stack
 
     public RecipeRandomizerElasticBeanstalkStack(Construct scope, string id, RecipeRandomizerElasticBeanstalkStackProps props) : base(scope, id)
     {
-        IRole role = Role.FromRoleName(this, "recipe-randomizer-eb-app-role", "Elasticbeanstalk-EC2-Role");
+        IRole role = Role.FromRoleName(this, "recipe-randomizer-eb-app-role", "aws-elasticbeanstalk-ec2-role");
 
         var instanceProfile = new InstanceProfile(this, "recipe-randomizer-eb-instance-profile", new InstanceProfileProps 
         {

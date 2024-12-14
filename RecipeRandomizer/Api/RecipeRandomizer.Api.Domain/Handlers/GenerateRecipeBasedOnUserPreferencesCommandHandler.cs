@@ -51,11 +51,28 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
             Log.Error("Could not generate recipe query params for recipe");
             return result;
         }
+        
+        GoogleCustomSearchResponse? customSearchResult = null;
 
-        GoogleCustomSearchResponse? customSearchResult = await googleCustomSearchProxy.SearchAsync(new GoogleCustomSearchService.Api.Client.GoogleCustomSearchDto { QueryString = recipeQueryParams, PaginationToken = RandomizePaginationToken() });
+        try
+        {
+            customSearchResult = await googleCustomSearchProxy.SearchAsync(new GoogleCustomSearchService.Api.Client.GoogleCustomSearchDto { QueryString = recipeQueryParams, PaginationToken = RandomizePaginationToken() });
+        }
+        catch(Exception e)
+        {
+            Log.Error($"Error calling the GoogleCustomSearchClient: {e.Message} {e.InnerException?.Message}");
+        }
 
         if(customSearchResult == null)
         {
+            Log.Warning("Response from the GoogleCustomSearchClient is null");
+            return result;
+        }
+
+        if(customSearchResult.ProblemDetails != null && customSearchResult.ProblemDetails.AdditionalProperties.ContainsKey("traceId"))
+        {
+            result.ErrorTraceId = (string)customSearchResult.ProblemDetails.AdditionalProperties["traceId"];
+            Log.Error("Something went wrong when generating the recipe within the GoogleCustomSearchClient: Trace ID {traceId}", result.ErrorTraceId);
             return result;
         }
 
@@ -115,11 +132,22 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
     {
         StringBuilder sb = new StringBuilder();
 
-        RecipePreferenceModel[] recipePreferencesArray = recipePreferences.ToArray();
+        RecipePreferenceModel[] recipePreferencesArray = recipePreferences.Where(r => r.Type != RecipePreferenceType.General).ToArray();
 
         Random rand = new Random();
 
-        RecipePreferenceType recipeTypeToSearchFor = recipePreferencesArray[rand.Next(recipePreferences.Count() - 1)].Type;
+        RecipePreferenceType recipeTypeToSearchFor;
+
+    	if(recipePreferencesArray.Count() == 1)
+        {
+            recipeTypeToSearchFor = recipePreferencesArray.Single().Type;
+        }
+        else
+        {
+            recipeTypeToSearchFor = recipePreferencesArray[rand.Next(recipePreferences.Count() - 1)].Type;
+        }
+
+        Log.Information($"Generating Recipe Query for Recipe Preference Type: {recipeTypeToSearchFor}");
 
         if(recipeTypeToSearchFor == RecipePreferenceType.Pescatarian)
         {
@@ -141,7 +169,9 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
         RecipePreferenceModel seafoodTypeToSearchFor = seafoodPreferences[rand.Next(seafoodPreferences.Count() - 1)];
 
-        sb.Append($"{seafoodTypeToSearchFor}+recipe");
+        sb.Append($"{seafoodTypeToSearchFor.Name}+recipe");
+
+        Log.Information($"Generated Seafood query: {sb.ToString()}");
 
         return sb.ToString();
     }
@@ -152,7 +182,9 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
         RecipePreferenceModel meatTypeToSearchFor = meatPreferences[rand.Next(meatPreferences.Count() - 1)];
 
-        sb.Append($"{meatTypeToSearchFor}+recipe");
+        sb.Append($"{meatTypeToSearchFor.Name}+recipe");
+
+        Log.Information($"Generated Meat query: {sb.ToString()}");
 
         return sb.ToString();
     }
@@ -163,7 +195,9 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
         RecipePreferenceModel vegetarianTypeToSearchFor = vegetarianPreferences[rand.Next(vegetarianPreferences.Count() - 1)];
 
-        sb.Append(string.Format($"vegetarian+{vegetarianTypeToSearchFor}+recipe"));
+        sb.Append(string.Format($"vegetarian+{vegetarianTypeToSearchFor.Name}+recipe"));
+
+        Log.Information($"Generated Vegetarian query: {sb.ToString()}");
 
         return sb.ToString();
     }

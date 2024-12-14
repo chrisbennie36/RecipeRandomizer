@@ -3,4 +3,4 @@ using RecipeRandomizer.Api.Domain.Models;
 
 namespace RecipeRandomizer.Api.Domain.Queries;
 
-public record GetConfiguredRecipePreferencesQuery : IRequest<IEnumerable<RecipePreferenceModel>>;
+public record GetConfiguredRecipePreferencesQuery(string? cultureCode = null) : IRequest<IEnumerable<RecipePreferenceModel>>;

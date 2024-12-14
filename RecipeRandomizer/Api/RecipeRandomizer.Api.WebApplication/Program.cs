@@ -45,14 +45,16 @@ builder.Services.AddHttpClient("GoogleCustomSearchClient", config =>
 {
     var me = builder.Configuration["GoogleCustomSearchClient:Url"];
 
-    config.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"] ?? string.Empty);
+    //config.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"] ?? string.Empty);
+    config.BaseAddress = new Uri("http://localhost:5176");
 });
 
 builder.Services.AddSingleton<GoogleClient>(c => 
 {
     var factory = c.GetService<IHttpClientFactory>();
     var httpClient = factory?.CreateClient("GoogleCustomSearchClient");
-    httpClient.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"]);
+    //httpClient.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"]);
+    httpClient.BaseAddress = new Uri("http://localhost:5176");
     
     return new GoogleClient(httpClient);
 });
@@ -75,8 +77,6 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-//Log.Logger = new LoggerConfiguration().WriteTo.File("./Logs/logs-", rollingInterval: RollingInterval.Day).MinimumLevel.Debug().CreateLogger();
-
 if(Boolean.Parse(builder.Configuration["AwsCloudwatchLogging:Enabled"]) == true)
 {
     var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(builder.Configuration["AwsCloudwatchLogging:AccessKey"], builder.Configuration["AwsCloudwatchLogging:SecretKey"]), RegionEndpoint.USEast1);
@@ -84,7 +84,7 @@ if(Boolean.Parse(builder.Configuration["AwsCloudwatchLogging:Enabled"]) == true)
     Log.Logger = new LoggerConfiguration().WriteTo.AmazonCloudWatch(
         logGroup: builder.Configuration["AwsCloudwatchLogging:LogGroup"],
         logStreamPrefix: builder.Configuration["AwsCloudwatchLogging:LogStreamPrefix"],
-        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Verbose,
+        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Debug,
         createLogGroup: true,
         appendUniqueInstanceGuid: true,
         appendHostName: false,

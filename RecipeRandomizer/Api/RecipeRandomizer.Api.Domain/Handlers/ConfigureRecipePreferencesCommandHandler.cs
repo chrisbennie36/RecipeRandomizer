@@ -27,6 +27,7 @@ public class ConfigureRecipePreferencesCommandHandler : IRequestHandler<Configur
                 {
                     Name = recipePreferenceModel.Name,
                     Type = recipePreferenceModel.Type,
+                    Excluded = false,
                     CreatedUtc = DateTime.UtcNow
                 };
 

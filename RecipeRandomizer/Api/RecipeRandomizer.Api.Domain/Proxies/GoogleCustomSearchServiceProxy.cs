@@ -1,6 +1,7 @@
 namespace RecipeRandomizer.Api.Domain.Proxies;
 
 using GoogleCustomSearchService.Api.Client;
+using Serilog;
 using GoogleClient = GoogleCustomSearchService.Api.Client.GoogleCustomSearchClient;
 
 public class GoogleCustomSearchServiceProxy : IGoogleCustomSearchServiceProxy
@@ -13,8 +14,21 @@ public class GoogleCustomSearchServiceProxy : IGoogleCustomSearchServiceProxy
 
     public async Task<GoogleCustomSearchResponse> SearchAsync(GoogleCustomSearchDto dto)
     {
-        //ToDo: Determine why this isn't set during DI
-        googleCustomSearchClient.BaseUrl = "http://projects.eba-mwswa2uy.us-east-1.elasticbeanstalk.com";
-        return await googleCustomSearchClient.GetResultsAsync(dto);
+        try
+        {
+            Log.Warning("About to call the GoogleCustomSearchClient");
+
+            //ToDo: Determine why this isn't set during DI
+            googleCustomSearchClient.BaseUrl = "http://localhost:5176";
+
+            Log.Warning("Calling GoogleCustomSearchClient at URL: {url}", googleCustomSearchClient.BaseUrl);
+
+            return await googleCustomSearchClient.GetResultsAsync(dto);
+        }
+        catch(Exception e)
+        {
+            Log.Error($"Error when calling the GoogleCustomSearchClient: {e.Message} {e.InnerException?.Message}");
+            return new GoogleCustomSearchResponse();
+        }
     }
 }
