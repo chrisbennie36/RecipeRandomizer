@@ -136,15 +136,21 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
         Random rand = new Random();
 
-        RecipePreferenceType recipeTypeToSearchFor;
+        RecipePreferenceType recipeTypeToSearchFor = recipePreferencesArray.First().Type;
 
-    	if(recipePreferencesArray.Count() == 1)
+        if(recipePreferencesArray.Count() > 1)
         {
-            recipeTypeToSearchFor = recipePreferencesArray.Single().Type;
-        }
-        else
-        {
-            recipeTypeToSearchFor = recipePreferencesArray[rand.Next(recipePreferences.Count() - 1)].Type;
+            int randIndex = 0;
+            try
+            {
+                randIndex = rand.Next(recipePreferences.Count() - 1);
+
+                recipeTypeToSearchFor = recipePreferencesArray[randIndex].Type;
+            }
+            catch(IndexOutOfRangeException e)
+            {
+                Log.Error($"Index out of range when randomizing recipe type to search for, recipe type count: {recipePreferences.Count()}, index: { randIndex}");
+            }
         }
 
         Log.Information($"Generating Recipe Query for Recipe Preference Type: {recipeTypeToSearchFor}");

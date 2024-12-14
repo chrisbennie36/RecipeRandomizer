@@ -30,6 +30,11 @@ public class RecipeController : ControllerBase
             return NotFound();
         }
 
+        if(recipeResult.RecipeUrl == null)
+        {
+            return BadRequest(recipeResult.ErrorTraceId);
+        }
+
         return Ok(recipeResult);
     }
 }
