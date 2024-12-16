@@ -8,20 +8,15 @@ public class AppDbContext : DbContext
 {
     protected readonly IConfiguration configuration;
 
-    public AppDbContext(IConfiguration configuration) : base()
+    public AppDbContext(IConfiguration configuration, DbContextOptions<AppDbContext> options) : base(options)
     {
         this.configuration = configuration;
     }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-    {
-        
-    }
-
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseNpgsql(configuration.GetConnectionString("ApiAwsConnectionString"), b => b.MigrationsAssembly("RecipeRandomizer.Api.WebApplication"));
-        //options.UseNpgsql(configuration.GetConnectionString("ApiConnectionString"), b => b.MigrationsAssembly("RecipeRandomizer.Api.WebApplication"));
+       // options.UseNpgsql(configuration.GetConnectionString("ApiAwsConnectionString"), b => b.MigrationsAssembly("RecipeRandomizer.Api.WebApplication"));
+        options.UseNpgsql(configuration.GetConnectionString("ApiConnectionString"), b => b.MigrationsAssembly("RecipeRandomizer.Api.WebApplication"));
     }
 
     public DbSet<RecipePreference> RecipePreferences { get; set; }

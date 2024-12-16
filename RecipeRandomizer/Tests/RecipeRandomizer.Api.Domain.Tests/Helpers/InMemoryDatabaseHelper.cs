@@ -12,7 +12,7 @@ public static class InMemoryDatabaseHelper
         builder.UseInMemoryDatabase(databaseName: "RecipeRandomizerTestDb");
 
         var dbContextOptions = builder.Options;
-        AppDbContext appDbContext = new AppDbContext(dbContextOptions);
+        AppDbContext appDbContext = new AppDbContext(null, dbContextOptions);
         appDbContext.Database.EnsureDeleted();
         appDbContext.Database.EnsureCreated();
         
