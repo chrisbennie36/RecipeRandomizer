@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using System.Text;
 using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Domain.Commands;
@@ -37,24 +36,19 @@ builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddProblemDetails().AddExceptionHandler<GlobalExceptionHandler>();
 
+//For more control over DBContexts, can make use of the DbContextScope approach described here: https://mehdi.me/ambient-dbcontext-in-ef6/, https://github.com/mehdime/DbContextScope?ref=mehdi.me 
 builder.Services.AddDbContext<AppDbContext>();
-/*builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("ApiConnectionString")));*/
 
 builder.Services.AddHttpClient("GoogleCustomSearchClient", config => 
 {
-    var me = builder.Configuration["GoogleCustomSearchClient:Url"];
-
-    //config.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"] ?? string.Empty);
-    config.BaseAddress = new Uri("http://localhost:5176");
+    config.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"] ?? string.Empty);
 });
 
 builder.Services.AddSingleton<GoogleClient>(c => 
 {
     var factory = c.GetService<IHttpClientFactory>();
     var httpClient = factory?.CreateClient("GoogleCustomSearchClient");
-    //httpClient.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"]);
-    httpClient.BaseAddress = new Uri("http://localhost:5176");
+    httpClient.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"] ?? string.Empty);
     
     return new GoogleClient(httpClient);
 });

@@ -8,6 +8,7 @@ using GoogleClient = GoogleCustomSearchService.Api.Client.GoogleCustomSearchClie
 public class GoogleCustomSearchServiceProxy : IGoogleCustomSearchServiceProxy
 {
     private readonly GoogleClient googleCustomSearchClient;
+
     public GoogleCustomSearchServiceProxy(GoogleClient googleCustomSearchClient)
     {
         this.googleCustomSearchClient = googleCustomSearchClient;
@@ -17,13 +18,6 @@ public class GoogleCustomSearchServiceProxy : IGoogleCustomSearchServiceProxy
     {
         try
         {
-            Log.Warning("About to call the GoogleCustomSearchClient");
-
-            //ToDo: Determine why this isn't set during DI
-            googleCustomSearchClient.BaseUrl = "http://localhost:5176";
-
-            Log.Warning("Calling GoogleCustomSearchClient at URL: {url}", googleCustomSearchClient.BaseUrl);
-
             return await googleCustomSearchClient.GetResultsAsync(dto);
         }
         catch(ApiException e)
