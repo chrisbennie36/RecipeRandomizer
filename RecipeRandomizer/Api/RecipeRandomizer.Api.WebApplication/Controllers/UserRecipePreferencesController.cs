@@ -5,9 +5,11 @@ using Microsoft.Extensions.Caching.Memory;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Models;
 using RecipeRandomizer.Api.Domain.Queries;
+using RecipeRandomizer.Api.Domain.Results;
 using RecipeRandomizer.Api.WebApplication.Caching;
 using RecipeRandomizer.Api.WebApplication.Dtos;
 using RecipeRandomizer.Api.WebApplication.Responses;
+using RecipeRandomizer.Api.WebApplication.Extensions;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -33,11 +35,16 @@ public class UserRecipePreferencesController : ControllerBase
 
         if(!cache.TryGetValue(cacheKey, out userRecipePreferencesResponse))
         {
-            IEnumerable<RecipePreferenceModel> userRecipePreferences = await sender.Send(new GetUserRecipePreferencesQuery(userId));
+            DomainResult<IEnumerable<RecipePreferenceModel>> result = await sender.Send(new GetUserRecipePreferencesQuery(userId));
 
-            userRecipePreferencesResponse = mapper.Map<List<RecipePreferenceDto>>(userRecipePreferences);
+            if(result.status == ResponseStatus.Success)
+            {
+                userRecipePreferencesResponse = mapper.Map<List<RecipePreferenceDto>>(result.resultModel);
 
-            cache.Set(CacheKeys.GetUserRecipePreferencesCacheKey(userId), userRecipePreferencesResponse);
+                cache.Set(CacheKeys.GetUserRecipePreferencesCacheKey(userId), userRecipePreferencesResponse);
+            }
+
+            return result.ToActionResult();
         }
 
         return Ok(new UserRecipePreferencesResponse { RecipePreferences = userRecipePreferencesResponse ?? new List<RecipePreferenceDto>() });
@@ -46,28 +53,28 @@ public class UserRecipePreferencesController : ControllerBase
     [HttpPost("api/UserRecipePreferences/Update")]
     public async Task<ActionResult> UpdateUserRecipePreferences([FromBody] UserRecipePreferencesDto userRecipePreferencesDto, IMemoryCache cache)
     {
-        await sender.Send(new UpdateUserRecipePreferencesCommand(mapper.Map<UserRecipePreferencesModel>(userRecipePreferencesDto)));
+        var result = await sender.Send(new UpdateUserRecipePreferencesCommand(mapper.Map<UserRecipePreferencesModel>(userRecipePreferencesDto)));
 
-        cache.Remove(CacheKeys.GetUserRecipePreferencesCacheKey(userRecipePreferencesDto.UserId));
+        if(result.status == ResponseStatus.Success)
+        {
+            cache.Remove(CacheKeys.GetUserRecipePreferencesCacheKey(userRecipePreferencesDto.UserId));
 
-        return Ok();
+            return Ok();
+        }
+
+        return result.ToActionResult();
     }
 
     [HttpPost("api/UserRecipePreferences/Add")]
     public async Task<ActionResult> AddUserRecipePreferences([FromBody] UserRecipePreferencesDto userRecipePreferencesDto)
     {
-        bool result = await sender.Send(new AddUserRecipePreferencesCommand(userRecipePreferencesDto.RecipePreferences.Select(r => new RecipePreferenceModel
+        var result = await sender.Send(new AddUserRecipePreferencesCommand(userRecipePreferencesDto.RecipePreferences.Select(r => new RecipePreferenceModel
         {
             Id = r.Id,
             Type = r.Type,
             Excluded = r.Excluded
         }), userRecipePreferencesDto.UserId)); 
 
-        if(result == false)
-        {
-            return BadRequest();
-        }
-
-        return Ok();
+        return result.ToActionResult();
     }
 }

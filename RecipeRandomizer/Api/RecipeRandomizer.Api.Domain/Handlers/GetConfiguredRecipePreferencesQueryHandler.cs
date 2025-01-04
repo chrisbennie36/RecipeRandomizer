@@ -6,11 +6,12 @@ using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Models;
 using RecipeRandomizer.Api.Domain.Queries;
+using RecipeRandomizer.Api.Domain.Results;
 using Serilog;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 
-public class GetConfiguredRecipePreferencesQueryHandler : IRequestHandler<GetConfiguredRecipePreferencesQuery, IEnumerable<RecipePreferenceModel>>
+public class GetConfiguredRecipePreferencesQueryHandler : IRequestHandler<GetConfiguredRecipePreferencesQuery, DomainResult<IEnumerable<RecipePreferenceModel>>>
 {
     private readonly AppDbContext appDbContext;
     private readonly IMapper mapper;
@@ -21,29 +22,32 @@ public class GetConfiguredRecipePreferencesQueryHandler : IRequestHandler<GetCon
         this.mapper = mapper;
     }
 
-    public async Task<IEnumerable<RecipePreferenceModel>> Handle(GetConfiguredRecipePreferencesQuery request, CancellationToken cancellationToken) 
+    public async Task<DomainResult<IEnumerable<RecipePreferenceModel>>> Handle(GetConfiguredRecipePreferencesQuery request, CancellationToken cancellationToken) 
     {
         try
         {
-            List<RecipePreference> configuredRecipePreferences = await appDbContext.RecipePreferences.ToListAsync();
+            List<RecipePreference> configuredRecipePreferences = await appDbContext.RecipePreferences.AsNoTracking().ToListAsync();
 
             if(!configuredRecipePreferences.Any())
             {
-                return Enumerable.Empty<RecipePreferenceModel>();
+                return new DomainResult<IEnumerable<RecipePreferenceModel>>(ResponseStatus.Success, Enumerable.Empty<RecipePreferenceModel>());
             }
 
             if(!string.IsNullOrWhiteSpace(request.cultureCode))
             {
                 List<RecipePreference> translatedRecipePrefereces = TranslateRecipePreferences(configuredRecipePreferences, request.cultureCode);
-                return mapper.Map<List<RecipePreferenceModel>>(translatedRecipePrefereces);
+                List<RecipePreferenceModel> mappedTranslatedRecipePreferences = mapper.Map<List<RecipePreferenceModel>>(translatedRecipePrefereces);
+
+                return new DomainResult<IEnumerable<RecipePreferenceModel>>(ResponseStatus.Success, mappedTranslatedRecipePreferences);
             } 
 
-            return mapper.Map<List<RecipePreferenceModel>>(configuredRecipePreferences);
+            List<RecipePreferenceModel> mappedRecipePreferences = mapper.Map<List<RecipePreferenceModel>>(configuredRecipePreferences);
+            return new DomainResult<IEnumerable<RecipePreferenceModel>>(ResponseStatus.Success, mappedRecipePreferences);
         }
         catch(Exception e)
         {
-            Log.Error($"Error when retrieving configured recipe preferences from the database: {e.Message}, {e.InnerException?.Message}");
-            return Enumerable.Empty<RecipePreferenceModel>();
+            Log.Error($"Error when retrieving configured Recipe Preferences from the database: {e.Message}, {e.InnerException?.Message}");
+            return new DomainResult<IEnumerable<RecipePreferenceModel>>(ResponseStatus.Error, null, "Error when retrieving configured Recipe Preferences from the database");
         }
     }
 

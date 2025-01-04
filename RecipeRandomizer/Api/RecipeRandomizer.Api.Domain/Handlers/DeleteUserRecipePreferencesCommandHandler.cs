@@ -3,11 +3,12 @@ using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Models;
+using RecipeRandomizer.Api.Domain.Results;
 using Serilog;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 
-public class DeleteUserRecipePreferencesCommandHandler : IRequestHandler<DeleteUserRecipePreferencesCommand, bool>
+public class DeleteUserRecipePreferencesCommandHandler : IRequestHandler<DeleteUserRecipePreferencesCommand, DomainResult>
 {
     private AppDbContext appDbContext;
 
@@ -16,7 +17,7 @@ public class DeleteUserRecipePreferencesCommandHandler : IRequestHandler<DeleteU
         this.appDbContext = appDbContext;
     }
 
-    public async Task<bool> Handle(DeleteUserRecipePreferencesCommand request, CancellationToken cancellationToken) 
+    public async Task<DomainResult> Handle(DeleteUserRecipePreferencesCommand request, CancellationToken cancellationToken) 
     {
         try
         {
@@ -36,12 +37,12 @@ public class DeleteUserRecipePreferencesCommandHandler : IRequestHandler<DeleteU
                 await appDbContext.SaveChangesAsync();
             }
 
-            return true;
+            return new DomainResult(ResponseStatus.Success);
         }
         catch(Exception e)
         {
             Log.Error($"Error occurred when trying to delete a {nameof(UserRecipePreference)} from the database: {e.Message} {e.InnerException?.Message}");
-            return false;
+            return new DomainResult(ResponseStatus.Error, $"Error when deleting a {nameof(UserRecipePreference)} from the database");
         }
     }
 }

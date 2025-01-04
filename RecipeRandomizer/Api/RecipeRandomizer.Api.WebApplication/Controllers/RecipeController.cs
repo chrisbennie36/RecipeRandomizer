@@ -3,6 +3,7 @@ using RecipeRandomizer.Api.Domain.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
+using RecipeRandomizer.Api.WebApplication.Extensions;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -23,18 +24,13 @@ public class RecipeController : ControllerBase
     public async Task<ActionResult> GenerateRecipeForUser([FromRoute] int userId)
     {   
 
-        RecipeResult? recipeResult = await sender.Send(new GenerateRecipeBasedOnUserPreferencesCommand(userId));
+        var recipeResult = await sender.Send(new GenerateRecipeBasedOnUserPreferencesCommand(userId));
 
-        if(recipeResult == null)
+        if(recipeResult.resultModel.RecipeUrl == null)
         {
-            return NotFound();
+            return BadRequest(recipeResult.resultModel.ErrorTraceId);
         }
 
-        if(recipeResult.RecipeUrl == null)
-        {
-            return BadRequest(recipeResult.ErrorTraceId);
-        }
-
-        return Ok(recipeResult);
+        return recipeResult.ToActionResult();
     }
 }

@@ -1,11 +1,12 @@
 using MediatR;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Extensions;
+using RecipeRandomizer.Api.Domain.Results;
 using RecipeRandomizer.Api.Domain.Models;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 
-public class UpdateUserRecipePreferencesCommandHandler : IRequestHandler<UpdateUserRecipePreferencesCommand, Unit>
+public class UpdateUserRecipePreferencesCommandHandler : IRequestHandler<UpdateUserRecipePreferencesCommand, DomainResult>
 {
     private ISender sender;
 
@@ -14,7 +15,7 @@ public class UpdateUserRecipePreferencesCommandHandler : IRequestHandler<UpdateU
         this.sender = sender;
     }
 
-    public async Task<Unit> Handle(UpdateUserRecipePreferencesCommand request, CancellationToken cancellationToken)
+    public async Task<DomainResult> Handle(UpdateUserRecipePreferencesCommand request, CancellationToken cancellationToken)
     {
         IEnumerable<RecipePreferenceModel> recipePreferences = request.userRecipePreferencesModel.RecipePreferences;
 
@@ -23,14 +24,24 @@ public class UpdateUserRecipePreferencesCommandHandler : IRequestHandler<UpdateU
 
         if(recipePreferencesToDelete.Any())
         {
-            await sender.Send(new DeleteUserRecipePreferencesCommand(recipePreferencesToDelete, request.userRecipePreferencesModel.UserId));
+            var result = await sender.Send(new DeleteUserRecipePreferencesCommand(recipePreferencesToDelete, request.userRecipePreferencesModel.UserId));
+
+            if(result.status != ResponseStatus.Success)
+            {
+                return new DomainResult(ResponseStatus.Error, $"Error when deleting a User Recipe Preference from the database");
+            }
         } 
 
         if(recipePreferencesToAdd.Any())
         {
-            await sender.Send(new AddUserRecipePreferencesCommand(recipePreferencesToAdd, request.userRecipePreferencesModel.UserId));
+            var result = await sender.Send(new AddUserRecipePreferencesCommand(recipePreferencesToAdd, request.userRecipePreferencesModel.UserId));
+
+            if(result.status != ResponseStatus.Success)
+            {
+                return new DomainResult(ResponseStatus.Error, $"Error when adding a User Recipe Preference to the database");
+            }
         }
 
-        return Unit.Value;
+        return new DomainResult(ResponseStatus.Success);
     }
 }

@@ -33,7 +33,7 @@ public class GetUserRecipePreferencesQueryHandlerTests
         var result = await sut.Handle(new GetUserRecipePreferencesQuery(1), CancellationToken.None);
 
         Assert.NotNull(result);
-        Assert.Empty(result);
+        Assert.Empty(result.resultModel);
     }
 
        [Fact]
@@ -48,7 +48,7 @@ public class GetUserRecipePreferencesQueryHandlerTests
         var result = await sut.Handle(new GetUserRecipePreferencesQuery(UserId), CancellationToken.None);
 
         Assert.NotNull(result);
-        Assert.Empty(result);
+        Assert.Empty(result.resultModel);
 
         await ClearDatabase();
     }

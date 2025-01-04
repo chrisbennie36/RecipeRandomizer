@@ -3,11 +3,12 @@ using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Models;
+using RecipeRandomizer.Api.Domain.Results;
 using Serilog;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 
-public class AddUserRecipePreferencesCommandHandler : IRequestHandler<AddUserRecipePreferencesCommand, bool>
+public class AddUserRecipePreferencesCommandHandler : IRequestHandler<AddUserRecipePreferencesCommand, DomainResult>
 {
     private AppDbContext appDbContext;
 
@@ -16,7 +17,7 @@ public class AddUserRecipePreferencesCommandHandler : IRequestHandler<AddUserRec
         this.appDbContext = appDbContext;
     }
 
-    public async Task<bool> Handle(AddUserRecipePreferencesCommand request, CancellationToken cancellationToken) 
+    public async Task<DomainResult> Handle(AddUserRecipePreferencesCommand request, CancellationToken cancellationToken) 
     {
         try
         {
@@ -37,12 +38,12 @@ public class AddUserRecipePreferencesCommandHandler : IRequestHandler<AddUserRec
                 await appDbContext.SaveChangesAsync();
             }
 
-            return true;
+            return new DomainResult(ResponseStatus.Success);
         }
         catch(Exception e)
         {
             Log.Error($"Error occurred when trying to save a {nameof(UserRecipePreference)} to the database: {e.Message} {e.InnerException?.Message}");
-            return false;
+            return new DomainResult(ResponseStatus.Error, $"Error occurred when saving a {nameof(UserRecipePreference)} to the database");
         }
     }
 }

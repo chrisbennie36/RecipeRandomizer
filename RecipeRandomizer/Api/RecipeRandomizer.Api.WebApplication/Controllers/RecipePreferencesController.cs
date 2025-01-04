@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Models;
 using RecipeRandomizer.Api.Domain.Queries;
+using RecipeRandomizer.Api.Domain.Results;
 using RecipeRandomizer.Api.WebApplication.Dtos;
 using RecipeRandomizer.Api.WebApplication.Responses;
 using Serilog;
+using RecipeRandomizer.Api.WebApplication.Extensions;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -27,18 +29,15 @@ public class RecipePreferencesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> GetConfiguredRecipePreferences([FromRoute] string cultureCode)
-    {
-        Log.Warning("About to retrieve configured Recipe Preferences");
-        
-        IEnumerable<RecipePreferenceModel> configuredRecipePreferences = await sender.Send(new GetConfiguredRecipePreferencesQuery(cultureCode));
+    {        
+        DomainResult<IEnumerable<RecipePreferenceModel>> result = await sender.Send(new GetConfiguredRecipePreferencesQuery(cultureCode));
 
-        if(!configuredRecipePreferences.Any())
+        if(result.status == ResponseStatus.Success)
         {
-            Log.Warning("No Configured Recipe Preferences could be retrieved");
-            return NotFound();
+            return Ok(new ConfiguredRecipePreferencesResponse { RecipePreferences = mapper.Map<List<RecipePreferenceDto>>(result.resultModel) });
         }
 
-        return Ok(new ConfiguredRecipePreferencesResponse { RecipePreferences = mapper.Map<List<RecipePreferenceDto>>(configuredRecipePreferences) });
+        return result.ToActionResult();
     }
 
     //ToDo: Development only

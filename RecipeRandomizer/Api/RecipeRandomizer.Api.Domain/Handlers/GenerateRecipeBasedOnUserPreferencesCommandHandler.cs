@@ -14,7 +14,7 @@ using RecipeRandomizer.Api.Domain.Extensions;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 
-public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandler<GenerateRecipeBasedOnUserPreferencesCommand, RecipeResult>
+public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandler<GenerateRecipeBasedOnUserPreferencesCommand, DomainResult<RecipeResult>>
 {
     //As per Google's API Page: The API will never return more than 100 results, even if more than 100 documents match the query, so setting the sum of start + num to a number greater than 100 
     //will produce an error. Our maximum is 90 as we are using the default value for num which is 10, so 10+90 = 100.
@@ -32,24 +32,26 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
         this.googleCustomSearchProxy = googleCustomSearchProxy;
     }
 
-    public async Task<RecipeResult> Handle(GenerateRecipeBasedOnUserPreferencesCommand request, CancellationToken cancellationToken)
+    public async Task<DomainResult<RecipeResult>> Handle(GenerateRecipeBasedOnUserPreferencesCommand request, CancellationToken cancellationToken)
     {
         RecipeResult result = new RecipeResult();
 
-        IEnumerable<RecipePreferenceModel> userRecipePreferences = await sender.Send(new GetUserRecipePreferencesQuery(request.userId));
+        DomainResult<IEnumerable<RecipePreferenceModel>> userRecipePreferencesResult = await sender.Send(new GetUserRecipePreferencesQuery(request.userId));
 
-        if(!userRecipePreferences.Any())
+        if(userRecipePreferencesResult.status != ResponseStatus.Success)
         {
-            Log.Error($"Could not retrieve any user recipe preferences when generating a recipe URL");
-            return result;
+            string errorMessage = $"Could not retrieve any user recipe preferences when generating a recipe URL";
+            Log.Error(errorMessage);
+            return new DomainResult<RecipeResult>(ResponseStatus.Error, null, errorMessage);
         }
 
-        string recipeQueryParams = GenerateRecipeQuery(userRecipePreferences);
+        string recipeQueryParams = GenerateRecipeQuery(userRecipePreferencesResult.resultModel);
 
         if(string.IsNullOrEmpty(recipeQueryParams))
         {
-            Log.Error("Could not generate recipe query params for recipe");
-            return result;
+            string errorMessage = "Could not generate query for recipe";
+            Log.Error(errorMessage);
+            return new DomainResult<RecipeResult>(ResponseStatus.Error, null, errorMessage);
         }
         
         GoogleCustomSearchResponse? customSearchResult = null;
@@ -61,19 +63,21 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
         catch(Exception e)
         {
             Log.Error($"Error calling the GoogleCustomSearchClient: {e.Message} {e.InnerException?.Message}");
+            return new DomainResult<RecipeResult>(ResponseStatus.Error, null, "Error when calling the GoogleCustomSearchClient");
         }
 
         if(customSearchResult == null)
         {
-            Log.Warning("Response from the GoogleCustomSearchClient is null");
-            return result;
+            string message = "Response from the GoogleCustomSearchClient is null";
+            Log.Warning(message);
+            return new DomainResult<RecipeResult>(ResponseStatus.NotFound, null, message);
         }
 
         if(customSearchResult.ProblemDetails != null && customSearchResult.ProblemDetails.AdditionalProperties.ContainsKey("traceId"))
         {
             result.ErrorTraceId = (string)customSearchResult.ProblemDetails.AdditionalProperties["traceId"];
             Log.Error("Something went wrong when generating the recipe within the GoogleCustomSearchClient: Trace ID {traceId}", result.ErrorTraceId);
-            return result;
+            return new DomainResult<RecipeResult>(ResponseStatus.Error, result, $"Something went wrong when generating the recipe within the GoogleCustomSearchClient: Trace ID {result.ErrorTraceId}");
         }
 
         IEnumerable<string> urls = FilterOutNonUsefulUrls(customSearchResult.Items.Select(i => i.Link).ToList());
@@ -85,14 +89,14 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
             if(customSearchResult == null)
             {
-                return result;
+                return new DomainResult<RecipeResult>(ResponseStatus.NotFound, null);
             }
 
             urls = FilterOutNonUsefulUrls(customSearchResult.Items.Select(i => i.Link).ToList());
         }
 
         result.RecipeUrl = ChooseRandomResultUrl(urls.ToArray());
-        return result;
+        return new DomainResult<RecipeResult>(ResponseStatus.Success, result);
     }
 
     //Should ensure that every time the user requests results from google, we minimise the chance of duplicate recipes coming back
