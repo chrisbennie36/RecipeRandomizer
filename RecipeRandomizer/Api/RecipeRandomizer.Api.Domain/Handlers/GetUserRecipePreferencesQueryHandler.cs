@@ -5,8 +5,8 @@ using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using RecipeRandomizer.Api.Domain.Models;
-using RecipeRandomizer.Api.Domain.Results;
 using AutoMapper;
+using Utilities.ResultPattern;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 

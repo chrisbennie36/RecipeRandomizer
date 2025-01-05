@@ -3,6 +3,7 @@ using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Extensions;
 using RecipeRandomizer.Api.Domain.Results;
 using RecipeRandomizer.Api.Domain.Models;
+using Utilities.ResultPattern;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 

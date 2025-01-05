@@ -23,6 +23,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Utilities.dll">
+      <HintPath>..\..\Refs\Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\RecipeRandomizer.Api.Data\RecipeRandomizer.Api.Data.csproj" />
     <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Enums\RecipeRandomizer.Shared.Enums.csproj" />
   </ItemGroup>

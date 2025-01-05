@@ -4,11 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Models;
 using RecipeRandomizer.Api.Domain.Queries;
-using RecipeRandomizer.Api.Domain.Results;
 using RecipeRandomizer.Api.WebApplication.Dtos;
 using RecipeRandomizer.Api.WebApplication.Responses;
-using Serilog;
-using RecipeRandomizer.Api.WebApplication.Extensions;
+using Utilities.ResultPattern;
+using Utilities.ResultPattern.Extensions;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 

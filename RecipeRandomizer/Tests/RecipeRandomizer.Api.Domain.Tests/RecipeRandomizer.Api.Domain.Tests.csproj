@@ -17,6 +17,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Utilities.dll">
+      <HintPath>..\..\Refs\Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Api\RecipeRandomizer.Api.Data\RecipeRandomizer.Api.Data.csproj" />
     <ProjectReference Include="..\..\Api\RecipeRandomizer.Api.Domain\RecipeRandomizer.Api.Domain.csproj" />
     <ProjectReference Include="..\..\Api\RecipeRandomizer.Api.WebApplication\RecipeRandomizer.Api.WebApplication.csproj" />

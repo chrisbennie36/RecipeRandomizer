@@ -34,4 +34,9 @@
       <HintPath>..\..\Refs\GoogleCustomSearchService.Api.Client.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Utilities.dll">
+      <HintPath>..\..\Refs\Utilities.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

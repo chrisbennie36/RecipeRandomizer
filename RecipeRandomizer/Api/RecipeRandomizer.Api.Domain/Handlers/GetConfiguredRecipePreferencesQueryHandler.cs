@@ -6,8 +6,8 @@ using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Models;
 using RecipeRandomizer.Api.Domain.Queries;
-using RecipeRandomizer.Api.Domain.Results;
 using Serilog;
+using Utilities.ResultPattern;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 

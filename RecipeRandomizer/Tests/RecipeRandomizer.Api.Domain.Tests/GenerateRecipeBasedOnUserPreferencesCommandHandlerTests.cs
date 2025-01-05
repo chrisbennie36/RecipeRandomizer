@@ -9,6 +9,7 @@ using RecipeRandomizer.Api.Domain.Proxies;
 using RecipeRandomizer.Api.Domain.Queries;
 using RecipeRandomizer.Api.Domain.Results;
 using RecipeRandomizer.Api.WebApplication.Mapper;
+using Utilities.ResultPattern;
 using Xunit;
 
 namespace RecipeRandomizer.Api.Domain.Tests;
@@ -21,7 +22,7 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandlerTests
     private readonly Mock<IGoogleCustomSearchServiceProxy> googleCustomSearchProxy;
     private readonly IMapper mapper;
 
-    public GenerateRecipeBasedOnUserPreferencesCommandHandlerTestsTests()
+    public GenerateRecipeBasedOnUserPreferencesCommandHandlerTests()
     {
         RecipePreferenceModel recipePreferenceModel = new RecipePreferenceModel
         {
@@ -50,7 +51,7 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandlerTests
     [Fact]
     public async Task GenerateRecipeBasedOnUserPreferencesCommandHandlerTests_RetrievesUserRecipePreferences()
     {
-        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandlerTests(senderMock.Object, mapper, googleCustomSearchProxy.Object);
+        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandler(senderMock.Object, mapper, googleCustomSearchProxy.Object);
 
         var result = await sut.Handle(new GenerateRecipeBasedOnUserPreferencesCommand(UserId), CancellationToken.None);
 
@@ -64,7 +65,7 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandlerTests
 
         senderMock.Setup(s => s.Send(It.IsAny<GetUserRecipePreferencesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(emptyUserRecipePreferencesResult);
 
-        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandlerTests(senderMock.Object, mapper, googleCustomSearchProxy.Object);
+        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandler(senderMock.Object, mapper, googleCustomSearchProxy.Object);
 
         var result = await sut.Handle(new GenerateRecipeBasedOnUserPreferencesCommand(UserId), CancellationToken.None);
 
@@ -77,7 +78,7 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandlerTests
     [Fact]
     public async Task GenerateRecipeBasedOnUserPreferencesCommandHandlerTests_CallsTheGoogleCustomSearchClient_WhenUserRecipePreferencesExist()
     {
-        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandlerTests(senderMock.Object, mapper, googleCustomSearchProxy.Object);
+        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandler(senderMock.Object, mapper, googleCustomSearchProxy.Object);
 
         var result = await sut.Handle(new GenerateRecipeBasedOnUserPreferencesCommand(UserId), CancellationToken.None);
 

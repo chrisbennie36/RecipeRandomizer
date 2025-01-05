@@ -3,7 +3,7 @@ using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Models;
-using RecipeRandomizer.Api.Domain.Results;
+using Utilities.ResultPattern;
 using Serilog;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;

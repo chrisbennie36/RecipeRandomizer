@@ -11,6 +11,7 @@ using GoogleCustomSearchService.Api.Client;
 using MediatR;
 using Serilog;
 using RecipeRandomizer.Api.Domain.Extensions;
+using Utilities.ResultPattern;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 

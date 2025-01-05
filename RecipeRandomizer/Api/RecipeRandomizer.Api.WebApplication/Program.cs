@@ -12,6 +12,7 @@ using Amazon.CloudWatchLogs;
 using Amazon.Runtime;
 using Amazon;
 using RecipeRandomizer.Api.WebApplication.ExceptionHandler;
+using Utilities.ConfigurationManager.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,14 +42,17 @@ builder.Services.AddDbContext<AppDbContext>();
 
 builder.Services.AddHttpClient("GoogleCustomSearchClient", config => 
 {
-    config.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"] ?? string.Empty);
+    config.BaseAddress = new Uri(builder.Configuration.GetStringValue("GoogleCustomSearchClient:Url"));
 });
 
-builder.Services.AddSingleton<GoogleClient>(c => 
+builder.Services.AddSingleton(c => 
 {
     var factory = c.GetService<IHttpClientFactory>();
     var httpClient = factory?.CreateClient("GoogleCustomSearchClient");
-    httpClient.BaseAddress = new Uri(builder.Configuration["GoogleCustomSearchClient:Url"] ?? string.Empty);
+
+    ArgumentNullException.ThrowIfNull(httpClient);
+
+    httpClient.BaseAddress = new Uri(builder.Configuration.GetStringValue("GoogleCustomSearchClient:Url"));
     
     return new GoogleClient(httpClient);
 });
@@ -63,7 +67,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
     {
         ValidateIssuer = false,
         ValidateAudience = false,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["Jwt:Key"] ?? string.Empty))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetStringValue("Jwt:Key")))
     };
 });
 
@@ -73,13 +77,13 @@ builder.Services.AddMemoryCache();
 
 var app = builder.Build();
 
-if(Boolean.Parse(builder.Configuration["AwsCloudwatchLogging:Enabled"]) == true)
+if(builder.Configuration.GetBoolValue("AwsCloudwatchLogging:Enabled") == true)
 {
-    var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(builder.Configuration["AwsCloudwatchLogging:AccessKey"], builder.Configuration["AwsCloudwatchLogging:SecretKey"]), RegionEndpoint.USEast1);
+    var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(builder.Configuration.GetStringValue("AwsCloudwatchLogging:AccessKey"), builder.Configuration.GetStringValue("AwsCloudwatchLogging:SecretKey")), RegionEndpoint.USEast1);
 
     Log.Logger = new LoggerConfiguration().WriteTo.AmazonCloudWatch(
-        logGroup: builder.Configuration["AwsCloudwatchLogging:LogGroup"],
-        logStreamPrefix: builder.Configuration["AwsCloudwatchLogging:LogStreamPrefix"],
+        logGroup: builder.Configuration.GetStringValue("AwsCloudwatchLogging:LogGroup"),
+        logStreamPrefix: builder.Configuration.GetStringValue("AwsCloudwatchLogging:LogStreamPrefix"),
         restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Debug,
         createLogGroup: true,
         appendUniqueInstanceGuid: true,

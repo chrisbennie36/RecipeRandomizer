@@ -1,6 +1,6 @@
 using MediatR;
 using RecipeRandomizer.Api.Domain.Models;
-using RecipeRandomizer.Api.Domain.Results;
+using Utilities.ResultPattern;
 
 namespace RecipeRandomizer.Api.Domain.Commands;
 

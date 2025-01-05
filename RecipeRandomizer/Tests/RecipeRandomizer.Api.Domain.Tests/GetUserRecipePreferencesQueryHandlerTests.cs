@@ -33,6 +33,7 @@ public class GetUserRecipePreferencesQueryHandlerTests
         var result = await sut.Handle(new GetUserRecipePreferencesQuery(1), CancellationToken.None);
 
         Assert.NotNull(result);
+        Assert.NotNull(result.resultModel);
         Assert.Empty(result.resultModel);
     }
 
@@ -48,6 +49,7 @@ public class GetUserRecipePreferencesQueryHandlerTests
         var result = await sut.Handle(new GetUserRecipePreferencesQuery(UserId), CancellationToken.None);
 
         Assert.NotNull(result);
+        Assert.NotNull(result.resultModel);
         Assert.Empty(result.resultModel);
 
         await ClearDatabase();
@@ -55,7 +57,7 @@ public class GetUserRecipePreferencesQueryHandlerTests
 
     private async Task InitialiseDatabase()
     {
-        appDbContext.RecipePreferences.Add(new Data.Entities.RecipePreference 
+        appDbContext.RecipePreferences.Add(new RecipePreference 
         {
             Name = RecipePreferenceName,
             Type = Shared.Enums.RecipePreferenceType.Meat,
