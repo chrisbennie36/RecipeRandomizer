@@ -13,6 +13,7 @@ using Amazon.Runtime;
 using Amazon;
 using RecipeRandomizer.Api.WebApplication.ExceptionHandler;
 using Utilities.ConfigurationManager.Extensions;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,11 @@ builder.Services.AddProblemDetails().AddExceptionHandler<GlobalExceptionHandler>
 
 //For more control over DBContexts, can make use of the DbContextScope approach described here: https://mehdi.me/ambient-dbcontext-in-ef6/, https://github.com/mehdime/DbContextScope?ref=mehdi.me 
 builder.Services.AddDbContext<AppDbContext>();
+
+builder.Services.AddMassTransit(x => 
+{
+    x.UsingRabbitMq();
+});
 
 builder.Services.AddHttpClient("GoogleCustomSearchClient", config => 
 {

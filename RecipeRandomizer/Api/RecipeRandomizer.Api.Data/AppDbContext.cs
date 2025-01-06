@@ -21,4 +21,5 @@ public class AppDbContext : DbContext
 
     public DbSet<RecipePreference> RecipePreferences { get; set; }
     public DbSet<UserRecipePreference> UserRecipePreferences { get; set; }
+    public DbSet<RecipeRating> RecipeRatings { get; set; }
 }

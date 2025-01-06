@@ -2,6 +2,7 @@ using RecipeRandomizer.Api.Domain.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Utilities.ResultPattern.Extensions;
+using MassTransit;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -14,6 +15,17 @@ public class RecipeController : ControllerBase
     public RecipeController(ISender sender)
     {
         this.sender = sender;
+    }
+
+    [HttpPost("api/Recipe/")]
+    public ActionResult FireEvent([FromServices] IPublishEndpoint publishEndpoint)
+    {
+        publishEndpoint.Publish<TestEvent>(new
+        {
+            Id = 1
+        });
+
+        return Ok();
     }
 
     [HttpGet("/api/Recipe/{userId}")]
@@ -31,4 +43,9 @@ public class RecipeController : ControllerBase
 
         return recipeResult.ToActionResult();
     }
+}
+
+public class TestEvent 
+{
+    int Id { get; set;}
 }

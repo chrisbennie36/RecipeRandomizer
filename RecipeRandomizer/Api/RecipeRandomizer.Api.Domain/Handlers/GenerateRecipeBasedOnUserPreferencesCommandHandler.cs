@@ -152,7 +152,7 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
                 recipeTypeToSearchFor = recipePreferencesArray[randIndex].Type;
             }
-            catch(IndexOutOfRangeException e)
+            catch(IndexOutOfRangeException)
             {
                 Log.Error($"Index out of range when randomizing recipe type to search for, recipe type count: {recipePreferences.Count()}, index: { randIndex}");
             }
