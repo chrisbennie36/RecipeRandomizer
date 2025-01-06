@@ -14,6 +14,7 @@ using Amazon;
 using RecipeRandomizer.Api.WebApplication.ExceptionHandler;
 using Utilities.ConfigurationManager.Extensions;
 using MassTransit;
+using RecipeRandomizer.Api.Domain.EventConsumers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -41,15 +42,25 @@ builder.Services.AddProblemDetails().AddExceptionHandler<GlobalExceptionHandler>
 //For more control over DBContexts, can make use of the DbContextScope approach described here: https://mehdi.me/ambient-dbcontext-in-ef6/, https://github.com/mehdime/DbContextScope?ref=mehdi.me 
 builder.Services.AddDbContext<AppDbContext>();
 
-builder.Services.AddMassTransit(x => 
-{
-    x.UsingRabbitMq();
-});
-
 builder.Services.AddHttpClient("GoogleCustomSearchClient", config => 
 {
     config.BaseAddress = new Uri(builder.Configuration.GetStringValue("GoogleCustomSearchClient:Url"));
 });
+
+builder.Services.AddMassTransit(x => 
+{
+    x.AddConsumer<RecipeRatedEventConsumer>()
+        .Endpoint(e => 
+        {
+            e.Name = "recipe-rated-event";
+        });
+
+    x.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));
+});
+
+var busControl = Bus.Factory.CreateUsingRabbitMq();
+
+await busControl.StartAsync();
 
 builder.Services.AddSingleton(c => 
 {
