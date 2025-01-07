@@ -42,11 +42,6 @@ builder.Services.AddProblemDetails().AddExceptionHandler<GlobalExceptionHandler>
 //For more control over DBContexts, can make use of the DbContextScope approach described here: https://mehdi.me/ambient-dbcontext-in-ef6/, https://github.com/mehdime/DbContextScope?ref=mehdi.me 
 builder.Services.AddDbContext<AppDbContext>();
 
-builder.Services.AddHttpClient("GoogleCustomSearchClient", config => 
-{
-    config.BaseAddress = new Uri(builder.Configuration.GetStringValue("GoogleCustomSearchClient:Url"));
-});
-
 builder.Services.AddMassTransit(x => 
 {
     x.AddConsumer<RecipeRatedEventConsumer>()
@@ -61,6 +56,11 @@ builder.Services.AddMassTransit(x =>
 var busControl = Bus.Factory.CreateUsingRabbitMq();
 
 await busControl.StartAsync();
+
+builder.Services.AddHttpClient("GoogleCustomSearchClient", config => 
+{
+    config.BaseAddress = new Uri(builder.Configuration.GetStringValue("GoogleCustomSearchClient:Url"));
+});
 
 builder.Services.AddSingleton(c => 
 {

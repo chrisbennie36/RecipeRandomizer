@@ -16,21 +16,33 @@ public class RecipeRatedEventConsumer : IConsumer<RecipeRatedEvent>
     }
 
     public async Task Consume(ConsumeContext<RecipeRatedEvent> context)
-    {
+    {        
         if(context.Message == null)
         {
             return;
         }
 
-        RecipeRating recipeRatingEntity = new RecipeRating
-        {
-            UserId = context.Message.UserId,
-            Rating = context.Message.RecipeRating,
-            RecipeName = context.Message.RecipeName,
-            RecipeUrl = context.Message.RecipeUrl
-        };
+        RecipeRatedEvent recipeRatedEvent = context.Message;
 
-        dbContext.RecipeRatings.Add(recipeRatingEntity);
+        RecipeRating? existingRating = dbContext.RecipeRatings.SingleOrDefault(r => r.UserId == recipeRatedEvent.UserId && r.RecipeUrl == recipeRatedEvent.RecipeUrl);
+
+        if (existingRating != null)
+        {
+            existingRating.Rating = recipeRatedEvent.RecipeRating;
+            dbContext.RecipeRatings.Update(existingRating);
+        }
+        else
+        {
+            RecipeRating recipeRatingEntity = new RecipeRating
+            {
+                UserId = context.Message.UserId,
+                Rating = context.Message.RecipeRating,
+                RecipeName = context.Message.RecipeName,
+                RecipeUrl = context.Message.RecipeUrl
+            };
+
+            dbContext.RecipeRatings.Add(recipeRatingEntity);
+        }
 
         try
         {
