@@ -20,6 +20,7 @@ using Microsoft.Extensions.Options;
 using System.Threading.RateLimiting;
 using Microsoft.Extensions.Primitives;
 using RecipeRandomizer.Shared.Constants;
+using RecipeRandomizer.Shared.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -97,13 +98,16 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddMemoryCache();
 
+ConcurrencyRateLimiterConfiguration concurrencyRateLimiterConfig = new ConcurrencyRateLimiterConfiguration();
+builder.Configuration.GetSection(ConcurrencyRateLimiterConfiguration.Key).Bind(concurrencyRateLimiterConfig);
+
 builder.Services.AddRateLimiter(cfg => 
 {
     cfg.AddConcurrencyLimiter(policyName: RateLimiterConstants.PostRateLimiterPolicyName, options => 
     {
-        options.PermitLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:PermitLimit");
+        options.PermitLimit = concurrencyRateLimiterConfig.PermitLimit;
         options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-        options.QueueLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:QueueLimit");
+        options.QueueLimit = concurrencyRateLimiterConfig.QueueLimit;
     })
     .AddPolicy<string>(policyName: RateLimiterConstants.PostRateLimiterPolicyName, partitioner: (HttpContext httpContext) => 
     {
@@ -114,23 +118,23 @@ builder.Services.AddRateLimiter(cfg =>
             return RateLimitPartition.GetTokenBucketLimiter(username, _ => 
                 new TokenBucketRateLimiterOptions 
                 {
-                    TokenLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:AuthorizedUserTokenLimit"),
+                    TokenLimit = concurrencyRateLimiterConfig.AuthorizedUserTokenLimit,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:QueueLimit"),
-                    ReplenishmentPeriod = TimeSpan.FromSeconds(builder.Configuration.GetIntValue("ConcurrencyRateLimiter:ReplenishmentPeriodSeconds")),
-                    TokensPerPeriod = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:TokensPerPeriod"),
-                    AutoReplenishment = builder.Configuration.GetBoolValue("ConcurrencyRateLimiter:AutoReplenishmentEnabled")
+                    QueueLimit = concurrencyRateLimiterConfig.QueueLimit,
+                    ReplenishmentPeriod = TimeSpan.FromSeconds(concurrencyRateLimiterConfig.ReplenishmentPeriodSeconds),
+                    TokensPerPeriod = concurrencyRateLimiterConfig.TokensPerPeriod,
+                    AutoReplenishment = concurrencyRateLimiterConfig.AutoReplenishmentEnabled
                 });
         }
 
         return RateLimitPartition.GetTokenBucketLimiter(RateLimiterConstants.AnonymousUserRateLimiterPolicyName, _ =>
             new TokenBucketRateLimiterOptions
             {
-                TokenLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:AnonymousUserTokenLimit"),
+                TokenLimit = concurrencyRateLimiterConfig.AnonymousUserTokenLimit,
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:QueueLimit"),
-                ReplenishmentPeriod = TimeSpan.FromSeconds(builder.Configuration.GetIntValue("ConcurrencyRateLimiter:ReplenishmentPeriodSeconds")),
-                TokensPerPeriod = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:TokensPerPeriod"),
+                QueueLimit = concurrencyRateLimiterConfig.QueueLimit,
+                ReplenishmentPeriod = TimeSpan.FromSeconds(concurrencyRateLimiterConfig.ReplenishmentPeriodSeconds),
+                TokensPerPeriod = concurrencyRateLimiterConfig.TokensPerPeriod,
                 AutoReplenishment = true
             });
     });
@@ -138,13 +142,16 @@ builder.Services.AddRateLimiter(cfg =>
 
 var app = builder.Build();
 
-if(builder.Configuration.GetBoolValue("AwsCloudwatchLogging:Enabled") == true)
+AwsLoggingConfiguration awsLoggingConfig = new AwsLoggingConfiguration();
+builder.Configuration.GetSection(AwsLoggingConfiguration.Key).Bind(awsLoggingConfig);
+
+if(awsLoggingConfig.Enabled)
 {
-    var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(builder.Configuration.GetStringValue("AwsCloudwatchLogging:AccessKey"), builder.Configuration.GetStringValue("AwsCloudwatchLogging:SecretKey")), RegionEndpoint.USEast1);
+    var client = new AmazonCloudWatchLogsClient(new BasicAWSCredentials(awsLoggingConfig.AccessKey, awsLoggingConfig.SecretKey), RegionEndpoint.USEast1);
 
     Log.Logger = new LoggerConfiguration().WriteTo.AmazonCloudWatch(
-        logGroup: builder.Configuration.GetStringValue("AwsCloudwatchLogging:LogGroup"),
-        logStreamPrefix: builder.Configuration.GetStringValue("AwsCloudwatchLogging:LogStreamPrefix"),
+        logGroup: awsLoggingConfig.LogGroup,
+        logStreamPrefix: awsLoggingConfig.LogStreamPrefix,
         restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Debug,
         createLogGroup: true,
         appendUniqueInstanceGuid: true,

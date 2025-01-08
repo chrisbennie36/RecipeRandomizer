@@ -31,6 +31,7 @@
     <ProjectReference Include="..\RecipeRandomizer.Api.Domain\RecipeRandomizer.Api.Domain.csproj" />
     <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Enums\RecipeRandomizer.Shared.Enums.csproj" />
     <ProjectReference Include="..\..\RecipeRandomizer.Shared.Constants\RecipeRandomizer.Shared.Constants.csproj" />
+    <ProjectReference Include="..\..\RecipeRandomizer.Shared.Configuration\RecipeRandomizer.Shared.Configuration.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GoogleCustomSearchService.Api.Client.dll">
