@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeRandomizer.Build.Infr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeRandomizer.Api.Domain.Tests", "Tests\RecipeRandomizer.Api.Domain.Tests\RecipeRandomizer.Api.Domain.Tests.csproj", "{F07AE794-9840-473B-8632-1E7A70F52AE6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeRandomizer.Shared.Constants", "RecipeRandomizer.Shared.Constants\RecipeRandomizer.Shared.Constants.csproj", "{BF7292CC-EC38-45E4-BCF6-5DBB5778DF96}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,10 @@ Global
 		{F07AE794-9840-473B-8632-1E7A70F52AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F07AE794-9840-473B-8632-1E7A70F52AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F07AE794-9840-473B-8632-1E7A70F52AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF7292CC-EC38-45E4-BCF6-5DBB5778DF96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF7292CC-EC38-45E4-BCF6-5DBB5778DF96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF7292CC-EC38-45E4-BCF6-5DBB5778DF96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF7292CC-EC38-45E4-BCF6-5DBB5778DF96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{29E1BCB3-7585-41F7-9B02-50FD2720CA17} = {C92AD0E0-DC9E-48A6-8FFA-281C1AA72A66}

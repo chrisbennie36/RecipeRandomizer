@@ -17,17 +17,6 @@ public class RecipeController : ControllerBase
         this.sender = sender;
     }
 
-    [HttpPost("api/Recipe/")]
-    public ActionResult FireEvent([FromServices] IPublishEndpoint publishEndpoint)
-    {
-        publishEndpoint.Publish<TestEvent>(new
-        {
-            Id = 1
-        });
-
-        return Ok();
-    }
-
     [HttpGet("/api/Recipe/{userId}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -43,9 +32,4 @@ public class RecipeController : ControllerBase
 
         return recipeResult.ToActionResult();
     }
-}
-
-public class TestEvent 
-{
-    int Id { get; set;}
 }

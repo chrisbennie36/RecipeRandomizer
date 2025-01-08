@@ -10,6 +10,8 @@ using RecipeRandomizer.Api.WebApplication.Dtos;
 using RecipeRandomizer.Api.WebApplication.Responses;
 using Utilities.ResultPattern;
 using Utilities.ResultPattern.Extensions;
+using RecipeRandomizer.Shared.Constants;
+using Microsoft.AspNetCore.RateLimiting;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -51,6 +53,7 @@ public class UserRecipePreferencesController : ControllerBase
     }
 
     [HttpPost("api/UserRecipePreferences/Update")]
+    [EnableRateLimiting(RateLimiterConstants.PostRateLimiterPolicyName)]
     public async Task<ActionResult> UpdateUserRecipePreferences([FromBody] UserRecipePreferencesDto userRecipePreferencesDto, IMemoryCache cache)
     {
         var result = await sender.Send(new UpdateUserRecipePreferencesCommand(mapper.Map<UserRecipePreferencesModel>(userRecipePreferencesDto)));
@@ -66,6 +69,7 @@ public class UserRecipePreferencesController : ControllerBase
     }
 
     [HttpPost("api/UserRecipePreferences/Add")]
+    [EnableRateLimiting(RateLimiterConstants.PostRateLimiterPolicyName)]
     public async Task<ActionResult> AddUserRecipePreferences([FromBody] UserRecipePreferencesDto userRecipePreferencesDto)
     {
         var result = await sender.Send(new AddUserRecipePreferencesCommand(userRecipePreferencesDto.RecipePreferences.Select(r => new RecipePreferenceModel

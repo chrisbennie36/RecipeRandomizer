@@ -15,6 +15,11 @@ using RecipeRandomizer.Api.WebApplication.ExceptionHandler;
 using Utilities.ConfigurationManager.Extensions;
 using MassTransit;
 using RecipeRandomizer.Api.Domain.EventConsumers;
+using Microsoft.AspNetCore.RateLimiting;
+using Microsoft.Extensions.Options;
+using System.Threading.RateLimiting;
+using Microsoft.Extensions.Primitives;
+using RecipeRandomizer.Shared.Constants;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -91,6 +96,45 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
 builder.Services.AddAuthorization();
 
 builder.Services.AddMemoryCache();
+
+builder.Services.AddRateLimiter(cfg => 
+{
+    cfg.AddConcurrencyLimiter(policyName: RateLimiterConstants.PostRateLimiterPolicyName, options => 
+    {
+        options.PermitLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:PermitLimit");
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:QueueLimit");
+    })
+    .AddPolicy<string>(policyName: RateLimiterConstants.PostRateLimiterPolicyName, partitioner: (HttpContext httpContext) => 
+    {
+        string username = httpContext.User.Identity?.Name ?? string.Empty;
+
+        if(!StringValues.IsNullOrEmpty(username))
+        {
+            return RateLimitPartition.GetTokenBucketLimiter(username, _ => 
+                new TokenBucketRateLimiterOptions 
+                {
+                    TokenLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:AuthorizedUserTokenLimit"),
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:QueueLimit"),
+                    ReplenishmentPeriod = TimeSpan.FromSeconds(builder.Configuration.GetIntValue("ConcurrencyRateLimiter:ReplenishmentPeriodSeconds")),
+                    TokensPerPeriod = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:TokensPerPeriod"),
+                    AutoReplenishment = builder.Configuration.GetBoolValue("ConcurrencyRateLimiter:AutoReplenishmentEnabled")
+                });
+        }
+
+        return RateLimitPartition.GetTokenBucketLimiter(RateLimiterConstants.AnonymousUserRateLimiterPolicyName, _ =>
+            new TokenBucketRateLimiterOptions
+            {
+                TokenLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:AnonymousUserTokenLimit"),
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:QueueLimit"),
+                ReplenishmentPeriod = TimeSpan.FromSeconds(builder.Configuration.GetIntValue("ConcurrencyRateLimiter:ReplenishmentPeriodSeconds")),
+                TokensPerPeriod = builder.Configuration.GetIntValue("ConcurrencyRateLimiter:TokensPerPeriod"),
+                AutoReplenishment = true
+            });
+    });
+});
 
 var app = builder.Build();
 
