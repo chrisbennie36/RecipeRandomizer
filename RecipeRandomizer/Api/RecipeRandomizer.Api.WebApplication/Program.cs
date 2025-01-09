@@ -5,8 +5,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using NSwag.Generation.Processors.Security;
-using RecipeRandomizer.Api.Domain.Proxies;
-using GoogleClient = GoogleCustomSearchService.Api.Client.GoogleCustomSearchClient;
 using Serilog.Sinks.AwsCloudWatch;
 using Amazon.CloudWatchLogs;
 using Amazon.Runtime;
@@ -16,11 +14,12 @@ using Utilities.ConfigurationManager.Extensions;
 using MassTransit;
 using RecipeRandomizer.Api.Domain.EventConsumers;
 using Microsoft.AspNetCore.RateLimiting;
-using Microsoft.Extensions.Options;
 using System.Threading.RateLimiting;
 using Microsoft.Extensions.Primitives;
 using RecipeRandomizer.Shared.Constants;
 using RecipeRandomizer.Shared.Configuration;
+using Refit;
+using RecipeRandomizer.Api.Domain.Clients;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -63,24 +62,8 @@ var busControl = Bus.Factory.CreateUsingRabbitMq();
 
 await busControl.StartAsync();
 
-builder.Services.AddHttpClient("GoogleCustomSearchClient", config => 
-{
-    config.BaseAddress = new Uri(builder.Configuration.GetStringValue("GoogleCustomSearchClient:Url"));
-});
-
-builder.Services.AddSingleton(c => 
-{
-    var factory = c.GetService<IHttpClientFactory>();
-    var httpClient = factory?.CreateClient("GoogleCustomSearchClient");
-
-    ArgumentNullException.ThrowIfNull(httpClient);
-
-    httpClient.BaseAddress = new Uri(builder.Configuration.GetStringValue("GoogleCustomSearchClient:Url"));
-    
-    return new GoogleClient(httpClient);
-});
-
-builder.Services.AddTransient<IGoogleCustomSearchServiceProxy, GoogleCustomSearchServiceProxy>();
+builder.Services.AddRefitClient<IGoogleCustomSearchClient>()
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri(builder.Configuration.GetStringValue("GoogleCustomSearchClient:Url")));
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => 
 {

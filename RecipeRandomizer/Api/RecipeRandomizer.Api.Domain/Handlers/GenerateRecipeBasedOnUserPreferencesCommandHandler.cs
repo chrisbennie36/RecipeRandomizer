@@ -1,17 +1,18 @@
 using System.Collections.ObjectModel;
 using System.Text;
-using AutoMapper;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Models;
-using RecipeRandomizer.Api.Domain.Proxies;
 using RecipeRandomizer.Api.Domain.Queries;
 using RecipeRandomizer.Api.Domain.Results;
 using RecipeRandomizer.Shared.Enums;
-using GoogleCustomSearchService.Api.Client;
 using MediatR;
 using Serilog;
 using RecipeRandomizer.Api.Domain.Extensions;
 using Utilities.ResultPattern;
+using RecipeRandomizer.Api.Domain.Clients;
+using RecipeRandomizer.Api.Domain.Clients.Responses;
+using Refit;
+using RecipeRandomizer.Api.Domain.Clients.Dtos;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 
@@ -22,15 +23,13 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
     const int MaxPaginationToken = 90;
     ReadOnlyCollection<string> domainsToRemove = new ReadOnlyCollection<string>(new List<string> {"facebook", "reddit", "pinterest", "forum" });
 
-    private ISender sender;
-    private IMapper mapper;
-    private IGoogleCustomSearchServiceProxy googleCustomSearchProxy;
+    private readonly ISender sender;
+    private readonly IGoogleCustomSearchClient googleCustomSearchClient;
 
-    public GenerateRecipeBasedOnUserPreferencesCommandHandler(ISender sender, IMapper mapper, IGoogleCustomSearchServiceProxy googleCustomSearchProxy)
+    public GenerateRecipeBasedOnUserPreferencesCommandHandler(ISender sender, IGoogleCustomSearchClient googleCustomSearchClient)
     {
         this.sender = sender;
-        this.mapper = mapper;
-        this.googleCustomSearchProxy = googleCustomSearchProxy;
+        this.googleCustomSearchClient = googleCustomSearchClient;
     }
 
     public async Task<DomainResult<RecipeResult>> Handle(GenerateRecipeBasedOnUserPreferencesCommand request, CancellationToken cancellationToken)
@@ -39,7 +38,7 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
         DomainResult<IEnumerable<RecipePreferenceModel>> userRecipePreferencesResult = await sender.Send(new GetUserRecipePreferencesQuery(request.userId));
 
-        if(userRecipePreferencesResult.status != ResponseStatus.Success)
+        if(userRecipePreferencesResult.status != ResponseStatus.Success || userRecipePreferencesResult.resultModel == null)
         {
             string errorMessage = $"Could not retrieve any user recipe preferences when generating a recipe URL";
             Log.Error(errorMessage);
@@ -59,12 +58,21 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
         try
         {
-            customSearchResult = await googleCustomSearchProxy.SearchAsync(new GoogleCustomSearchService.Api.Client.GoogleCustomSearchDto { QueryString = recipeQueryParams, PaginationToken = RandomizePaginationToken() });
+            customSearchResult = await googleCustomSearchClient.SearchAsync(new GoogleCustomSearchDto { QueryString = recipeQueryParams, PaginationToken = RandomizePaginationToken() });
         }
-        catch(Exception e)
+        catch(ValidationApiException e)
         {
             Log.Error($"Error calling the GoogleCustomSearchClient: {e.Message} {e.InnerException?.Message}");
-            return new DomainResult<RecipeResult>(ResponseStatus.Error, null, "Error when calling the GoogleCustomSearchClient");
+
+            string errorTraceId = GetProblemDetailsErrorTraceId(e);
+
+            if(!string.IsNullOrWhiteSpace(errorTraceId))
+            {
+                Log.Error("Something went wrong when generating the recipe within the GoogleCustomSearchClient: Trace ID {traceId}", errorTraceId);
+                return new DomainResult<RecipeResult>(ResponseStatus.Error, new RecipeResult { ErrorTraceId = errorTraceId }, e.Message );
+            }
+
+            return new DomainResult<RecipeResult>(ResponseStatus.Error, null, e.Message);
         }
 
         if(customSearchResult == null)
@@ -74,19 +82,12 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
             return new DomainResult<RecipeResult>(ResponseStatus.NotFound, null, message);
         }
 
-        if(customSearchResult.ProblemDetails != null && customSearchResult.ProblemDetails.AdditionalProperties.ContainsKey("traceId"))
-        {
-            result.ErrorTraceId = (string)customSearchResult.ProblemDetails.AdditionalProperties["traceId"];
-            Log.Error("Something went wrong when generating the recipe within the GoogleCustomSearchClient: Trace ID {traceId}", result.ErrorTraceId);
-            return new DomainResult<RecipeResult>(ResponseStatus.Error, result, $"Something went wrong when generating the recipe within the GoogleCustomSearchClient: Trace ID {result.ErrorTraceId}");
-        }
-
         IEnumerable<string> urls = FilterOutNonUsefulUrls(customSearchResult.Items.Select(i => i.Link).ToList());
 
         //Shouldn't happen, but if we receieve 10 results and they're all facebook/pinterest/reddit urls, then fetch a new set of results until there is at least one useful url
         while(!urls.Any())
         {
-            customSearchResult = await googleCustomSearchProxy.SearchAsync(new GoogleCustomSearchService.Api.Client.GoogleCustomSearchDto { QueryString = recipeQueryParams, PaginationToken = RandomizePaginationToken() });
+            customSearchResult = await googleCustomSearchClient.SearchAsync(new GoogleCustomSearchDto { QueryString = recipeQueryParams, PaginationToken = RandomizePaginationToken() });
 
             if(customSearchResult == null)
             {
@@ -98,6 +99,40 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandler : IRequestHandle
 
         result.RecipeUrl = ChooseRandomResultUrl(urls.ToArray());
         return new DomainResult<RecipeResult>(ResponseStatus.Success, result);
+    }
+
+    private string GetProblemDetailsErrorTraceId(ValidationApiException e)
+    {
+        if(e.Content == null)
+        {
+            return string.Empty;
+        }
+
+        foreach(string key in e.Content.Extensions.Keys)
+        {
+            if(key.ToLower() == "problemdetails")
+            {
+                ProblemDetails? problemDetails;
+                
+                try
+                {
+                    problemDetails = (ProblemDetails)e.Content.Extensions[key];
+                }
+                catch(InvalidCastException)
+                {
+                    Log.Error($"Could not cast value {e.Content.Extensions[key] } to a {nameof(ProblemDetails)} instance");
+                    return string.Empty;
+                }
+
+                if (problemDetails.Extensions.ContainsKey("traceId"))
+                {
+                    return (string)problemDetails.Extensions["traceId"];
+                }
+            }
+        }
+
+        Log.Error($"Unable to deserialize the Trace ID from Problem Details in API response: { e.Content }");
+        return string.Empty;
     }
 
     //Should ensure that every time the user requests results from google, we minimise the chance of duplicate recipes coming back

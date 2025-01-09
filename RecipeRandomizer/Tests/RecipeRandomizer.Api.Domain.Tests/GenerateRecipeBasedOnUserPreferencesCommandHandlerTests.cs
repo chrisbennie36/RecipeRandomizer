@@ -1,13 +1,13 @@
 using AutoMapper;
-using GoogleCustomSearchService.Api.Client;
 using MediatR;
 using Moq;
+using RecipeRandomizer.Api.Domain.Clients;
+using RecipeRandomizer.Api.Domain.Clients.Dtos;
+using RecipeRandomizer.Api.Domain.Clients.Responses;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Handlers;
 using RecipeRandomizer.Api.Domain.Models;
-using RecipeRandomizer.Api.Domain.Proxies;
 using RecipeRandomizer.Api.Domain.Queries;
-using RecipeRandomizer.Api.Domain.Results;
 using RecipeRandomizer.Api.WebApplication.Mapper;
 using Utilities.ResultPattern;
 using Xunit;
@@ -19,7 +19,7 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandlerTests
     const int UserId = 50;
 
     private readonly Mock<ISender> senderMock;
-    private readonly Mock<IGoogleCustomSearchServiceProxy> googleCustomSearchProxy;
+    private readonly Mock<IGoogleCustomSearchClient> googleCustomSearchClient;
     private readonly IMapper mapper;
 
     public GenerateRecipeBasedOnUserPreferencesCommandHandlerTests()
@@ -40,9 +40,9 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandlerTests
         senderMock = new Mock<ISender>();
         senderMock.Setup(s => s.Send(It.IsAny<GetUserRecipePreferencesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(successResult);
 
-        googleCustomSearchProxy = new Mock<IGoogleCustomSearchServiceProxy>();
+        googleCustomSearchClient = new Mock<IGoogleCustomSearchClient>();
 
-        googleCustomSearchProxy.Setup(g => g.SearchAsync(It.IsAny<GoogleCustomSearchDto>())).ReturnsAsync(new GoogleCustomSearchResponse { Items = new List<Item>() });
+        googleCustomSearchClient.Setup(g => g.SearchAsync(It.IsAny<GoogleCustomSearchDto>())).ReturnsAsync(new GoogleCustomSearchResponse { Items = new List<Item>() });
 
         MapperConfiguration config = new MapperConfiguration(cfg => cfg.AddMaps(typeof(DefaultProfile).Assembly));
         mapper = new Mapper(config);
@@ -51,7 +51,7 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandlerTests
     [Fact]
     public async Task GenerateRecipeBasedOnUserPreferencesCommandHandlerTests_RetrievesUserRecipePreferences()
     {
-        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandler(senderMock.Object, mapper, googleCustomSearchProxy.Object);
+        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandler(senderMock.Object, googleCustomSearchClient.Object);
 
         var result = await sut.Handle(new GenerateRecipeBasedOnUserPreferencesCommand(UserId), CancellationToken.None);
 
@@ -65,7 +65,7 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandlerTests
 
         senderMock.Setup(s => s.Send(It.IsAny<GetUserRecipePreferencesQuery>(), It.IsAny<CancellationToken>())).ReturnsAsync(emptyUserRecipePreferencesResult);
 
-        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandler(senderMock.Object, mapper, googleCustomSearchProxy.Object);
+        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandler(senderMock.Object, googleCustomSearchClient.Object);
 
         var result = await sut.Handle(new GenerateRecipeBasedOnUserPreferencesCommand(UserId), CancellationToken.None);
 
@@ -78,10 +78,10 @@ public class GenerateRecipeBasedOnUserPreferencesCommandHandlerTests
     [Fact]
     public async Task GenerateRecipeBasedOnUserPreferencesCommandHandlerTests_CallsTheGoogleCustomSearchClient_WhenUserRecipePreferencesExist()
     {
-        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandler(senderMock.Object, mapper, googleCustomSearchProxy.Object);
+        var sut = new GenerateRecipeBasedOnUserPreferencesCommandHandler(senderMock.Object, googleCustomSearchClient.Object);
 
         var result = await sut.Handle(new GenerateRecipeBasedOnUserPreferencesCommand(UserId), CancellationToken.None);
 
-        googleCustomSearchProxy.Verify(g => g.SearchAsync(It.IsAny<GoogleCustomSearchDto>()), Times.Once);
+        googleCustomSearchClient.Verify(g => g.SearchAsync(It.IsAny<GoogleCustomSearchDto>()), Times.Once);
     }
 }
