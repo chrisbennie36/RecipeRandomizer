@@ -1,0 +1,9 @@
+bin/
+obj/
+appsettings.development.json
+Logs/
+Files/
+.vscode/
+Lambdas/
+Build
+UserManagementService.Api.Domain.Tests/

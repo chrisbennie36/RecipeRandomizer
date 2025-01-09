@@ -19,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeRandomizer.Build.Infr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeRandomizer.Api.Domain.Tests", "Tests\RecipeRandomizer.Api.Domain.Tests\RecipeRandomizer.Api.Domain.Tests.csproj", "{F07AE794-9840-473B-8632-1E7A70F52AE6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeRandomizer.Shared.Constants", "RecipeRandomizer.Shared.Constants\RecipeRandomizer.Shared.Constants.csproj", "{BF7292CC-EC38-45E4-BCF6-5DBB5778DF96}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeRandomizer.Shared.Constants", "Shared\RecipeRandomizer.Shared.Constants\RecipeRandomizer.Shared.Constants.csproj", "{BF7292CC-EC38-45E4-BCF6-5DBB5778DF96}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeRandomizer.Shared.Configuration", "RecipeRandomizer.Shared.Configuration\RecipeRandomizer.Shared.Configuration.csproj", "{1E224340-429E-4E28-AFE4-6E32F5E6CF38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecipeRandomizer.Shared.Configuration", "Shared\RecipeRandomizer.Shared.Configuration\RecipeRandomizer.Shared.Configuration.csproj", "{1E224340-429E-4E28-AFE4-6E32F5E6CF38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
