@@ -7,6 +7,7 @@ namespace RecipeRandomizer.Api.Data.Repositories;
 public abstract class EfCoreEntityRepository<T> : IEntityRepository<T> where T : EntityBase
 {
     private readonly AppDbContext appDbContext;
+    private readonly DbSet<T> dbEntities;
 
     //ToDo: At the moment, we are saving after every function call. An improvement would be to keep track
     //of the transcation in a Unit of Work and only save at the end of the transaction
@@ -14,16 +15,23 @@ public abstract class EfCoreEntityRepository<T> : IEntityRepository<T> where T :
     {
         ArgumentNullException.ThrowIfNull(appDbContext);
         this.appDbContext = appDbContext;
+
+        if(appDbContext.Set<T>() == null)
+        {
+            throw new NullReferenceException("Could not retrieve an entity collection to work with");
+        }
+
+        dbEntities = appDbContext.Set<T>();
     }
 
     public async Task<IEnumerable<T>> GetAllAsync(CancellationToken cancellationToken = default)
     {
-        return await GetDbSet().AsNoTracking().ToListAsync(cancellationToken);
+        return await dbEntities.AsNoTracking().ToListAsync(cancellationToken);
     }
 
     public async Task<IEnumerable<T>> GetMultiByIdsAsync(IEnumerable<int> ids, CancellationToken cancellationToken = default)
     {
-        return await GetDbSet().Where(e => ids.Contains(e.Id)).ToListAsync(cancellationToken);
+        return await dbEntities.Where(e => ids.Contains(e.Id)).ToListAsync(cancellationToken);
     }
 
     public async Task<T> AddAsync(T entity, CancellationToken cancellationToken = default)
@@ -71,7 +79,7 @@ public abstract class EfCoreEntityRepository<T> : IEntityRepository<T> where T :
             return;
         }
 
-        GetDbSet().Remove(entityToDelete);
+        dbEntities.Remove(entityToDelete);
 
         try
         {
@@ -93,7 +101,7 @@ public abstract class EfCoreEntityRepository<T> : IEntityRepository<T> where T :
             return;
         }
 
-        GetDbSet().RemoveRange(entitiesToDelete);
+        dbEntities.RemoveRange(entitiesToDelete);
 
         try
         {
@@ -108,7 +116,7 @@ public abstract class EfCoreEntityRepository<T> : IEntityRepository<T> where T :
 
     public async Task<T?> GetByIdAsync(int id, CancellationToken cancellationToken = default)
     {
-        return await GetDbSet().AsNoTracking().SingleOrDefaultAsync(e => e.Id == id, cancellationToken);
+        return await dbEntities.AsNoTracking().SingleOrDefaultAsync(e => e.Id == id, cancellationToken);
     }
 
     public async Task UpdateAsync(T entity, CancellationToken cancellationToken = default)
@@ -128,11 +136,6 @@ public abstract class EfCoreEntityRepository<T> : IEntityRepository<T> where T :
 
     protected DbSet<T> GetDbSet()
     {
-        if(appDbContext.Set<T>() == null)
-        {
-            throw new NullReferenceException("Could not retrieve an entity collection to work with");
-        }
-
-        return appDbContext.Set<T>();
+        return dbEntities;
     }
 }
