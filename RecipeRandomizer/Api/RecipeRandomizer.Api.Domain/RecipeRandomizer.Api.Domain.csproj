@@ -15,11 +15,6 @@
     <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="UserManagementService.Api.Client.dll">
-      <HintPath>..\..\Refs\UserManagementService.Api.Client.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="Utilities.dll">
       <HintPath>..\..\Refs\Utilities.dll</HintPath>
     </Reference>

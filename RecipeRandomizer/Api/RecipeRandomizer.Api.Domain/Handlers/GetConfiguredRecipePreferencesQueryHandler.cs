@@ -14,12 +14,12 @@ namespace RecipeRandomizer.Api.Domain.Handlers;
 
 public class GetConfiguredRecipePreferencesQueryHandler : IRequestHandler<GetConfiguredRecipePreferencesQuery, DomainResult<IEnumerable<RecipePreferenceModel>>>
 {
-    private readonly IEntityRepository<RecipePreference> recipePreferenceRepository;
+    private readonly IEntityRepository<RecipePreference> recipePreferencesRepository;
     private readonly IMapper mapper;
 
-    public GetConfiguredRecipePreferencesQueryHandler(IEntityRepository<RecipePreference> recipePreferenceRepository, IMapper mapper)
+    public GetConfiguredRecipePreferencesQueryHandler(IEntityRepository<RecipePreference> recipePreferencesRepository, IMapper mapper)
     {
-        this.recipePreferenceRepository = recipePreferenceRepository;
+        this.recipePreferencesRepository = recipePreferencesRepository;
         this.mapper = mapper;
     }
 
@@ -27,7 +27,7 @@ public class GetConfiguredRecipePreferencesQueryHandler : IRequestHandler<GetCon
     {
         try
         {
-            IEnumerable<RecipePreference> configuredRecipePreferences = await recipePreferenceRepository.GetAllAsync();
+            IEnumerable<RecipePreference> configuredRecipePreferences = await recipePreferencesRepository.GetAllAsync();
 
             if(!configuredRecipePreferences.Any())
             {
