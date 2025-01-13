@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Data.Entities;
+using RecipeRandomizer.Api.Data.Repositories;
 using RecipeRandomizer.Api.Domain.Models;
 using RecipeRandomizer.Api.Domain.Queries;
 using Serilog;
@@ -13,12 +14,12 @@ namespace RecipeRandomizer.Api.Domain.Handlers;
 
 public class GetConfiguredRecipePreferencesQueryHandler : IRequestHandler<GetConfiguredRecipePreferencesQuery, DomainResult<IEnumerable<RecipePreferenceModel>>>
 {
-    private readonly AppDbContext appDbContext;
+    private readonly IEntityRepository<RecipePreference> recipePreferenceRepository;
     private readonly IMapper mapper;
 
-    public GetConfiguredRecipePreferencesQueryHandler(AppDbContext appDbContext, IMapper mapper)
+    public GetConfiguredRecipePreferencesQueryHandler(IEntityRepository<RecipePreference> recipePreferenceRepository, IMapper mapper)
     {
-        this.appDbContext = appDbContext;
+        this.recipePreferenceRepository = recipePreferenceRepository;
         this.mapper = mapper;
     }
 
@@ -26,7 +27,7 @@ public class GetConfiguredRecipePreferencesQueryHandler : IRequestHandler<GetCon
     {
         try
         {
-            List<RecipePreference> configuredRecipePreferences = await appDbContext.RecipePreferences.AsNoTracking().ToListAsync();
+            IEnumerable<RecipePreference> configuredRecipePreferences = await recipePreferenceRepository.GetAllAsync();
 
             if(!configuredRecipePreferences.Any())
             {

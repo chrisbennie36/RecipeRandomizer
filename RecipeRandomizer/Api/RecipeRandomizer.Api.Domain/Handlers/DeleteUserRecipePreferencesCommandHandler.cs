@@ -1,48 +1,49 @@
 using MediatR;
-using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Models;
 using Utilities.ResultPattern;
-using Serilog;
+using RecipeRandomizer.Api.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 
 public class DeleteUserRecipePreferencesCommandHandler : IRequestHandler<DeleteUserRecipePreferencesCommand, DomainResult>
 {
-    private AppDbContext appDbContext;
+    private readonly UserRecipePreferencesRepository userRecipePreferencesRepository;
 
-    public DeleteUserRecipePreferencesCommandHandler(AppDbContext appDbContext) 
+    public DeleteUserRecipePreferencesCommandHandler(UserRecipePreferencesRepository userRecipePreferencesRepository) 
     {
-        this.appDbContext = appDbContext;
+        this.userRecipePreferencesRepository = userRecipePreferencesRepository;
     }
 
     public async Task<DomainResult> Handle(DeleteUserRecipePreferencesCommand request, CancellationToken cancellationToken) 
     {
-        try
+        if(!request.recipePreferencesToDelete.Any())
         {
-            IEnumerable<RecipePreferenceModel> recipePreferencesToDelete = request.recipePreferencesToDelete;
-        
-            if(recipePreferencesToDelete.Any())
-            {
-                foreach(RecipePreferenceModel recipePreference in recipePreferencesToDelete)
-                {
-                    UserRecipePreference userRecipePreference = new UserRecipePreference();
-                    userRecipePreference.RecipePreferenceId = recipePreference.Id;
-                    userRecipePreference.UserId = request.userId;
-
-                    appDbContext.UserRecipePreferences.Remove(userRecipePreference);
-                }
-
-                await appDbContext.SaveChangesAsync();
-            }
-
             return new DomainResult(ResponseStatus.Success);
         }
-        catch(Exception e)
+
+        List<UserRecipePreference> userRecipePreferences = new List<UserRecipePreference>();
+    
+        foreach(RecipePreferenceModel recipePreference in request.recipePreferencesToDelete)
         {
-            Log.Error($"Error occurred when trying to delete a {nameof(UserRecipePreference)} from the database: {e.Message} {e.InnerException?.Message}");
-            return new DomainResult(ResponseStatus.Error, $"Error when deleting a {nameof(UserRecipePreference)} from the database");
+            UserRecipePreference userRecipePreference = new UserRecipePreference();
+            userRecipePreference.RecipePreferenceId = recipePreference.Id;
+            userRecipePreference.UserId = request.userId;
+
+            userRecipePreferences.Add(userRecipePreference);
         }
+
+        try
+        {
+            await userRecipePreferencesRepository.DeleteUserRecipePreferences(userRecipePreferences);
+        }
+        catch(DbUpdateException)
+        {
+            return new DomainResult(ResponseStatus.Error, $"Unable to delete {nameof(UserRecipePreference)}(s)");
+        }
+
+        return new DomainResult(ResponseStatus.Success);
     }
 }

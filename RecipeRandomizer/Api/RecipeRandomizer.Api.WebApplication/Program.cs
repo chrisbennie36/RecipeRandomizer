@@ -20,6 +20,8 @@ using RecipeRandomizer.Shared.Constants;
 using RecipeRandomizer.Shared.Configuration;
 using Refit;
 using RecipeRandomizer.Api.Domain.Clients;
+using RecipeRandomizer.Api.Data.Repositories;
+using RecipeRandomizer.Api.Data.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,6 +48,8 @@ builder.Services.AddProblemDetails().AddExceptionHandler<GlobalExceptionHandler>
 
 //For more control over DBContexts, can make use of the DbContextScope approach described here: https://mehdi.me/ambient-dbcontext-in-ef6/, https://github.com/mehdime/DbContextScope?ref=mehdi.me 
 builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddTransient<IEntityRepository<UserRecipePreference>, UserRecipePreferencesRepository>();
+builder.Services.AddTransient<UserRecipePreferencesRepository>();    //For concrete class constructor injection 
 
 builder.Services.AddMassTransit(x => 
 {

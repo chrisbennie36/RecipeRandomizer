@@ -9,6 +9,7 @@ using RecipeRandomizer.Api.Domain.Handlers;
 using AutoMapper;
 using Moq;
 using Microsoft.EntityFrameworkCore;
+using RecipeRandomizer.Api.Data.Repositories;
 
 public class GetUserRecipePreferencesQueryHandlerTests
 {
@@ -17,10 +18,12 @@ public class GetUserRecipePreferencesQueryHandlerTests
     const string RecipePreferenceName = "TestRecipePreference";
 
     private AppDbContext appDbContext;
+    private Mock<UserRecipePreferencesRepository> userRecipePreferencesRepositoryMock;
 
     public GetUserRecipePreferencesQueryHandlerTests()
     {
         appDbContext = InMemoryDatabaseHelper.InitialiseDatabase();
+        userRecipePreferencesRepositoryMock = new Mock<UserRecipePreferencesRepository>(appDbContext);
     }
 
     [Fact]
@@ -28,7 +31,7 @@ public class GetUserRecipePreferencesQueryHandlerTests
     {
         Mock<IMapper> mapper = new Mock<IMapper>();
 
-        var sut = new GetUserRecipePreferencesQueryHandler(appDbContext, mapper.Object);
+        var sut = new GetUserRecipePreferencesQueryHandler(userRecipePreferencesRepositoryMock.Object, mapper.Object);
 
         var result = await sut.Handle(new GetUserRecipePreferencesQuery(1), CancellationToken.None);
 
@@ -37,20 +40,21 @@ public class GetUserRecipePreferencesQueryHandlerTests
         Assert.Empty(result.resultModel);
     }
 
-       [Fact]
+    [Fact]
     public async Task GetUserRecipePreferencesQueryHandlerTests_ReturnsListOfPreferences_ForGivenUser()
     {
         Mock<IMapper> mapper = new Mock<IMapper>();
 
         await InitialiseDatabase();
 
-        var sut = new GetUserRecipePreferencesQueryHandler(appDbContext, mapper.Object);
+        var sut = new GetUserRecipePreferencesQueryHandler(userRecipePreferencesRepositoryMock.Object, mapper.Object);
 
         var result = await sut.Handle(new GetUserRecipePreferencesQuery(UserId), CancellationToken.None);
 
         Assert.NotNull(result);
         Assert.NotNull(result.resultModel);
-        Assert.Empty(result.resultModel);
+        Assert.NotEmpty(result.resultModel);
+        Assert.Single(result.resultModel);
 
         await ClearDatabase();
     }
@@ -78,7 +82,7 @@ public class GetUserRecipePreferencesQueryHandlerTests
     private async Task ClearDatabase()
     {
         await appDbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE [RecipePreferences]");
-        await appDbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE [RecipePreferences]");
+        await appDbContext.Database.ExecuteSqlRawAsync("TRUNCATE TABLE [UserRecipePreferences]");
 
         await appDbContext.SaveChangesAsync();
     }
