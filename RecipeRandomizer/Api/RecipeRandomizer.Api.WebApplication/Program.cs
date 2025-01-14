@@ -22,6 +22,7 @@ using Refit;
 using RecipeRandomizer.Api.Domain.Clients;
 using RecipeRandomizer.Api.Data.Repositories;
 using RecipeRandomizer.Api.Data.Entities;
+using RecipeRandomizer.Api.Data.GraphQlQueryProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -127,6 +128,12 @@ builder.Services.AddRateLimiter(cfg =>
     });
 });
 
+builder.Services.AddGraphQLServer()
+    .AddQueryType<RecipeRatingQueryProvider>()
+    .AddProjections()
+    .AddFiltering()
+    .AddSorting();
+
 var app = builder.Build();
 
 AwsLoggingConfiguration awsLoggingConfig = new AwsLoggingConfiguration();
@@ -166,5 +173,7 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapGraphQL("/graphQL");
 
 app.Run();
