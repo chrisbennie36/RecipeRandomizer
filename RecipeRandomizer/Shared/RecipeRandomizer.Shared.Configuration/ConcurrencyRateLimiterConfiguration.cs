@@ -4,7 +4,6 @@ public class ConcurrencyRateLimiterConfiguration
 {
     public const string Key = "ConcurrencyRateLimiter";
 
-    public bool Enabled { get; set; }
     public int PermitLimit { get; set; }    //Number of permitted requests per window size
     public int QueueLimit { get; set; }
     public int AuthorizedUserTokenLimit { get; set; }

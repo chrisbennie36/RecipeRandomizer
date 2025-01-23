@@ -94,47 +94,44 @@ builder.Services.AddMemoryCache();
 ConcurrencyRateLimiterConfiguration concurrencyRateLimiterConfig = new ConcurrencyRateLimiterConfiguration();
 builder.Configuration.GetSection(ConcurrencyRateLimiterConfiguration.Key).Bind(concurrencyRateLimiterConfig);
 
-if(concurrencyRateLimiterConfig.Enabled)
+builder.Services.AddRateLimiter(cfg => 
 {
-    builder.Services.AddRateLimiter(cfg => 
+    cfg.AddConcurrencyLimiter(policyName: RateLimiterConstants.PostRateLimiterPolicyName, options => 
     {
-        cfg.AddConcurrencyLimiter(policyName: RateLimiterConstants.PostRateLimiterPolicyName, options => 
-        {
-            options.PermitLimit = concurrencyRateLimiterConfig.PermitLimit;
-            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-            options.QueueLimit = concurrencyRateLimiterConfig.QueueLimit;
-        })
-        .AddPolicy<string>(policyName: RateLimiterConstants.PostRateLimiterPolicyName, partitioner: (HttpContext httpContext) => 
-        {
-            string username = httpContext.User.Identity?.Name ?? string.Empty;
+        options.PermitLimit = concurrencyRateLimiterConfig.PermitLimit;
+        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+        options.QueueLimit = concurrencyRateLimiterConfig.QueueLimit;
+    })
+    .AddPolicy<string>(policyName: RateLimiterConstants.PostRateLimiterPolicyName, partitioner: (HttpContext httpContext) => 
+    {
+        string username = httpContext.User.Identity?.Name ?? string.Empty;
 
-            if(!StringValues.IsNullOrEmpty(username))
-            {
-                return RateLimitPartition.GetTokenBucketLimiter(username, _ => 
-                    new TokenBucketRateLimiterOptions 
-                    {
-                        TokenLimit = concurrencyRateLimiterConfig.AuthorizedUserTokenLimit,
-                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                        QueueLimit = concurrencyRateLimiterConfig.QueueLimit,
-                        ReplenishmentPeriod = TimeSpan.FromSeconds(concurrencyRateLimiterConfig.ReplenishmentPeriodSeconds),
-                        TokensPerPeriod = concurrencyRateLimiterConfig.TokensPerPeriod,
-                        AutoReplenishment = concurrencyRateLimiterConfig.AutoReplenishmentEnabled
-                    });
-            }
-
-            return RateLimitPartition.GetTokenBucketLimiter(RateLimiterConstants.AnonymousUserRateLimiterPolicyName, _ =>
-                new TokenBucketRateLimiterOptions
+        if(!StringValues.IsNullOrEmpty(username))
+        {
+            return RateLimitPartition.GetTokenBucketLimiter(username, _ => 
+                new TokenBucketRateLimiterOptions 
                 {
-                    TokenLimit = concurrencyRateLimiterConfig.AnonymousUserTokenLimit,
+                    TokenLimit = concurrencyRateLimiterConfig.AuthorizedUserTokenLimit,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                     QueueLimit = concurrencyRateLimiterConfig.QueueLimit,
                     ReplenishmentPeriod = TimeSpan.FromSeconds(concurrencyRateLimiterConfig.ReplenishmentPeriodSeconds),
                     TokensPerPeriod = concurrencyRateLimiterConfig.TokensPerPeriod,
-                    AutoReplenishment = true
+                    AutoReplenishment = concurrencyRateLimiterConfig.AutoReplenishmentEnabled
                 });
-        });
+        }
+
+        return RateLimitPartition.GetTokenBucketLimiter(RateLimiterConstants.AnonymousUserRateLimiterPolicyName, _ =>
+            new TokenBucketRateLimiterOptions
+            {
+                TokenLimit = concurrencyRateLimiterConfig.AnonymousUserTokenLimit,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = concurrencyRateLimiterConfig.QueueLimit,
+                ReplenishmentPeriod = TimeSpan.FromSeconds(concurrencyRateLimiterConfig.ReplenishmentPeriodSeconds),
+                TokensPerPeriod = concurrencyRateLimiterConfig.TokensPerPeriod,
+                AutoReplenishment = true
+            });
     });
-}
+});
 
 builder.Services.AddGraphQLServer()
     .AddQueryType<RecipeRatingQueryProvider>()
