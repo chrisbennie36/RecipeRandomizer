@@ -28,11 +28,13 @@ Microservice is deployed in AWS as an ElasticBeanstalk application. The database
 
 # Docker
 
-Build image => docker build -f Dockerfile -t user-management-service .
-Run Container => docker run --rm -p <ConfiguredPortNumber>:8000 user-management-service
+Build image => docker build -f Dockerfile -t recipe-randomizer .
+Run Container => docker run --rm -p 5179:8000 recipe-randomizer
 
 
 # EF Core migrations commands
 Perform the below in a powershell window, from within the API Web Application project directory
-1) dotnet ef migrations add <MigrationName>
-2) dotnet ef database update
+1.1) dotnet ef migrations add <MigrationName> (Generates a Migration file)
+1.2) dotnet ef migrations script AddNewTables AddAuditTable (Generates an SQL script from the first specified migration to the second specified migration)
+2.1) dotnet ef database update (Applies all Migrations)
+2.2) dotnet ef database update <MigrationName> (Applies specific Migration) 

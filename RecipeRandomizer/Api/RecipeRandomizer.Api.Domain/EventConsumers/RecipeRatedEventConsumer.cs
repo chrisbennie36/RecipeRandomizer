@@ -1,8 +1,9 @@
 using MassTransit;
+using Microsoft.EntityFrameworkCore;
 using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Data.Entities;
 using Serilog;
-using RecipeRatedEvent = Utilities.RecipeRandomizer.Events.RecipeRated;
+using Utilities.RecipeRandomizer.Events;
 
 namespace RecipeRandomizer.Api.Domain.EventConsumers;
 
@@ -24,16 +25,16 @@ public class RecipeRatedEventConsumer : IConsumer<RecipeRatedEvent>
 
         RecipeRatedEvent recipeRatedEvent = context.Message;
 
-        RecipeRating? existingRating = dbContext.RecipeRatings.SingleOrDefault(r => r.UserId == recipeRatedEvent.UserId && r.RecipeUrl == recipeRatedEvent.RecipeUrl);
+        UserRecipeRating? existingRating = dbContext.UserRecipeRatings.SingleOrDefault(r => r.UserId == recipeRatedEvent.UserId && r.RecipeUrl == recipeRatedEvent.RecipeUrl);
 
         if (existingRating != null)
         {
             existingRating.Rating = recipeRatedEvent.RecipeRating;
-            dbContext.RecipeRatings.Update(existingRating);
+            dbContext.UserRecipeRatings.Update(existingRating);
         }
         else
         {
-            RecipeRating recipeRatingEntity = new RecipeRating
+            UserRecipeRating recipeRatingEntity = new UserRecipeRating
             {
                 UserId = context.Message.UserId,
                 Rating = context.Message.RecipeRating,
@@ -41,14 +42,14 @@ public class RecipeRatedEventConsumer : IConsumer<RecipeRatedEvent>
                 RecipeUrl = context.Message.RecipeUrl
             };
 
-            dbContext.RecipeRatings.Add(recipeRatingEntity);
+            dbContext.UserRecipeRatings.Add(recipeRatingEntity);
         }
 
         try
         {
             await dbContext.SaveChangesAsync();
         }
-        catch (Exception e)
+        catch (DbUpdateException e)
         {
             Log.Error($"Error when saving Recipe Rating to the database: {e.Message} {e.InnerException?.Message}");
         }

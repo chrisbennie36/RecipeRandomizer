@@ -26,7 +26,7 @@ public class GetUserRecipePreferencesQueryHandler : IRequestHandler<GetUserRecip
         {
             IEnumerable<UserRecipePreference> userRecipePreferences = await userRecipePreferencesRepository.GetUserRecipePreferences(request.userId);
 
-            List<RecipePreferenceModel> mappedRecipePreferences = mapper.Map<List<RecipePreferenceModel>>(userRecipePreferences.Select(r => r.RecipePreferece));
+            List<RecipePreferenceModel> mappedRecipePreferences = mapper.Map<List<RecipePreferenceModel>>(userRecipePreferences.Select(r => r.RecipePreference));
             return new DomainResult<IEnumerable<RecipePreferenceModel>>(ResponseStatus.Success, mappedRecipePreferences);
         }
         catch(DbUpdateException)

@@ -41,4 +41,9 @@
       <HintPath>..\..\Refs\Utilities.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+  <Reference Include="Utilities.RecipeRandomizer.dll">
+      <HintPath>..\..\Refs\Utilities.RecipeRandomizer.dll</HintPath>
+    </Reference>
+</ItemGroup>
 </Project>

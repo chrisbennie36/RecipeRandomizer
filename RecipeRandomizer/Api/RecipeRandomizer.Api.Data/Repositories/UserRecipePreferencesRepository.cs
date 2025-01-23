@@ -20,7 +20,7 @@ public class UserRecipePreferencesRepository : EfCoreEntityRepository<UserRecipe
             return await appDbContext.UserRecipePreferences
                 .AsNoTracking()
                 .Where(ur => ur.UserId == userId)
-                    .Include(u => u.RecipePreferece).ToListAsync();
+                    .Include(u => u.RecipePreference).ToListAsync();
         }
         catch(DbUpdateException e)
         {

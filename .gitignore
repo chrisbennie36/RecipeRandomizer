@@ -2,3 +2,6 @@ bin/
 obj/
 Logs/
 appsettings.Development.json
+*.zip
+.vscode/
+cdk.out/

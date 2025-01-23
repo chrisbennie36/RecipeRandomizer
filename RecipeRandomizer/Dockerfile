@@ -1,5 +1,6 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0.404 AS base
 WORKDIR /app
+ENV ASPNETCORE_ENVIRONMENT=Development
 EXPOSE 5179
 
 # Ensure we listen on any IP Address 
@@ -16,7 +17,6 @@ COPY ["Shared/RecipeRandomizer.Shared.Configuration/RecipeRandomizer.Shared.Conf
 COPY ["Shared/RecipeRandomizer.Shared.Constants/RecipeRandomizer.Shared.Constants.csproj", "Shared/Constants"]
 COPY ["Refs/Utilities.dll", "Refs/Utilities"]
 COPY ["Refs/Utilities.RecipeRandomizer.dll", "Refs/Utilities.RecipeRandomizer"]
-COPY ["Refs/UserManagementService.Api.Client.dll", "Refs/UserManagememtService"]
 COPY . .
 WORKDIR "/src"
 RUN dotnet restore "Api/RecipeRandomizer.Api.WebApplication/RecipeRandomizer.Api.WebApplication.csproj"

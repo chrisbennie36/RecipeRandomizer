@@ -8,5 +8,5 @@ public class RecipeRatingQueryProvider
     [UseProjection]
     [UseFiltering]
     [UseSorting]
-    public IQueryable<RecipeRating> GetRecipeRatings([Service] AppDbContext dbContext) => dbContext.RecipeRatings;
+    public IQueryable<UserRecipeRating> GetRecipeRatings([Service] AppDbContext dbContext) => dbContext.UserRecipeRatings;
 }

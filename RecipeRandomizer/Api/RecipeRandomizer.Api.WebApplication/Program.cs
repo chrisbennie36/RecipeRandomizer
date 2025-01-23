@@ -23,6 +23,7 @@ using RecipeRandomizer.Api.Domain.Clients;
 using RecipeRandomizer.Api.Data.Repositories;
 using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Data.GraphQlQueryProviders;
+using Utilities.RecipeRandomizer.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,6 +59,11 @@ builder.Services.AddMassTransit(x =>
         .Endpoint(e => 
         {
             e.Name = "recipe-rated-event";
+        });
+    x.AddConsumer<RecipeFavouritedEventConsumer>()
+        .Endpoint(e => 
+        {
+            e.Name = "recipe-favourited-event";
         });
 
     x.UsingRabbitMq((context, cfg) => cfg.ConfigureEndpoints(context));

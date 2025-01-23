@@ -13,6 +13,10 @@ public class AppDbContext : DbContext
         this.configuration = configuration;
     }
 
+    //Uncomment when generating Migrations and commnt out the constructor above
+    /*public AppDbContext()
+    {}*/
+
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
        // options.UseNpgsql(configuration.GetConnectionString("ApiAwsConnectionString"), b => b.MigrationsAssembly("RecipeRandomizer.Api.WebApplication"));
@@ -21,5 +25,6 @@ public class AppDbContext : DbContext
 
     public DbSet<RecipePreference> RecipePreferences { get; set; }
     public DbSet<UserRecipePreference> UserRecipePreferences { get; set; }
-    public DbSet<RecipeRating> RecipeRatings { get; set; }
+    public DbSet<UserRecipeRating> UserRecipeRatings { get; set; }
+    public DbSet<UserRecipeFavourite> UserRecipeFavourites { get; set; }
 }
