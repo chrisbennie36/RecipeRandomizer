@@ -35,6 +35,7 @@ public class RecipeFavouritedEventConsumer : IConsumer<RecipeFavouritedEvent>
         UserRecipeFavourite userRecipeFavourite = new UserRecipeFavourite
         {
             UserId = context.Message.UserId,
+            CreatedUtc = DateTime.UtcNow,
             RecipeName = context.Message.RecipeName,
             RecipeUrl = context.Message.RecipeUrl.ToString()
         };

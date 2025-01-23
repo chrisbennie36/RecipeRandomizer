@@ -30,6 +30,7 @@ public class RecipeRatedEventConsumer : IConsumer<RecipeRatedEvent>
         if (existingRating != null)
         {
             existingRating.Rating = recipeRatedEvent.RecipeRating;
+            existingRating.UpdatedUtc = DateTime.UtcNow;
             dbContext.UserRecipeRatings.Update(existingRating);
         }
         else
@@ -39,7 +40,8 @@ public class RecipeRatedEventConsumer : IConsumer<RecipeRatedEvent>
                 UserId = context.Message.UserId,
                 Rating = context.Message.RecipeRating,
                 RecipeName = context.Message.RecipeName,
-                RecipeUrl = context.Message.RecipeUrl
+                RecipeUrl = context.Message.RecipeUrl,
+                CreatedUtc = DateTime.UtcNow
             };
 
             dbContext.UserRecipeRatings.Add(recipeRatingEntity);

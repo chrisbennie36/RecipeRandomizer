@@ -21,9 +21,7 @@ using RecipeRandomizer.Shared.Configuration;
 using Refit;
 using RecipeRandomizer.Api.Domain.Clients;
 using RecipeRandomizer.Api.Data.Repositories;
-using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Data.GraphQlQueryProviders;
-using Utilities.RecipeRandomizer.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -50,7 +48,8 @@ builder.Services.AddProblemDetails().AddExceptionHandler<GlobalExceptionHandler>
 
 //For more control over DBContexts, can make use of the DbContextScope approach described here: https://mehdi.me/ambient-dbcontext-in-ef6/, https://github.com/mehdime/DbContextScope?ref=mehdi.me 
 builder.Services.AddDbContext<AppDbContext>();
-builder.Services.AddTransient<IEntityRepository<UserRecipePreference>, UserRecipePreferencesRepository>();
+//builder.Services.AddTransient<IEntityRepository<UserRecipePreference>, UserRecipePreferencesRepository>();
+builder.Services.AddTransient(typeof(IEntityRepository<>), typeof(EfCoreEntityRepository<>));
 builder.Services.AddTransient<UserRecipePreferencesRepository>();    //For concrete class constructor injection 
 
 builder.Services.AddMassTransit(x => 
@@ -95,44 +94,47 @@ builder.Services.AddMemoryCache();
 ConcurrencyRateLimiterConfiguration concurrencyRateLimiterConfig = new ConcurrencyRateLimiterConfiguration();
 builder.Configuration.GetSection(ConcurrencyRateLimiterConfiguration.Key).Bind(concurrencyRateLimiterConfig);
 
-builder.Services.AddRateLimiter(cfg => 
+if(concurrencyRateLimiterConfig.Enabled)
 {
-    cfg.AddConcurrencyLimiter(policyName: RateLimiterConstants.PostRateLimiterPolicyName, options => 
+    builder.Services.AddRateLimiter(cfg => 
     {
-        options.PermitLimit = concurrencyRateLimiterConfig.PermitLimit;
-        options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-        options.QueueLimit = concurrencyRateLimiterConfig.QueueLimit;
-    })
-    .AddPolicy<string>(policyName: RateLimiterConstants.PostRateLimiterPolicyName, partitioner: (HttpContext httpContext) => 
-    {
-        string username = httpContext.User.Identity?.Name ?? string.Empty;
-
-        if(!StringValues.IsNullOrEmpty(username))
+        cfg.AddConcurrencyLimiter(policyName: RateLimiterConstants.PostRateLimiterPolicyName, options => 
         {
-            return RateLimitPartition.GetTokenBucketLimiter(username, _ => 
-                new TokenBucketRateLimiterOptions 
+            options.PermitLimit = concurrencyRateLimiterConfig.PermitLimit;
+            options.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
+            options.QueueLimit = concurrencyRateLimiterConfig.QueueLimit;
+        })
+        .AddPolicy<string>(policyName: RateLimiterConstants.PostRateLimiterPolicyName, partitioner: (HttpContext httpContext) => 
+        {
+            string username = httpContext.User.Identity?.Name ?? string.Empty;
+
+            if(!StringValues.IsNullOrEmpty(username))
+            {
+                return RateLimitPartition.GetTokenBucketLimiter(username, _ => 
+                    new TokenBucketRateLimiterOptions 
+                    {
+                        TokenLimit = concurrencyRateLimiterConfig.AuthorizedUserTokenLimit,
+                        QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                        QueueLimit = concurrencyRateLimiterConfig.QueueLimit,
+                        ReplenishmentPeriod = TimeSpan.FromSeconds(concurrencyRateLimiterConfig.ReplenishmentPeriodSeconds),
+                        TokensPerPeriod = concurrencyRateLimiterConfig.TokensPerPeriod,
+                        AutoReplenishment = concurrencyRateLimiterConfig.AutoReplenishmentEnabled
+                    });
+            }
+
+            return RateLimitPartition.GetTokenBucketLimiter(RateLimiterConstants.AnonymousUserRateLimiterPolicyName, _ =>
+                new TokenBucketRateLimiterOptions
                 {
-                    TokenLimit = concurrencyRateLimiterConfig.AuthorizedUserTokenLimit,
+                    TokenLimit = concurrencyRateLimiterConfig.AnonymousUserTokenLimit,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                     QueueLimit = concurrencyRateLimiterConfig.QueueLimit,
                     ReplenishmentPeriod = TimeSpan.FromSeconds(concurrencyRateLimiterConfig.ReplenishmentPeriodSeconds),
                     TokensPerPeriod = concurrencyRateLimiterConfig.TokensPerPeriod,
-                    AutoReplenishment = concurrencyRateLimiterConfig.AutoReplenishmentEnabled
+                    AutoReplenishment = true
                 });
-        }
-
-        return RateLimitPartition.GetTokenBucketLimiter(RateLimiterConstants.AnonymousUserRateLimiterPolicyName, _ =>
-            new TokenBucketRateLimiterOptions
-            {
-                TokenLimit = concurrencyRateLimiterConfig.AnonymousUserTokenLimit,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = concurrencyRateLimiterConfig.QueueLimit,
-                ReplenishmentPeriod = TimeSpan.FromSeconds(concurrencyRateLimiterConfig.ReplenishmentPeriodSeconds),
-                TokensPerPeriod = concurrencyRateLimiterConfig.TokensPerPeriod,
-                AutoReplenishment = true
-            });
+        });
     });
-});
+}
 
 builder.Services.AddGraphQLServer()
     .AddQueryType<RecipeRatingQueryProvider>()

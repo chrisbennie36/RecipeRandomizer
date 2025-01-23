@@ -4,7 +4,7 @@ using Serilog;
 
 namespace RecipeRandomizer.Api.Data.Repositories;
 
-public abstract class EfCoreEntityRepository<T> : IEntityRepository<T> where T : EntityBase
+public class EfCoreEntityRepository<T> : IEntityRepository<T> where T : EntityBase
 {
     private readonly AppDbContext appDbContext;
     private readonly DbSet<T> dbEntities;
