@@ -36,6 +36,7 @@
     <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Constants\RecipeRandomizer.Shared.Constants.csproj" />
     <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Configuration\RecipeRandomizer.Shared.Configuration.csproj" />
     <ProjectReference Include="..\..\Infrastructure\RecipeRandomizer.Infrastructure.Repositories\RecipeRandomizer.Infrastructure.Repositories.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\RecipeRandomizer.Infrastructure.Caching\RecipeRandomizer.Infrastructure.Caching.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Utilities.dll">

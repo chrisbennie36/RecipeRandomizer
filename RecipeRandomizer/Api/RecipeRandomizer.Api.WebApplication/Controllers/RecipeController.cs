@@ -6,6 +6,8 @@ using MassTransit;
 using RecipeRandomizer.Api.WebApplication.Dtos;
 using Utilities.RecipeRandomizer.Events;
 using RecipeRandomizer.Api.Domain.Queries;
+using RecipeRandomizer.Infrastructure.Caching;
+using RecipeRandomizer.Api.Domain.Models;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -15,11 +17,13 @@ public class RecipeController : ControllerBase
 {
     private readonly ISender sender;
     private readonly IPublishEndpoint publishEndpoint;
+    private readonly ICacheService cache;
 
-    public RecipeController(ISender sender, IPublishEndpoint publishEndpoint)
+    public RecipeController(ISender sender, IPublishEndpoint publishEndpoint, ICacheService cache)
     {
         this.sender = sender;
         this.publishEndpoint = publishEndpoint;
+        this.cache = cache;
     }
 
     [HttpGet("/api/Recipe/{userId}")]
@@ -41,6 +45,13 @@ public class RecipeController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> GetRecipeRatingsForUser([FromRoute] int userId, bool sortAscending = true)
     {   
+        List<RecipeFavouriteModel> cachedFavourites = cache.GetData<List<RecipeFavouriteModel>>(CacheKeys.GetUserRecipeRatingsCacheKey(userId));
+
+        if(cachedFavourites != null)
+        {
+            return Ok(cachedFavourites);
+        }
+
         var recipeRatings = await sender.Send(new GetUserRecipeRatingsQuery(userId, sortAscending));
 
         return recipeRatings.ToActionResult();

@@ -22,6 +22,8 @@ using RecipeRandomizer.Api.Domain.Clients;
 using RecipeRandomizer.Api.Data.Repositories;
 using RecipeRandomizer.Api.Data.GraphQlQueryProviders;
 using RecipeRandomizer.Infrastructure.Repositories;
+using RecipeRandomizer.Infrastructure.Caching;
+using RecipeRandomizer.Infrastructure.Caching.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -52,6 +54,11 @@ builder.Services.AddTransient(typeof(IEntityRepository<>), typeof(EfCoreEntityRe
 builder.Services.AddTransient<UserRecipePreferencesRepository>();    //For concrete class constructor injection 
 builder.Services.AddTransient<UserRecipeFavouritesRepository>();
 builder.Services.AddTransient<UserRecipeRatingsRepository>();
+
+builder.Services.Configure<RedisConfiguration>(
+    builder.Configuration.GetSection(RedisConfiguration.Key));
+    
+builder.Services.AddScoped<ICacheService, RedisCacheService>();
 
 builder.Services.AddMassTransit(x => 
 {
