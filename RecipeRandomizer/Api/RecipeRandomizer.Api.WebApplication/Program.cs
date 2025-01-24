@@ -48,9 +48,10 @@ builder.Services.AddProblemDetails().AddExceptionHandler<GlobalExceptionHandler>
 
 //For more control over DBContexts, can make use of the DbContextScope approach described here: https://mehdi.me/ambient-dbcontext-in-ef6/, https://github.com/mehdime/DbContextScope?ref=mehdi.me 
 builder.Services.AddDbContext<AppDbContext>();
-//builder.Services.AddTransient<IEntityRepository<UserRecipePreference>, UserRecipePreferencesRepository>();
 builder.Services.AddTransient(typeof(IEntityRepository<>), typeof(EfCoreEntityRepository<>));
 builder.Services.AddTransient<UserRecipePreferencesRepository>();    //For concrete class constructor injection 
+builder.Services.AddTransient<UserRecipeFavouritesRepository>();
+builder.Services.AddTransient<UserRecipeRatingsRepository>();
 
 builder.Services.AddMassTransit(x => 
 {

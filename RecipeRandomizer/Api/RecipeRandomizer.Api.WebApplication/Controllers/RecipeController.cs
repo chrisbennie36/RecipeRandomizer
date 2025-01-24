@@ -5,6 +5,7 @@ using Utilities.ResultPattern.Extensions;
 using MassTransit;
 using RecipeRandomizer.Api.WebApplication.Dtos;
 using Utilities.RecipeRandomizer.Events;
+using RecipeRandomizer.Api.Domain.Queries;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -36,7 +37,25 @@ public class RecipeController : ControllerBase
         return recipeResult.ToActionResult();
     }
 
-    [HttpPost("/api/Recipe/Rate")]
+    [HttpGet("/api/Recipe/{userId}/Ratings")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult> GetRecipeRatingsForUser([FromRoute] int userId, bool sortAscending = true)
+    {   
+        var recipeRatings = await sender.Send(new GetUserRecipeRatingsQuery(userId, sortAscending));
+
+        return recipeRatings.ToActionResult();
+    }
+
+    [HttpGet("/api/Recipe/{userId}/Favourites")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult> GetRecipeFavouritesForUser([FromRoute] int userId)
+    {   
+        var recipeFavourites = await sender.Send(new GetUserRecipeFavouritesQuery(userId));
+
+        return recipeFavourites.ToActionResult();
+    }
+
+    [HttpPost("/api/Recipe/Ratings")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult RateRecipe([FromBody] RecipeRatingDto recipeRatingDto)
     {
@@ -50,7 +69,7 @@ public class RecipeController : ControllerBase
         return Ok();
     }
 
-    [HttpPost("/api/Recipe/AddToFavourites")]
+    [HttpPost("/api/Recipe/Favourites")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public ActionResult AddRecipeToFavourites([FromBody] RecipeFavouritedDto recipeFavouritedDto)
     {
