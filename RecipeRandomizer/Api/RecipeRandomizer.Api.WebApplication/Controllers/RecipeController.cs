@@ -45,11 +45,11 @@ public class RecipeController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> GetRecipeRatingsForUser([FromRoute] int userId, bool sortAscending = true)
     {   
-        List<RecipeFavouriteModel> cachedFavourites = cache.GetData<List<RecipeFavouriteModel>>(CacheKeys.GetUserRecipeRatingsCacheKey(userId));
+        List<RecipeRatingModel> cachedRatings = cache.GetData<List<RecipeRatingModel>>(CacheKeys.GetUserRecipeRatingsCacheKey(userId));
 
-        if(cachedFavourites != null)
+        if(cachedRatings != null)
         {
-            return Ok(cachedFavourites);
+            return Ok(cachedRatings);
         }
 
         var recipeRatings = await sender.Send(new GetUserRecipeRatingsQuery(userId, sortAscending));
@@ -61,6 +61,13 @@ public class RecipeController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> GetRecipeFavouritesForUser([FromRoute] int userId)
     {   
+         List<RecipeFavouriteModel> cachedFavourites = cache.GetData<List<RecipeFavouriteModel>>(CacheKeys.GetUserRecipeRatingsCacheKey(userId));
+
+        if(cachedFavourites != null)
+        {
+            return Ok(cachedFavourites);
+        }
+
         var recipeFavourites = await sender.Send(new GetUserRecipeFavouritesQuery(userId));
 
         return recipeFavourites.ToActionResult();
