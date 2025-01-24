@@ -1,5 +1,6 @@
 using HotChocolate;
-using RecipeRandomizer.Api.Data.Entities;
+using RecipeRandomizer.Infrastructure.Repositories;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 
 namespace RecipeRandomizer.Api.Data.GraphQlQueryProviders;
 

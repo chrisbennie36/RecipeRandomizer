@@ -35,6 +35,7 @@
     <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Enums\RecipeRandomizer.Shared.Enums.csproj" />
     <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Constants\RecipeRandomizer.Shared.Constants.csproj" />
     <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Configuration\RecipeRandomizer.Shared.Configuration.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\RecipeRandomizer.Infrastructure.Repositories\RecipeRandomizer.Infrastructure.Repositories.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Utilities.dll">

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using RecipeRandomizer.Api.Data.Entities;
+using RecipeRandomizer.Infrastructure.Repositories;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 using Serilog;
 
 namespace RecipeRandomizer.Api.Data.Repositories;

@@ -1,5 +1,4 @@
 using System.Text;
-using RecipeRandomizer.Api.Data;
 using RecipeRandomizer.Api.Domain.Commands;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -22,6 +21,7 @@ using Refit;
 using RecipeRandomizer.Api.Domain.Clients;
 using RecipeRandomizer.Api.Data.Repositories;
 using RecipeRandomizer.Api.Data.GraphQlQueryProviders;
+using RecipeRandomizer.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 

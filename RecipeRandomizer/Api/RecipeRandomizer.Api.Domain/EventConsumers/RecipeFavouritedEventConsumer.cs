@@ -1,7 +1,7 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
-using RecipeRandomizer.Api.Data;
-using RecipeRandomizer.Api.Data.Entities;
+using RecipeRandomizer.Infrastructure.Repositories;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 using Serilog;
 using Utilities.RecipeRandomizer.Events;
 

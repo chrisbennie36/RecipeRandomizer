@@ -1,4 +1,4 @@
-namespace RecipeRandomizer.Api.Data.Entities;
+namespace RecipeRandomizer.Infrastructure.Repositories.Entities;
 
 public class UserRecipeFavourite : EntityBase
 {

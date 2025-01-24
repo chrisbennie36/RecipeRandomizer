@@ -25,5 +25,6 @@
   <ItemGroup>
     <ProjectReference Include="..\RecipeRandomizer.Api.Data\RecipeRandomizer.Api.Data.csproj" />
     <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Enums\RecipeRandomizer.Shared.Enums.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\RecipeRandomizer.Infrastructure.Repositories\RecipeRandomizer.Infrastructure.Repositories.csproj" />
   </ItemGroup>
 </Project>

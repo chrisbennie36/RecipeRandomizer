@@ -1,8 +1,7 @@
 namespace RecipeRandomizer.Api.Domain.Tests.Helpers;
 
-using RecipeRandomizer.Api.Data;
 using Microsoft.EntityFrameworkCore;
-
+using RecipeRandomizer.Infrastructure.Repositories;
 
 public static class InMemoryDatabaseHelper
 {

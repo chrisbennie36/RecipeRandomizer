@@ -5,17 +5,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="HotChocolate.Data.EntityFramework" Version="14.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.10">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.1" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.10" />
     <PackageReference Include="Serilog" Version="4.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Shared\RecipeRandomizer.Shared.Enums\RecipeRandomizer.Shared.Enums.csproj" />
-    <ProjectReference Include="..\..\Infrastructure\RecipeRandomizer.Infrastructure.Repositories\RecipeRandomizer.Infrastructure.Repositories.csproj" />
   </ItemGroup>
 </Project>

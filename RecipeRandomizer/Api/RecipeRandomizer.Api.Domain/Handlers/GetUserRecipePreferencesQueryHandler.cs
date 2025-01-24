@@ -1,11 +1,11 @@
 using RecipeRandomizer.Api.Domain.Queries;
 using MediatR;
-using RecipeRandomizer.Api.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 using RecipeRandomizer.Api.Domain.Models;
 using AutoMapper;
 using Utilities.ResultPattern;
 using RecipeRandomizer.Api.Data.Repositories;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;
 

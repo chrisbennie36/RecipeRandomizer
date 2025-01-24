@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
-using RecipeRandomizer.Api.Data.Entities;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 using Serilog;
 
-namespace RecipeRandomizer.Api.Data.Repositories;
+namespace RecipeRandomizer.Infrastructure.Repositories;
 
 public class EfCoreEntityRepository<T> : IEntityRepository<T> where T : EntityBase
 {

@@ -1,7 +1,7 @@
 using AutoMapper;
-using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Models;
 using RecipeRandomizer.Api.WebApplication.Dtos;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 namespace RecipeRandomizer.Api.WebApplication.Mapper;
 
 public class DefaultProfile : Profile

@@ -1,6 +1,6 @@
-using RecipeRandomizer.Api.Data.Entities;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 
-namespace RecipeRandomizer.Api.Data.Repositories;
+namespace RecipeRandomizer.Infrastructure.Repositories;
 
 public interface IEntityRepository<T> where T : EntityBase
 {

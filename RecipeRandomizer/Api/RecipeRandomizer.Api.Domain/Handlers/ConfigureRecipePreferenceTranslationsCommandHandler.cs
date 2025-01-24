@@ -1,9 +1,9 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using RecipeRandomizer.Api.Data;
-using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Commands;
+using RecipeRandomizer.Infrastructure.Repositories;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 using Serilog;
 
 namespace RecipeRandomizer.Api.Domain.Handlers;

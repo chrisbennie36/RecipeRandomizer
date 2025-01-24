@@ -1,15 +1,15 @@
 ﻿namespace RecipeRandomizer.Api.Domain.Tests;
 
 using RecipeRandomizer.Api.Domain.Tests.Helpers;
-using RecipeRandomizer.Api.Data;
 using Xunit;
 using RecipeRandomizer.Api.Domain.Queries;
-using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Handlers;
 using AutoMapper;
 using Moq;
 using Microsoft.EntityFrameworkCore;
 using RecipeRandomizer.Api.Data.Repositories;
+using RecipeRandomizer.Infrastructure.Repositories;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 
 public class GetUserRecipePreferencesQueryHandlerTests
 {

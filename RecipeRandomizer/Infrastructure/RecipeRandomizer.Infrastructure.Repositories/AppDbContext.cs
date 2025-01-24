@@ -1,8 +1,8 @@
-using RecipeRandomizer.Api.Data.Entities;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace RecipeRandomizer.Api.Data;
+namespace RecipeRandomizer.Infrastructure.Repositories;
 
 public class AppDbContext : DbContext
 {

@@ -1,8 +1,8 @@
 using MediatR;
-using RecipeRandomizer.Api.Data;
-using RecipeRandomizer.Api.Data.Entities;
 using RecipeRandomizer.Api.Domain.Commands;
 using RecipeRandomizer.Api.Domain.Models;
+using RecipeRandomizer.Infrastructure.Repositories;
+using RecipeRandomizer.Infrastructure.Repositories.Entities;
 using RecipeRandomizer.Shared.Enums;
 using Serilog;
 

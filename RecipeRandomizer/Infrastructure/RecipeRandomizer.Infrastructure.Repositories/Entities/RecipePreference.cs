@@ -1,6 +1,6 @@
 using RecipeRandomizer.Shared.Enums;
 
-namespace RecipeRandomizer.Api.Data.Entities;
+namespace RecipeRandomizer.Infrastructure.Repositories.Entities;
 
 public class RecipePreference : EntityBase
 {
