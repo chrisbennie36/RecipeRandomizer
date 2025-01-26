@@ -3,6 +3,7 @@
 # .Net Core based Microservice which performs the following functions:
 
 - Adds/Removes preferences for users
+- Adds/Updates Recipe Ratings and Favourites for Users using events
 - Fetches the configured selectable preferences to display on the front end
 - Translates the configured recipe preferences based on the culture code of the user's device
 - Creates a recipe query based on a random selection of the user's saved preferences, and returns the result from Google to the front end
@@ -12,6 +13,9 @@
     - MediatR
     - EntityFramework
     - Refit
+    - MassTransit 
+    - RabbitMQ
+    - Redis Cache
     - XUnit
     - AutoMapper
     - AWS CDK

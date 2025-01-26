@@ -16,6 +16,8 @@ public class DefaultProfile : Profile
     private void MapEntitiesToModels()
     {
         CreateMap<RecipePreference, RecipePreferenceModel>();
+        CreateMap<UserRecipeFavourite, RecipeFavouriteModel>();
+        CreateMap<UserRecipeRating, RecipeRatingModel>();
     }
 
     private void MapModelsToDtos()

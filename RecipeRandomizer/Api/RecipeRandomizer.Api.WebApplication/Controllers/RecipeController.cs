@@ -61,7 +61,7 @@ public class RecipeController : ControllerBase
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> GetRecipeFavouritesForUser([FromRoute] int userId)
     {   
-         List<RecipeFavouriteModel> cachedFavourites = cache.GetData<List<RecipeFavouriteModel>>(CacheKeys.GetUserRecipeRatingsCacheKey(userId));
+        List<RecipeFavouriteModel> cachedFavourites = cache.GetData<List<RecipeFavouriteModel>>(CacheKeys.GetUserRecipeFavouritesCacheKey(userId));
 
         if(cachedFavourites != null)
         {

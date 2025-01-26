@@ -1,5 +1,6 @@
 using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using RecipeRandomizer.Infrastructure.Caching;
 using RecipeRandomizer.Infrastructure.Repositories;
 using RecipeRandomizer.Infrastructure.Repositories.Entities;
 using Serilog;
@@ -10,10 +11,12 @@ namespace RecipeRandomizer.Api.Domain.EventConsumers;
 public class RecipeFavouritedEventConsumer : IConsumer<RecipeFavouritedEvent>
 {
     private readonly AppDbContext dbContext;
+    private readonly ICacheService cacheService;
 
-    public RecipeFavouritedEventConsumer(AppDbContext dbContext)
+    public RecipeFavouritedEventConsumer(AppDbContext dbContext, ICacheService cacheService)
     {
         this.dbContext = dbContext;
+        this.cacheService = cacheService;
     }
 
     public async Task Consume(ConsumeContext<RecipeFavouritedEvent> context)
@@ -27,7 +30,7 @@ public class RecipeFavouritedEventConsumer : IConsumer<RecipeFavouritedEvent>
 
         UserRecipeFavourite? existingFavourite = dbContext.UserRecipeFavourites.SingleOrDefault(r => r.UserId == recipeFavouritedEvent.UserId && r.RecipeUrl == recipeFavouritedEvent.RecipeUrl.ToString());
 
-        if (existingFavourite == null)
+        if (existingFavourite != null)
         {
             return;
         }
@@ -50,5 +53,7 @@ public class RecipeFavouritedEventConsumer : IConsumer<RecipeFavouritedEvent>
         {
             Log.Error($"Error when saving {nameof(UserRecipeFavourite)} to the database: {e.Message} {e.InnerException?.Message}");
         }
+
+        cacheService.RemoveData(CacheKeys.GetUserRecipeFavouritesCacheKey(recipeFavouritedEvent.UserId));
     }
 }
