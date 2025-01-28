@@ -8,6 +8,7 @@ using Utilities.RecipeRandomizer.Events;
 using RecipeRandomizer.Api.Domain.Queries;
 using RecipeRandomizer.Infrastructure.Caching;
 using RecipeRandomizer.Api.Domain.Models;
+using Serilog;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -31,6 +32,8 @@ public class RecipeController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult> GenerateRecipeForUser([FromRoute] int userId)
     {   
+        Log.Warning("Generating Recipe for User");
+        
         var recipeResult = await sender.Send(new GenerateRecipeBasedOnUserPreferencesCommand(userId));
 
         if(recipeResult.resultModel?.RecipeUrl == null)

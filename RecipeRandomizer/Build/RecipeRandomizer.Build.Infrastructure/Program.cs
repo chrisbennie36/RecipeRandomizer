@@ -19,6 +19,13 @@ sealed class Program
             }
         });
 
+        RecipeRandomizerApiGatewayStack gatewayStack = new RecipeRandomizerApiGatewayStack(app, "recipe-randomizer-api-gateway-stack", new RecipeRandomizerApiGatewayStackProps 
+        {
+            BaseUrl = "http://reciperandomizer.eba-87gm6678.us-east-1.elasticbeanstalk.com"
+        });
+
+        gatewayStack.AddDependency(ebStack);
+
         //DatabaseMigrationLambdaStack dbMigrationLambdaStack = new DatabaseMigrationLambdaStack(app, "database-migration-lambda-stack");
 
         /*DatabaseStack dbStack = new DatabaseStack(app, "database-stack", new DatabaseStackProps

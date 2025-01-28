@@ -9,4 +9,9 @@
     <PackageReference Include="Amazon.CDK.Lib" Version="2.171.0" />
     <PackageReference Include="Constructs" Version="10.4.2" />
   </ItemGroup>
+<ItemGroup>
+  <Reference Include="Utilities.RecipeRandomizer.Infrastructure.dll">
+    <HintPath>..\..\Refs\Utilities.RecipeRandomizer.Infrastructure.dll</HintPath>
+  </Reference>
+</ItemGroup>
 </Project>
