@@ -1,6 +1,7 @@
 using Amazon.CDK;
 using Amazon.CDK.AWS.APIGateway;
 using Constructs;
+using Utilities.RecipeRandomizer.Infrastructure.CDK.Constants.ApiGateway;
 
 namespace RecipeRandomizer.Build.Infrastructure;
 
@@ -22,35 +23,18 @@ public class RecipeRandomizerApiGatewayStack : Stack
         _ = new CfnOutput(this, "recipe-randomizer-api-gateway-rest-api-id", new CfnOutputProps
         {
             Value = restApi.RestApiId,
-            ExportName = "RecipeRandomizerApiGatewayRestApiId"
+            ExportName = ApiGatewayExportKeys.RecipeRandomizerApiGatewayRestApiId
         });
 
         _ = new CfnOutput(this, "recipe-randomizer-api-gateway-root-resource-id", new CfnOutputProps
         {
             Value = restApi.RestApiRootResourceId,
-            ExportName = "RecipeRandomizerApiGatewayRootResourceId"
+            ExportName = ApiGatewayExportKeys.RecipeRandomizerApiGatewayRootResourceId
         });
 
         AddRestApiResourceProxy(restApi, "Recipe", props.BaseUrl);
         AddRestApiResourceProxy(restApi, "RecipePreferences", props.BaseUrl);
         AddRestApiResourceProxy(restApi, "UserRecipePreferences", props.BaseUrl);
-    }
-
-    private IRestApi? GetExistingRestApi(Construct scope, string restApiIdImportKey, string rootResourceIdKey)
-    {
-        string restApiId = Fn.ImportValue(restApiIdImportKey);
-        string rootResourceId = Fn.ImportValue(rootResourceIdKey);
-
-        if(string.IsNullOrWhiteSpace(restApiId) || string.IsNullOrWhiteSpace(rootResourceId))
-        {
-            return null;
-        }
-
-        return RestApi.FromRestApiAttributes(scope, "recipe-randomizer-api-gateway", new RestApiAttributes 
-        {
-            RootResourceId = rootResourceId,
-            RestApiId = restApiId
-        });
     }
 
     private void AddRestApiResourceProxy(IRestApi restApi, string resourceName, string apiBaseUrl)
