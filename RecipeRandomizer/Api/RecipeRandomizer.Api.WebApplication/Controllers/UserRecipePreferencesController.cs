@@ -12,6 +12,7 @@ using Utilities.ResultPattern;
 using Utilities.ResultPattern.Extensions;
 using RecipeRandomizer.Shared.Constants;
 using Microsoft.AspNetCore.RateLimiting;
+using HotChocolate.Authorization;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -27,6 +28,7 @@ public class UserRecipePreferencesController : ControllerBase
         this.mapper = mapper;
     }
     
+    [Authorize]
     [HttpGet("/api/UserRecipePreferences/{userId}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -52,6 +54,7 @@ public class UserRecipePreferencesController : ControllerBase
         return Ok(new UserRecipePreferencesResponse { RecipePreferences = userRecipePreferencesResponse ?? new List<RecipePreferenceDto>() });
     }
 
+    [Authorize]
     [HttpPost("api/UserRecipePreferences/Update")]
     [EnableRateLimiting(RateLimiterConstants.PostRateLimiterPolicyName)]
     public async Task<ActionResult> UpdateUserRecipePreferences([FromBody] UserRecipePreferencesDto userRecipePreferencesDto, IMemoryCache cache)
@@ -68,6 +71,7 @@ public class UserRecipePreferencesController : ControllerBase
         return result.ToActionResult();
     }
 
+    [Authorize]
     [HttpPost("api/UserRecipePreferences/Add")]
     [EnableRateLimiting(RateLimiterConstants.PostRateLimiterPolicyName)]
     public async Task<ActionResult> AddUserRecipePreferences([FromBody] UserRecipePreferencesDto userRecipePreferencesDto)

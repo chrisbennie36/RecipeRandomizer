@@ -6,6 +6,6 @@ namespace RecipeRandomizer.Api.Domain.Clients;
 
 public interface IGoogleCustomSearchClient
 {
-    [Post("api/GoogleCustomSearch")]
+    [Post("/api/GoogleCustomSearch")]
     Task<GoogleCustomSearchResponse> SearchAsync(GoogleCustomSearchDto dto);
 }

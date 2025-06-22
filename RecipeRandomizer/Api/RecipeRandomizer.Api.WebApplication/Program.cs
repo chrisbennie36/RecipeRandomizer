@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Text;
 using RecipeRandomizer.Api.Domain.Commands;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -24,6 +25,9 @@ using RecipeRandomizer.Api.Data.GraphQlQueryProviders;
 using RecipeRandomizer.Infrastructure.Repositories;
 using RecipeRandomizer.Infrastructure.Caching;
 using RecipeRandomizer.Infrastructure.Caching.Redis;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
+using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,9 +85,9 @@ var busControl = Bus.Factory.CreateUsingRabbitMq();
 await busControl.StartAsync();
 
 builder.Services.AddRefitClient<IGoogleCustomSearchClient>()
-    .ConfigureHttpClient(c => c.BaseAddress = new Uri(builder.Configuration.GetStringValue("GoogleCustomSearchClient:Url")));
+    .ConfigureHttpClient(c => c.BaseAddress = new Uri("http://localhost:5176"));
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => 
+/*builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => 
 {
     options.RequireHttpsMetadata = false;   //NOTE: ONLY FOR DEVELOPMENT
     //options.Authority = "localhost:5175";
@@ -93,9 +97,29 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         ValidateAudience = false,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration.GetStringValue("Jwt:Key")))
     };
+});*/
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService("RecipeRandomizer"))
+    .WithTracing(t => {
+        t.AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation();
+        //.AddNpgsql();
+
+        t.AddOtlpExporter(e => {
+            e.Endpoint = new Uri("http://localhost:55680");
+        });
+    });
+
+builder.Services.AddAuthentication().AddJwtBearer(options => 
+{
+    options.Authority = "http://localhost:8080/realms/recipe-randomizer";
+    options.Audience = "recipe-randomizer-api";
+    options.RequireHttpsMetadata = false; // DEV ONLY
 });
 
 builder.Services.AddAuthorization();
+builder.Services.AddAuthorizationBuilder();
 
 builder.Services.AddMemoryCache();
 
