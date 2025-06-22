@@ -100,16 +100,12 @@ builder.Services.AddRefitClient<IGoogleCustomSearchClient>()
 });*/
 
 builder.Services.AddOpenTelemetry()
-    .ConfigureResource(resource => resource.AddService("RecipeRandomizer"))
-    .WithTracing(t => {
-        t.AddAspNetCoreInstrumentation()
-        .AddHttpClientInstrumentation();
-        //.AddNpgsql();
-
-        t.AddOtlpExporter(e => {
-            e.Endpoint = new Uri("http://localhost:55680");
-        });
-    });
+    .WithTracing(builder => builder
+        .AddAspNetCoreInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddJaegerExporter()
+        .AddSource("Tracing.NET")
+        .SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("Tracing.NET")));
 
 builder.Services.AddAuthentication().AddJwtBearer(options => 
 {

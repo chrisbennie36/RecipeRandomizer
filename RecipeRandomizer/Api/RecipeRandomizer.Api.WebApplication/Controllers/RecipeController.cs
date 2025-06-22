@@ -9,6 +9,7 @@ using RecipeRandomizer.Api.Domain.Queries;
 using RecipeRandomizer.Infrastructure.Caching;
 using RecipeRandomizer.Api.Domain.Models;
 using Serilog;
+using System.Diagnostics;
 
 namespace RecipeRandomizer.Api.WebApplication.Controllers;
 
@@ -19,6 +20,8 @@ public class RecipeController : ControllerBase
     private readonly ISender sender;
     private readonly IPublishEndpoint publishEndpoint;
     private readonly ICacheService cache;
+
+    private static readonly ActivitySource _activitySource = new("Tracing.NET");
 
     public RecipeController(ISender sender, IPublishEndpoint publishEndpoint, ICacheService cache)
     {
@@ -33,11 +36,17 @@ public class RecipeController : ControllerBase
     public async Task<ActionResult> GenerateRecipeForUser([FromRoute] int userId)
     {   
         Log.Warning("Generating Recipe for User");
+        using var initalActivity = _activitySource.StartActivity("GeneratingRecipeForUser");
         
         var recipeResult = await sender.Send(new GenerateRecipeBasedOnUserPreferencesCommand(userId));
 
         if(recipeResult.resultModel?.RecipeUrl == null)
         {
+            using var badRequestActivity = _activitySource.StartActivity("FailedToGenerateUserRecipe");
+            if (badRequestActivity != null)
+            {
+                badRequestActivity.SetTag("ErrorDetails", recipeResult.resultModel?.ErrorTraceId ?? "No Result Model - Couldn't retrieve error details");
+            }
             return BadRequest(recipeResult.resultModel?.ErrorTraceId);
         }
 
